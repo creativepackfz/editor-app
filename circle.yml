@@ -1,0 +1,52 @@
+general:
+  artifacts:
+    - dist.tar.gz
+dependencies:
+  pre:
+    - curl -L -o google-chrome-stable.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo dpkg -i google-chrome-stable.deb
+    - sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+    - rm google-chrome-stable.deb
+  override:
+    - npm install
+    - bower install
+test:
+  override:
+    - echo $CHROME_INSTANCES
+    - npm run test
+deployment:
+  staging:
+    branch: /(feature|fix|chore).*/
+    commands:
+      - echo $CI_PULL_REQUEST
+      # We have 3 stage environments, editor-stage-0.risevision.com, editor-stage-1.risevision.com and editor-stage-2.risevision.com.
+      # To deploy to one of these environments a tag must be added to the commit message. For instance, [stage-0] for editor-stage-0.risevision.com.
+      # The build will fail if the tag is not added.
+      # If tag is missing, the [stage-0] is used.
+      - NODE_ENV=test npm run build
+      - ssh editor@webserver-stage.risevision.com 'mkdir -p /rise-front-end/editor';
+      - >
+        STAGE_ENV="$(git log -1 --pretty=%B | grep '\[.*\]' |sed -e 's/.*\[\(.*\)\].*/\1/g')";
+        if [ "$STAGE_ENV" != '' ]; then
+          echo "Deploying to $STAGE_ENV";
+        fi;
+        if [ "$STAGE_ENV" == '' ]; then
+          echo "stage deployment environment missing. Deploying to [stage-0].";
+          STAGE_ENV='stage-0';
+        fi;
+        rsync -rptz -e ssh --delete dist editor@webserver-stage.risevision.com:/rise-front-end/editor/$STAGE_ENV;
+      - tar czvf dist.tar.gz dist
+  production:
+    branch: master
+    owner: Rise-Vision
+    commands:
+      - NODE_ENV=prod npm run build
+      # It deploys first to production server 2.
+      - echo "deploying to production webserver1.risevision.com";
+      - ssh editor@webserver1.risevision.com 'mkdir -p /rise-front-end/editor';
+      - rsync -rptz -e ssh --delete dist editor@webserver1.risevision.com:/rise-front-end/editor;
+      # It then deploys to production server 1.
+      - echo "deploying to production webserver.risevision.com";
+      - ssh editor@webserver.risevision.com 'mkdir -p /rise-front-end/editor';
+      - rsync -rptz -e ssh --delete dist editor@webserver.risevision.com:/rise-front-end/editor;
+      - tar czvf dist.tar.gz dist
