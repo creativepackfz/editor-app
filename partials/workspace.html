@@ -1,0 +1,17 @@
+<!-- Inline css to remove margin from the CH. We must move it to common-style-->
+<style type="text/css">
+  .navbar {
+    margin-bottom: 0;
+  }
+</style>
+<div ng-include="'partials/sidebar.html'"></div>
+
+<div ng-include="'partials/toolbar.html'"></div>
+
+<div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard}">
+  <div id="editingModeView" ui-view></div>
+</div><!--editor-bg-->
+
+
+<div ng-include="'partials/footerbar.html'"></div>
+

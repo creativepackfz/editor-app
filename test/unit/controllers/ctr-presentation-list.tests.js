@@ -52,7 +52,7 @@ describe('controller: Presentation List', function() {
       $loading = $injector.get('$loading');
       $loadingStartSpy = sinon.spy($loading, 'start');
       $loadingStopSpy = sinon.spy($loading, 'stop');
-      $controller('presentationListController', {
+      $controller('PresentationListController', {
         $scope : $scope,
         $rootScope: $rootScope,
         presentation: $injector.get('presentation'),

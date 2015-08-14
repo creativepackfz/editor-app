@@ -52,9 +52,9 @@ angular.module('risevision.editorApp', [
       .state('editor.list', {
         url: '/editor/list',
         templateUrl: 'partials/presentation-list.html',
-        controller: 'presentationListController',
+        controller: 'PresentationListController',
         resolve: {
-          canAccessSchedules: ['canAccessEditor',
+          canAccess: ['canAccessEditor',
             function (canAccessEditor) {
               return canAccessEditor();
             }
@@ -62,7 +62,43 @@ angular.module('risevision.editorApp', [
         }
       })
 
+      .state('editor.workspace', {
+        url: '/editor/workspace',
+        abstract:true,
+        templateUrl: 'partials/workspace.html',
+        controller: 'WorkspaceController',
+        resolve: {
+          canAccess: ['canAccessEditor',
+            function (canAccessEditor) {
+              return canAccessEditor();
+            }
+          ]
+        }
+      })
 
+      .state('editor.workspace.artboard', {
+        url: '',
+        templateUrl: 'partials/artboard.html',
+          controller: 'ArtboardController',
+        resolve: {
+          canAccess: ['canAccessEditor',
+            function (canAccessEditor) {
+              return canAccessEditor();
+            }
+          ]
+        }
+      })
+
+      .state('editor.workspace.htmleditor', {
+        templateUrl: 'partials/html-editor.html',
+        resolve: {
+          canAccess: ['canAccessEditor',
+            function (canAccessEditor) {
+              return canAccessEditor();
+            }
+          ]
+        }
+      });
     }
   ])
   .run(['$rootScope', '$state', 'userState',
