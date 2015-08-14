@@ -1,6 +1,6 @@
 'use strict';
 angular.module('risevision.editorApp.controllers')
-  .controller('presentationListController', ['$scope', '$rootScope',
+  .controller('PresentationListController', ['$scope', '$rootScope',
     'presentation', '$loading', 'BaseList', '$filter',
     function ($scope, $rootScope, presentation, $loading, BaseList, $filter) {
       var DB_MAX_COUNT = 40; //number of records to load at a time

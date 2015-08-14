@@ -1,0 +1,28 @@
+<div class="container-fluid text-right editor-footer">
+  <div class="footer-content">
+    <div class="pull-left">
+      <button class="btn btn-danger">Delete <i class="fa fa-trash-o icon-white icon-right"></i></button>
+    </div>
+    <span ng-hide="draftState" class="text-muted add-right" style="line-height:33px"><small><span class="text-success">Published</span> 10-Jan-2014 12:10 AM by Byron Darlison</small></span>
+
+    <span ng-show="draftState" class="text-muted add-right ng-hide" style="line-height:33px"><small><span class="text-danger">Revised</span> 10-Jan-2014 12:10 AM by Byron Darlison</small></span>
+
+    <button class="btn btn-default">Restore</button>
+			<span ng-hide="draftState" class="">
+				<button class="btn btn-primary" ng-click="draftState = !draftState">Save<i class="fa fa-check icon-right"></i></button>
+			</span>
+
+			<span ng-show="draftState" class="ng-hide">
+				<button class="btn btn-primary disabled">Save<i class="fa fa-check icon-right"></i></button>
+			</span>
+
+    <span class="add-left"></span>
+
+    <button ng-hide="draftState" class="btn btn-primary disabled">Publish</button>
+    <button ng-hide="!draftState" class="btn btn-primary ng-hide">Publish</button>
+
+    <span class="add-left"></span>
+    <button class="btn btn-default">Cancel <i class="fa fa-times icon-right"></i></button>
+
+  </div>
+</div><!--container-fluid-->
