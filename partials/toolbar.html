@@ -1,9 +1,9 @@
-<div class="presentation-toolbar hide-toolbar" ng-class="{'hide-toolbar' : editing, 'hide-toolbar' : default, 'full' : fullArtboard}">
+<div class="presentation-toolbar" ng-class="{'full' : fullArtboard}">
   <div class="row">
     <div class="col-sm-4">
       <button class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = !fullArtboard" ng-show="fullArtboard"><i class="fa fa-compress"></i></button>
       <button class="btn btn-default" ng-show="!fullArtboard" ng-class="{'active' : fullArtboard}" ng-click="fullArtboard = !fullArtboard"><i class="fa fa-expand"></i></button>
-      <button class="btn btn-default" ng-click="open('md','prProperties.html')"><i class="fa fa-cog"></i></button>
+      <button class="btn btn-default" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
 
     </div><!--col-sm-4-->
     <div class="col-sm-4">
@@ -13,8 +13,8 @@
       </div><!--btn-group-->
     </div><!--col-sm-4-->
     <div class="col-sm-4 text-right">
-      <button class="btn btn-primary" ng-click="addPh = !addPh">Add Placeholder <i class="fa fa-plus icon-right"></i></button>
-      <button class="btn btn-default">Preview <i class="fa fa-play icon-right"></i></button>
+      <button class="btn btn-primary" ng-click="addNewPlaceHolder()">Add Placeholder <i class="fa fa-plus icon-right"></i></button>
+      <button class="btn btn-default" ng-click="preview()">Preview <i class="fa fa-play icon-right"></i></button>
     </div><!--col-sm-4-->
   </div>
 </div><!--presentation-toolbar-->
