@@ -76,6 +76,75 @@ angular.module('risevision.editorApp.services')
             });
 
           return deferred.promise;
+        },
+        add: function (presentation) {
+          var deferred = $q.defer();
+
+          var fields = pick.apply(this, [presentation].concat(
+            PRESENTAION_WRITABLE_FIELDS));
+          var obj = {
+            'companyId': userState.getSelectedCompanyId(),
+            'data': fields
+          };
+          coreAPILoader().then(function (coreApi) {
+              return coreApi.presentation.add(obj);
+            })
+            .then(function (resp) {
+              $log.debug('added presentation', resp);
+              deferred.resolve(resp.result);
+            })
+            .then(null, function (e) {
+              $log.error('Failed to add presentation.', e);
+              deferred.reject(e);
+            });
+          return deferred.promise;
+        },
+        update: function (presentationId, presentation) {
+          var deferred = $q.defer();
+
+          var fields = pick.apply(this, [presentation].concat(
+            PRESENTAION_WRITABLE_FIELDS));
+          var obj = {
+            'id': presentationId,
+            'data': fields
+          };
+
+          $log.debug('update presentation called with', presentationId);
+          coreAPILoader().then(function (coreApi) {
+              return coreApi.presentation.patch(obj);
+            })
+            .then(function (resp) {
+              $log.debug('update presentation resp', resp);
+              deferred.resolve(resp.result);
+            })
+            .then(null, function (e) {
+              $log.error('Failed to update presentation.', e);
+              deferred.reject(e);
+            });
+
+          return deferred.promise;
+        },
+        delete: function (presentationId) {
+          var deferred = $q.defer();
+
+          var obj = {
+            'id': presentationId
+          };
+
+          $log.debug('delete presentation called with', presentationId);
+          coreAPILoader().then(function (coreApi) {
+              return coreApi.presentation.delete(obj);
+            })
+            .then(function (resp) {
+              $log.debug('delete presentation resp', resp);
+              deferred.resolve(resp);
+            })
+            .then(null, function (e) {
+              $log.error('Failed to delete presentation.', e);
+              deferred.reject(e);
+            });
+
+          return deferred.promise;
         }
       };
 

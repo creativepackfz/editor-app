@@ -1,0 +1,279 @@
+'use strict';
+describe('service: editorFactory:', function() {
+  beforeEach(module('risevision.editorApp.services'));
+  beforeEach(module(function ($provide) {
+    $provide.service('$q', function() {return Q;});
+
+    $provide.service('presentation',function () {
+      return {
+        _presentation: {
+          id: "presentationId",
+          name: "some presentation"
+        },
+        add : function(){
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve({item: this._presentation});
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not create presentation'}}});
+          }
+          return deferred.promise;
+        },
+        update : function(presentation){
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve({item: this._presentation});
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not update presentation'}}});
+          }
+          return deferred.promise;
+        },
+        get: function(presentationId) {
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve({item: this._presentation});
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not get presentation'}}});
+          }
+          return deferred.promise;
+        },
+        delete: function(presentationId) {
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve(presentationId);
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not delete presentation'}}});
+          }
+          return deferred.promise;
+        }
+      };
+    });
+    $provide.service('presentationTracker', function() { 
+      return function(name) {
+        trackerCalled = name;
+      };
+    });
+    $provide.service('$state',function(){
+      return {
+        go : function(state, params){
+          if (state){
+            currentState = state;
+          }
+          return currentState;
+        }
+      }
+    });
+    $provide.value('VIEWER_URL', 'http://rvaviewer-test.appspot.com');
+
+  }));
+  var editorFactory, trackerCalled, updatePresentation, currentState;
+  beforeEach(function(){
+    trackerCalled = undefined;
+    currentState = undefined;
+    updatePresentation = true;
+
+    inject(function($injector){
+      editorFactory = $injector.get('editorFactory');
+    });
+  });
+
+  it('should exist',function(){
+    expect(editorFactory).to.be.truely;
+    
+    expect(editorFactory.presentation).to.be.truely;
+    expect(editorFactory.loadingPresentation).to.be.false;
+    expect(editorFactory.savingPresentation).to.be.false;
+    expect(editorFactory.apiError).to.not.be.truely;
+    
+    expect(editorFactory.newPresentation).to.be.a('function');
+    expect(editorFactory.getPresentation).to.be.a('function');
+    expect(editorFactory.addPresentation).to.be.a('function');
+    expect(editorFactory.updatePresentation).to.be.a('function');
+    expect(editorFactory.deletePresentation).to.be.a('function'); 
+    expect(editorFactory.getPreviewUrl).to.be.a('function');
+  });
+  
+  it('newPresentation: should reset the presentation',function(){
+    editorFactory.newPresentation();
+    
+    expect(editorFactory.presentation).to.deep.equal({});
+    expect(editorFactory.presentationId).to.not.be.truely;
+  });
+    
+  describe('getPresentation:',function(){
+    it("should get the presentation",function(done){
+      editorFactory.getPresentation("presentationId")
+      .then(function() {
+        expect(editorFactory.presentation).to.be.truely;
+        expect(editorFactory.presentation.name).to.equal("some presentation");
+
+        setTimeout(function() {
+          expect(editorFactory.loadingPresentation).to.be.false;
+
+          done();
+        }, 10);
+      })
+      .then(null, function() {
+        done("error");
+      })
+      .then(null,done);
+    });
+    
+    it("should handle failure to get presentation correctly",function(done){
+      updatePresentation = false;
+      
+      editorFactory.getPresentation()
+      .then(function(result) {
+        done(result);
+      })
+      .then(null, function() {
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.errorMessage).to.equal("Failed to get Presentation!");
+        expect(editorFactory.apiError).to.be.ok;
+        expect(editorFactory.apiError).to.equal("ERROR; could not get presentation");
+
+        setTimeout(function() {
+          expect(editorFactory.loadingPresentation).to.be.false;
+
+          done();
+        }, 10);
+      })
+      .then(null,done);
+    });
+  });
+  
+  describe('addPresentation:',function(){
+    it('should add the presentation',function(done){
+      updatePresentation = true;
+
+      editorFactory.addPresentation();
+      
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(currentState).to.equal('presentation.details');
+        expect(trackerCalled).to.equal('Presentation Created');
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        
+        done();
+      },10);
+    });
+
+    it('should show an error if fails to create presentation',function(done){
+      updatePresentation = false;
+
+      editorFactory.addPresentation();
+      
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(currentState).to.be.empty;
+        expect(trackerCalled).to.not.be.ok;
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.apiError).to.be.ok;
+        done();
+      },10);
+    });
+  });
+  
+  describe('updatePresentation: ',function(){
+    it('should update the presentation',function(done){
+      updatePresentation = true;
+
+      editorFactory.updatePresentation();
+      
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.equal('Presentation Updated');
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        done();
+      },10);
+    });
+
+    it('should show an error if fails to update the presentation',function(done){
+      updatePresentation = false;
+
+      editorFactory.updatePresentation();
+
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.not.be.ok;
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.apiError).to.be.ok;
+        done();
+      },10);
+    });
+  });
+  
+  describe('deletePresentation: ',function(){
+    it('should delete the presentation',function(done){
+      updatePresentation = true;
+      
+      editorFactory.deletePresentation();
+      
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        expect(trackerCalled).to.equal('Presentation Deleted');
+        expect(currentState).to.equal('editor.list');
+        done();
+      },10);
+    });
+    
+    it('should show an error if fails to delete the presentation',function(done){
+      updatePresentation = false;
+      
+      editorFactory.deletePresentation();
+      
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(currentState).to.be.empty;
+        expect(trackerCalled).to.not.be.ok;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.apiError).to.be.ok;
+        done();
+      },10);
+    });
+  });
+
+  it('getPreviewUrl: ', function(done) {
+    expect(editorFactory.getPreviewUrl()).to.not.be.ok;
+    
+    editorFactory.getPresentation("presentationId")
+      .then(function() {
+        expect(editorFactory.getPreviewUrl()).to.be.ok;
+        expect(editorFactory.getPreviewUrl()).to.equal('http://rvaviewer-test.appspot.com/?type=presentation&id=presentationId&showui=false');
+
+        done();
+      })
+      .then(null, function(e) {
+        done(e);
+      })
+      .then(null,done);
+  });
+
+});
