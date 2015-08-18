@@ -1,8 +1,8 @@
-<div class="presentation-toolbar" ng-class="{'full' : fullArtboard}">
+<div class="presentation-toolbar" ng-class="{'full' : fullArtboard && !factory.editing}">
   <div class="row">
     <div class="col-sm-4">
-      <button class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = !fullArtboard" ng-show="fullArtboard"><i class="fa fa-compress"></i></button>
-      <button class="btn btn-default" ng-show="!fullArtboard" ng-class="{'active' : fullArtboard}" ng-click="fullArtboard = !fullArtboard"><i class="fa fa-expand"></i></button>
+      <button class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = false" ng-show="fullArtboard && !factory.editing"><i class="fa fa-compress"></i></button>
+      <button class="btn btn-default" ng-show="!fullArtboard || factory.editing" ng-class="{'active' : fullArtboard && !factory.editing}" ng-click="fullArtboard = true; factory.editing = false"><i class="fa fa-expand"></i></button>
       <button class="btn btn-default" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
     </div><!--col-sm-4-->
     <div class="col-sm-4">

@@ -9,7 +9,7 @@
 
 <toolbar></toolbar>
 
-<div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard}">
+<div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard && !factory.editing}">
   <div id="editingModeView" ui-view></div>
 </div><!--editor-bg-->
 
