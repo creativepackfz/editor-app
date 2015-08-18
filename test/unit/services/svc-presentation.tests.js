@@ -73,6 +73,60 @@ describe('service: presentation:', function() {
                 def.reject("API Failed");
               }
               return def.promise;
+            },
+            add: function(obj) {
+              expect(obj).to.be.ok;
+              expect(obj.companyId).to.equal('TEST_COMP_ID');
+              expect(obj).to.have.property("data");
+              
+              var def = Q.defer();
+              if (obj.data.name) {
+                expect(obj.data).to.have.property("name");
+                expect(obj.data).to.not.have.property("id");
+                
+                obj.data.id = "presentation1"
+                
+                def.resolve({
+                  result: {
+                    item: obj.data
+                  }
+                });
+              } else {
+                def.reject("API Failed");
+              }
+              return def.promise;
+            },
+            patch: function(obj) {
+              expect(obj).to.be.ok;
+              expect(obj.id).to.equal('presentation1');
+              expect(obj.data).to.be.ok;
+              
+              var def = Q.defer();
+              if (obj.data.name) {
+                expect(obj.data).to.have.property("name");
+                
+                def.resolve({
+                  result: {
+                    item: obj.data
+                  }
+                });
+              } else {
+                def.reject("API Failed");
+              }
+              return def.promise;
+            },
+            delete: function(obj) {
+              expect(obj).to.be.ok;
+
+              var def = Q.defer();
+              if (obj.id) {
+                def.resolve({
+                  item: {}
+                });
+              } else {
+                def.reject("API Failed");
+              }
+              return def.promise;
             }
           }
         });
@@ -188,6 +242,106 @@ describe('service: presentation:', function() {
         done();
       })
       .then(null,done);
+    });
+  });
+  
+  describe('add:',function(){
+    var presentationObject = {
+      "name": "Test Presentation",
+    };
+    
+    it('should add a presentation',function(done){
+      presentation.add(presentationObject)
+      .then(function(result){
+        expect(result).to.be.truely;
+        expect(result.item).to.be.truely;
+        expect(result.item).to.have.property("name");
+        expect(result.item).to.have.property("id");
+        expect(result.item.id).to.equal("presentation1");
+        
+        done();
+      })
+      .then(null,done);
+    });
+    
+    it("should handle failure to add presentation",function(done){
+      presentation.add({})
+      .then(function(result) {
+        done(result);
+      })
+      .then(null, function(error) {
+        expect(error).to.deep.equal('API Failed');
+        done();
+      })
+      .then(null,done);
+    });
+  });
+  
+  describe('update:',function(){
+    var presentationObject = {
+      "name": "Test Presentation",
+      "id": "presentation1",
+      "companyId": "TEST_COMP_ID",
+    };
+    
+    it('should update a presentation',function(done){
+      presentation.update(presentationObject.id, presentationObject)
+      .then(function(result){
+        expect(result).to.be.truely;
+        expect(result.item).to.be.truely;
+        
+        done();
+      })
+      .then(null,done);
+    });
+    
+    it('should remove extra properties',function(done){
+      presentation.update(presentationObject.id, presentationObject)
+      .then(function(result){
+        expect(result).to.be.truely;
+        expect(result.item).to.be.truely;
+        expect(result.item).to.not.have.property("connected");
+        
+        done();
+      })
+      .then(null,done);
+    });
+    
+    it("should handle failure to update presentation",function(done){
+      presentation.update(presentationObject.id, {})
+      .then(function(result) {
+        done(result);
+      })
+      .then(null, function(error) {
+        expect(error).to.deep.equal('API Failed');
+        done();
+      })
+      .then(null,done);
+    });
+  });
+
+  describe('delete:',function(){
+    it('should delete a presentation',function(done){
+      presentation.delete('presentation1')
+        .then(function(result){
+          expect(result).to.be.truely;
+          expect(result.item).to.be.truely;
+
+          done();
+        })
+        .then(null,done);
+    });
+
+    it("should handle failure to delete presentation",function(done){
+      presentation.delete()
+        .then(function(result) {
+          done(result);
+        })
+        .then(null, function(error) {
+          expect(error).to.deep.equal('API Failed');
+          done();
+        })
+        .then(null,done);
     });
   });
 });
