@@ -36,15 +36,15 @@
 </div><!--artboard-sidebar-->
 
 
-<div class="artboard-sidebar" ng-class="{'active' : factory.editing, 'move' : plEdit}">
+<div class="artboard-sidebar" ng-class="{'active' : factory.editing}">
   <div class="artboard-sidebar-body">
 
-    <a href="#" class="btn btn-default pull-left add-right" ng-click="factory.editing = false"><i class="fa fa-angle-left icon-left"></i>Back</a>
+    <a href="" class="btn btn-default pull-left add-right" ng-click="factory.editing = false"><i class="fa fa-angle-left icon-left"></i>Back</a>
     <h4>Edit Placeholder</h4>
 
     <div class="btn-group filters btn-group-justified add-bottom" role="group" aria-label="...">
-      <a href="#" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
-      <a href="#" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
+      <a href="" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
+      <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
     </div>
 
     <div class="ph-playlist animated fadeIn ng-hide" ng-show="showPlaylist">
