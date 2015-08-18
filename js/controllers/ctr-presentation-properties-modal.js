@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('risevision.editorApp.controllers')
-  .controller('PresentationPropertiesModalController', ['$scope', '$modalInstance', 'editorFactory',
+  .controller('PresentationPropertiesModalController', ['$scope',
+    '$modalInstance', 'editorFactory',
     function ($scope, $modalInstance, editorFactory) {
       $scope.factory = editorFactory;
 

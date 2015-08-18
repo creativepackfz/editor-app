@@ -64,7 +64,7 @@ angular.module('risevision.editorApp', [
 
       .state('editor.workspace', {
         url: '/editor/workspace',
-        abstract:true,
+        abstract: true,
         templateUrl: 'partials/workspace.html',
         controller: 'WorkspaceController',
         resolve: {
@@ -79,7 +79,7 @@ angular.module('risevision.editorApp', [
       .state('editor.workspace.artboard', {
         url: '',
         templateUrl: 'partials/artboard.html',
-          controller: 'ArtboardController',
+        controller: 'ArtboardController',
         resolve: {
           canAccess: ['canAccessEditor',
             function (canAccessEditor) {
