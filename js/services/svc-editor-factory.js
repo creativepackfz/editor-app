@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('risevision.editorApp.services')
-  .factory('editorFactory', ['$q', '$state', 'presentation', 
-    'presentationTracker', 'VIEWER_URL',
-    function ($q, $state, presentation, presentationTracker, VIEWER_URL) {
+  .value('REVISION_STATUS_PUBLISHED', 0)
+  .value('REVISION_STATUS_REVISED', 1)
+  .factory('editorFactory', ['$q', '$state', 'presentation',
+    'presentationTracker', 'VIEWER_URL', 'REVISION_STATUS_REVISED',
+    function ($q, $state, presentation, presentationTracker, VIEWER_URL,
+      REVISION_STATUS_REVISED) {
       var factory = {};
       var _presentationId;
 
@@ -65,7 +68,7 @@ angular.module('risevision.editorApp.services')
         presentation.add(factory.presentation)
           .then(function (resp) {
             if (resp && resp.item && resp.item.id) {
-              presentationTracker('Presentation Created', resp.item.id, 
+              presentationTracker('Presentation Created', resp.item.id,
                 resp.item.name);
 
               $state.go('presentation.details', {
@@ -132,6 +135,10 @@ angular.module('risevision.editorApp.services')
           .finally(function () {
             factory.loadingPresentation = false;
           });
+      };
+
+      factory.isRevised = function () {
+        return factory.presentation.revisionStatus === REVISION_STATUS_REVISED;
       };
 
       factory.getPreviewUrl = function () {
