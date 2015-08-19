@@ -68,9 +68,18 @@ angular.module('risevision.editorApp', [
         templateUrl: 'partials/workspace.html',
         controller: 'WorkspaceController',
         resolve: {
-          canAccess: ['canAccessEditor',
-            function (canAccessEditor) {
-              return canAccessEditor();
+          presentationInfo: ['canAccessEditor', 'editorFactory',
+            '$stateParams',
+            function (canAccessEditor, editorFactory, $stateParams) {
+              return canAccessEditor().then(function () {
+                if ($stateParams.presentationId) {
+                  //load the presentation based on the url param
+                  return editorFactory.getPresentation($stateParams.presentationId);
+                }
+                else {
+                  return editorFactory.newPresentation();
+                }
+              });
             }
           ]
         }
