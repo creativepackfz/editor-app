@@ -89,7 +89,8 @@ describe('service: editorFactory:', function() {
     expect(editorFactory.getPresentation).to.be.a('function');
     expect(editorFactory.addPresentation).to.be.a('function');
     expect(editorFactory.updatePresentation).to.be.a('function');
-    expect(editorFactory.deletePresentation).to.be.a('function'); 
+    expect(editorFactory.deletePresentation).to.be.a('function');
+    expect(editorFactory.isRevised).to.be.a('function');
     expect(editorFactory.getPreviewUrl).to.be.a('function');
   });
   
@@ -221,6 +222,29 @@ describe('service: editorFactory:', function() {
         done();
       },10);
     });
+  });
+  
+  describe('isRevised: ', function() {
+    beforeEach(function() {
+      editorFactory.newPresentation();
+    });
+    
+    it('should default to false', function() {
+      expect(editorFactory.isRevised()).to.be.false;
+    });
+
+    it('should not be revised if published', function() {
+      editorFactory.presentation.revisionStatus = 0;
+      
+      expect(editorFactory.isRevised()).to.be.false;
+    });
+
+    it('should be revised with revision status 1', function() {
+      editorFactory.presentation.revisionStatus = 1;
+      
+      expect(editorFactory.isRevised()).to.be.true;
+    });
+    
   });
   
   describe('deletePresentation: ',function(){
