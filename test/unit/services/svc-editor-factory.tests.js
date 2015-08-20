@@ -48,6 +48,13 @@ describe('service: editorFactory:', function() {
         }
       };
     });
+    $provide.service('presentationParser', function() {
+      return {
+        parsePresentation: function(presentation) {
+          presentation.parsed = true;
+        }
+      };
+    });
     $provide.service('presentationTracker', function() { 
       return function(name) {
         trackerCalled = name;
@@ -97,8 +104,9 @@ describe('service: editorFactory:', function() {
   it('newPresentation: should reset the presentation',function(){
     editorFactory.newPresentation();
     
-    expect(editorFactory.presentation).to.deep.equal({});
-    expect(editorFactory.presentationId).to.not.be.truely;
+    expect(editorFactory.presentation.layout).to.be.ok;
+    expect(editorFactory.presentation.parsed).to.be.true;
+    expect(editorFactory.presentationId).to.not.be.ok;
   });
     
   describe('getPresentation:',function(){
@@ -107,6 +115,7 @@ describe('service: editorFactory:', function() {
       .then(function() {
         expect(editorFactory.presentation).to.be.truely;
         expect(editorFactory.presentation.name).to.equal("some presentation");
+        expect(editorFactory.presentation.parsed).to.be.true;
 
         setTimeout(function() {
           expect(editorFactory.loadingPresentation).to.be.false;
