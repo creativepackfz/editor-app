@@ -11,20 +11,20 @@
       <last-revised revision-status="factory.presentation.revisionStatus" change-date="factory.presentation.changeDate" changed-by="factory.presentation.changedBy"></last-revised>
     </span>
 
-    <button class="btn btn-default" ng-show="factory.isRevised()" ng-click="factory.restore()">Restore</button>
+    <button id="restoreButton" class="btn btn-default" ng-show="factory.isRevised()" ng-click="factory.restore()">Restore</button>
 
     <!-- Indicates a successful or positive action -->
-    <button type="submit" class="btn btn-primary btn-fixed-width" ng-click="factory.save()">
+    <button id="saveButton" type="submit" class="btn btn-primary btn-fixed-width" ng-click="factory.save()">
       {{ factory.savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
       <i class="fa fa-check icon-right"></i>
     </button>
     <span class="add-left"></span>
 
-    <button class="btn btn-primary" ng-show="factory.isRevised()" ng-click="factory.publish()">Publish</button>
+    <button id="publishButton" class="btn btn-primary" ng-show="factory.isRevised()" ng-click="factory.publish()">Publish</button>
 
     <span class="add-left"></span>
     <!-- Indicates cancel or non-destructive action -->
-    <button ui-sref="editor.list" class="btn btn-default btn-fixed-width">
+    <button id="cancelButton" ui-sref="editor.list" class="btn btn-default btn-fixed-width">
       {{'common.cancel' | translate}}
       <i class="fa fa-times icon-right"></i>
     </button>

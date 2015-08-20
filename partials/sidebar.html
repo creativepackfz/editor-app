@@ -1,37 +1,10 @@
 <div class="artboard-sidebar active" ng-class="{'active' : default, 'move' : factory.editing}" ng-init="default = 'true'">
 
   <div class="artboard-sidebar-body">
-
+    
     <h4>Placeholders</h4>
-
-
-    <div class="content-box">
-      <table class="table-2 table-hover">
-        <tbody>
-
-        <tr class="clickable-row">
-          <td>
-            <div class="pull-right">
-              <button class="btn btn-sm btn-default"><i class="fa fa-copy"></i></button>
-              <button class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></button>
-            </div>
-            <div ng-click="factory.editing = !factory.editing" style="line-height:30px;">Logo</div>
-          </td>
-        </tr>
-
-        <tr class="clickable-row animated fadeIn ng-hide" ng-show="addPh">
-          <td>
-            <div class="pull-right">
-              <button class="btn btn-sm btn-default"><i class="fa fa-copy"></i></button>
-              <button class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></button>
-            </div>
-            <div ng-click="factory.editing = !factory.editing" style="line-height:30px;">Special Offer</div>
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-    </div><!--content-box-->
+    <placeholders-list></placeholders-list>
+    
   </div><!--content-box-body-->
 </div><!--artboard-sidebar-->
 

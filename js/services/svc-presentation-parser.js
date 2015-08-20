@@ -1,8 +1,22 @@
 'use strict';
 
 angular.module('risevision.editorApp.services')
-  .factory('presentationParser', ['htmlParser',
-    function (htmlParser) {
+  .constant('PRESENTATION_JSON_FIELDS', [
+    'id', 'hidePointer', 'donePlaceholder'
+  ])
+  .constant('PLACEHOLDER_JSON_FIELDS', [
+    'id', 'type', 'timeDefined', 'startDate',
+    'endDate', 'startTime', 'endTime',
+    'recurrenceType', 'recurrenceFrequency',
+    'recurrenceAbsolute', 'recurrenceDayOfWeek',
+    'recurrenceDayOfMonth', 'recurrenceWeekOfMonth',
+    'recurrenceMonthOfYear', 'visibility',
+    'transition', 'items'
+  ])
+  .factory('presentationParser', ['$log', 'htmlParser', 'pick',
+    'PRESENTATION_JSON_FIELDS', 'PLACEHOLDER_JSON_FIELDS',
+    function ($log, htmlParser, pick, PRESENTATION_JSON_FIELDS,
+      PLACEHOLDER_JSON_FIELDS) {
       var factory = {};
 
       var htmlTag = '<html';
@@ -319,6 +333,8 @@ angular.module('risevision.editorApp.services')
 
         factory.parsePlaceholders(presentation, htmlString.substring(
           start, end + bodyEndTag.length));
+
+        $log.debug('parse presentation result', presentation);
       };
 
       // ======================================================================
@@ -464,7 +480,7 @@ angular.module('risevision.editorApp.services')
 
               placeholder.id = '';
             }
-          } else if (!placeholder.isDeleted()) {
+          } else if (!placeholder.deleted) {
             var newTag = '' + divTag + ' ' +
               factory.updateDiv(placeholder, '') + '>' + divEndTag + '\n\t';
             end = htmlString.indexOf(bodyEndTag);
@@ -531,10 +547,16 @@ angular.module('risevision.editorApp.services')
       };
 
       factory.updatePresentationData = function (presentation, htmlString) {
-        var presentationData = angular.copy(presentation);
-        delete presentationData.layout;
-        var presentationDataString = JSON.stringify(presentationData, null,
-          '\t');
+        var data = pick.apply(this, [presentation].concat(
+          PRESENTATION_JSON_FIELDS));
+
+        data.placeholders = [];
+        for (var i = 0; i < presentation.placeholders.length; i++) {
+          data.placeholders.push(pick.apply(this, [presentation.placeholders[
+            i]].concat(PLACEHOLDER_JSON_FIELDS)));
+        }
+
+        var presentationDataString = JSON.stringify(data, null, '\t');
 
         var modifiedDataVariableString = dataVariableString.replace(
           '%data%', presentationDataString);
@@ -574,6 +596,8 @@ angular.module('risevision.editorApp.services')
 
         presentation.layout = factory.updatePresentationData(
           presentation, htmlString);
+
+        $log.debug('update presentation result', presentation);
       };
 
       // =======================================================================
@@ -647,6 +671,8 @@ angular.module('risevision.editorApp.services')
           newBody);
 
         presentation.layout = htmlString;
+
+        $log.debug('update presentation header result', presentation);
       };
 
 

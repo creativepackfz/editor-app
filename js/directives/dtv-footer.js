@@ -21,7 +21,8 @@ angular.module('risevision.editorApp.directives')
                   return 'Deleting Presentation';
                 },
                 confirmationMessage: function () {
-                  return 'Are you sure you want to delete this Presentation?';
+                  return 'Are you sure you want to delete ' +
+                    'this Presentation?';
                 },
                 confirmationButton: function () {
                   return 'common.delete-forever';

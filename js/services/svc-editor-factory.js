@@ -3,10 +3,26 @@
 angular.module('risevision.editorApp.services')
   .value('REVISION_STATUS_PUBLISHED', 0)
   .value('REVISION_STATUS_REVISED', 1)
+  /*jshint multistr: true */
+  .value('DEFAULT_LAYOUT',
+    '\
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\
+<html>\n\
+\t<head>\n\
+\t\t<meta http-equiv="content-type" content="text/html; charset=UTF-8">\n\
+\t\t<title></title>\n\
+\t</head>\n\
+\n\
+\t<body style="width:1920px;height:1080px; margin: 0; overflow: hidden;" >\n\
+\t</body>\n\
+</html>\n'
+  )
   .factory('editorFactory', ['$q', '$state', 'presentation',
-    'presentationTracker', 'VIEWER_URL', 'REVISION_STATUS_REVISED',
-    function ($q, $state, presentation, presentationTracker, VIEWER_URL,
-      REVISION_STATUS_REVISED) {
+    'presentationParser', 'presentationTracker', 'VIEWER_URL',
+    'REVISION_STATUS_REVISED', 'DEFAULT_LAYOUT',
+    function ($q, $state, presentation, presentationParser,
+      presentationTracker, VIEWER_URL, REVISION_STATUS_REVISED,
+      DEFAULT_LAYOUT) {
       var factory = {};
       var _presentationId;
 
@@ -22,8 +38,10 @@ angular.module('risevision.editorApp.services')
         _presentationId = undefined;
 
         factory.presentation = {
-
+          layout: DEFAULT_LAYOUT
         };
+
+        presentationParser.parsePresentation(factory.presentation);
 
         _clearMessages();
       };
@@ -43,6 +61,8 @@ angular.module('risevision.editorApp.services')
         presentation.get(_presentationId)
           .then(function (result) {
             factory.presentation = result.item;
+
+            presentationParser.parsePresentation(factory.presentation);
 
             deferred.resolve();
           })
@@ -138,7 +158,8 @@ angular.module('risevision.editorApp.services')
       };
 
       factory.isRevised = function () {
-        return factory.presentation.revisionStatus === REVISION_STATUS_REVISED;
+        return factory.presentation.revisionStatus ===
+          REVISION_STATUS_REVISED;
       };
 
       factory.getPreviewUrl = function () {
