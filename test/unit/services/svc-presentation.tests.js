@@ -127,6 +127,39 @@ describe('service: presentation:', function() {
                 def.reject("API Failed");
               }
               return def.promise;
+            },
+            publish: function(obj) {
+              expect(obj).to.be.ok;
+
+              var def = Q.defer();
+              if (obj.id) {
+                def.resolve({
+                  item: "Published."
+                });
+              } else {
+                def.reject("API Failed");
+              }
+              return def.promise;
+            },
+            restore: function(obj) {
+              expect(obj).to.be.ok;
+
+              var def = Q.defer();
+              if (obj.id) {
+                def.resolve({
+                  result: {
+                    item: {
+                      id: obj.id,
+                      companyId: "TEST_COMP_ID",
+                      name: "Test Presentation",
+                      publish: 0 
+                    }  
+                  }                  
+                });
+              } else {
+                def.reject("API Failed");
+              }
+              return def.promise;
             }
           }
         });
@@ -334,6 +367,61 @@ describe('service: presentation:', function() {
 
     it("should handle failure to delete presentation",function(done){
       presentation.delete()
+        .then(function(result) {
+          done(result);
+        })
+        .then(null, function(error) {
+          expect(error).to.deep.equal('API Failed');
+          done();
+        })
+        .then(null,done);
+    });
+  });
+
+  describe('publish:',function(){
+    it('should publish a presentation',function(done){
+      presentation.publish('presentation1')
+        .then(function(result){
+          expect(result).to.be.truely;
+          expect(result.item).to.be.truely;
+          expect(result.item).to.equal("Published.");
+          done();
+        })
+        .then(null,done);
+    });
+
+    it("should handle failure to publish presentation",function(done){
+      presentation.publish()
+        .then(function(result) {
+          done(result);
+        })
+        .then(null, function(error) {
+          expect(error).to.deep.equal('API Failed');
+          done();
+        })
+        .then(null,done);
+    });
+  });
+
+  describe('restore:',function(){
+    it('should restore a presentation',function(done){
+      presentation.restore('presentation1')
+        .then(function(result){
+          expect(result).to.be.truely;
+          expect(result.item).to.be.truely;
+          expect(result.item).to.have.property("name");
+          expect(result.item).to.have.property("publish");
+          expect(result.item).to.have.property("id");
+          expect(result.item.id).to.equal("presentation1");
+          expect(result.item.name).to.equal("Test Presentation");
+          expect(result.item.publish).to.equal(0);
+          done();
+        })
+        .then(null,done);
+    });
+
+    it("should handle failure to restore presentation",function(done){
+      presentation.restore()
         .then(function(result) {
           done(result);
         })

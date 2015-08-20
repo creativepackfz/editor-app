@@ -10,6 +10,10 @@ describe('service: editorFactory:', function() {
           id: "presentationId",
           name: "some presentation"
         },
+        _restored_presentation: {
+          id: "presentationId",
+          name: "restored presentation"
+        },
         add : function(){
           var deferred = Q.defer();
           if(updatePresentation){
@@ -43,6 +47,24 @@ describe('service: editorFactory:', function() {
             deferred.resolve(presentationId);
           }else{
             deferred.reject({result: {error: { message: 'ERROR; could not delete presentation'}}});
+          }
+          return deferred.promise;
+        },
+        publish: function(presentationId) {
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve({item: this._presentation});
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not publish presentation'}}});
+          }
+          return deferred.promise;
+        },
+        restore: function(presentationId) {
+          var deferred = Q.defer();
+          if(updatePresentation){
+            deferred.resolve({item: this._restored_presentation});
+          }else{
+            deferred.reject({result: {error: { message: 'ERROR; could not restore presentation'}}});
           }
           return deferred.promise;
         }
@@ -307,6 +329,80 @@ describe('service: editorFactory:', function() {
         done(e);
       })
       .then(null,done);
+  });
+
+  describe('publishPresentation: ',function(){
+    it('should publish the presentation',function(done){
+      updatePresentation = true;
+
+      editorFactory.publishPresentation();
+      
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.equal('Presentation Published');
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        done();
+      },10);
+    });
+
+    it('should show an error if fails to publish the presentation',function(done){
+      updatePresentation = false;
+
+      editorFactory.publishPresentation();
+
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.not.be.ok;
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.apiError).to.be.ok;
+        done();
+      },10);
+    });
+  });
+
+describe('restorePresentation: ',function(){
+    it('should restore the presentation',function(done){
+      updatePresentation = true;
+
+      editorFactory.restorePresentation();
+      
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.equal('Presentation Restored');
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.presentation).to.be.truely;
+        expect(editorFactory.presentation.name).to.equal("restored presentation");
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        done();
+      },10);
+    });
+
+    it('should show an error if fails to restore the presentation',function(done){
+      updatePresentation = false;
+
+      editorFactory.restorePresentation();
+
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.not.be.ok;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.be.ok;
+        expect(editorFactory.apiError).to.be.ok;
+        done();
+      },10);
+    });
   });
 
 });

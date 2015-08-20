@@ -162,6 +162,65 @@ angular.module('risevision.editorApp.services')
           REVISION_STATUS_REVISED;
       };
 
+      factory.publishPresentation = function () {
+        var deferred = $q.defer();
+
+        _clearMessages();
+
+        //show loading spinner
+        factory.loadingPresentation = true;
+        factory.savingPresentation = true;
+
+        presentation.publish(_presentationId)
+          .then(function (presentationId) {
+            presentationTracker('Presentation Published', _presentationId,
+              factory.presentation.name);
+
+            deferred.resolve();
+          })
+          .then(null, function (e) {
+            _showErrorMessage('publish', e);
+
+            deferred.reject();
+          })
+          .finally(function () {
+            factory.loadingPresentation = false;
+            factory.savingPresentation = false;
+          });
+
+        return deferred.promise;
+      };
+
+      factory.restorePresentation = function (presentationId) {
+        var deferred = $q.defer();
+
+        _clearMessages();
+
+        //show loading spinner
+        factory.loadingPresentation = true;
+
+        presentation.restore(_presentationId)
+          .then(function (result) {
+            presentationTracker('Presentation Restored', _presentationId,
+              factory.presentation.name);
+            factory.presentation = result.item;
+
+            presentationParser.parsePresentation(factory.presentation);
+
+            deferred.resolve();
+          })
+          .then(null, function (e) {
+            _showErrorMessage('restore', e);
+
+            deferred.reject();
+          })
+          .finally(function () {
+            factory.loadingPresentation = false;
+          });
+
+        return deferred.promise;
+      };     
+
       factory.getPreviewUrl = function () {
         if (_presentationId) {
           return VIEWER_URL + '/?type=presentation&id=' + _presentationId +
