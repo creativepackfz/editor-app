@@ -145,6 +145,50 @@ angular.module('risevision.editorApp.services')
             });
 
           return deferred.promise;
+        },
+        publish: function (presentationId) {
+          var deferred = $q.defer();
+
+          var obj = {
+            'id': presentationId
+          };
+
+          $log.debug('publish presentation called with', presentationId);
+          coreAPILoader().then(function (coreApi) {
+              return coreApi.presentation.publish(obj);
+            })
+            .then(function (resp) {
+              $log.debug('publish presentation resp', resp);
+              deferred.resolve(resp);
+            })
+            .then(null, function (e) {
+              $log.error('Failed to publish presentation.', e);
+              deferred.reject(e);
+            });
+
+          return deferred.promise;
+        },
+        restore: function (presentationId) {
+          var deferred = $q.defer();
+
+          var obj = {
+            'id': presentationId
+          };
+
+          $log.debug('restore presentation called with', presentationId);
+          coreAPILoader().then(function (coreApi) {
+              return coreApi.presentation.restore(obj);
+            })
+            .then(function (resp) {
+              $log.debug('restore presentation resp', resp);
+              deferred.resolve(resp.result);
+            })
+            .then(null, function (e) {
+              $log.error('Failed to restore presentation.', e);
+              deferred.reject(e);
+            });
+
+          return deferred.promise;
         }
       };
 
