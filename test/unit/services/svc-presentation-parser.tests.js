@@ -128,30 +128,30 @@ describe('service: PresentationParser ', function() {
   
   describe('parseBodyStyle: ', function() {
     it('should parse correctly', function() {
-       var styleToken = 'width:1920px;height:1080px; margin: 0; overflow: hidden;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:contain;';
+       var styleToken = 'width:1920px;height:1080px; margin: 0; overflow: hidden;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:contain;';
        
        var presentationObj = {};
        presentationParser.parseBodyStyle(presentationObj, styleToken);
        expect(presentationObj).to.be.ok;
-       expect(presentationObj).to.deep.equal({width:1920,height:1080,widthUnits:'px',heightUnits:'px',backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
+       expect(presentationObj).to.deep.equal({width:1920,height:1080,widthUnits:'px',heightUnits:'px',backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
     });
     
     it('should skip parameter if missing', function() {
-       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:contain;';
+       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:contain;';
        
        var presentationObj = {};
        presentationParser.parseBodyStyle(presentationObj, styleToken);
        expect(presentationObj).to.be.ok;
-       expect(presentationObj).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
+       expect(presentationObj).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
     });
     
     it('should interpret background-size correctly', function() {
-       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:initial;';
+       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:initial;';
        
        var presentationObj = {};
        presentationParser.parseBodyStyle(presentationObj, styleToken);
        expect(presentationObj).to.be.ok;
-       expect(presentationObj).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:false});
+       expect(presentationObj).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:false});
     });
   });
 
@@ -171,30 +171,30 @@ describe('service: PresentationParser ', function() {
   
   describe('parseStyle: ', function() {
     it('should parse correctly', function() {
-       var styleToken = 'width:842px;height:134px;left:34px;top:60px;z-index:0;position:absolute;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:contain;';
+       var styleToken = 'width:842px;height:134px;left:34px;top:60px;z-index:0;position:absolute;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:contain;';
        
        var placeholder = {};
        presentationParser.parseStyle(placeholder, styleToken);
        expect(placeholder).to.be.ok;
-       expect(placeholder).to.deep.equal({width:842,height:134,widthUnits:'px',heightUnits:'px',left:34,top:60,leftUnits:'px',topUnits:'px',zIndex:0,backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
+       expect(placeholder).to.deep.equal({width:842,height:134,widthUnits:'px',heightUnits:'px',left:34,top:60,leftUnits:'px',topUnits:'px',zIndex:0,backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
     });
     
     it('should skip parameter if missing', function() {
-       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:contain;';
+       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:contain;';
        
        var placeholder = {};
        presentationParser.parseStyle(placeholder, styleToken);
        expect(placeholder).to.be.ok;
-       expect(placeholder).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
+       expect(placeholder).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:true});
     });
     
     it('should interpret background-size correctly', function() {
-       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'/images/bg.jpg\') no-repeat left top;background-size:initial;';
+       var styleToken = 'width:1920px; margin: 0; overflow: hidden;background:url(\'http://host.com/images/bg.jpg\') no-repeat left top;background-size:initial;';
        
        var placeholder = {};
        presentationParser.parseStyle(placeholder, styleToken);
        expect(placeholder).to.be.ok;
-       expect(placeholder).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:false});
+       expect(placeholder).to.deep.equal({width:1920,widthUnits:'px',backgroundStyle:'url(\'http://host.com/images/bg.jpg\') no-repeat left top',backgroundScaleToFit:false});
     });
   });
   

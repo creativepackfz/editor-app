@@ -95,7 +95,7 @@ angular.module('risevision.editorApp.services')
         for (var x = 0; x < tokens.length; x++) {
           if (tokens[x].indexOf(':') !== -1) {
             var param = tokens[x].split(':')[0];
-            var value = tokens[x].split(':')[1];
+            var value = tokens[x].substring(tokens[x].indexOf(":") + 1).trim();
 
             if (param.equalsIgnoreCase(widthParam)) {
               presentation.width = htmlParser.getIntValue(value);
@@ -168,7 +168,7 @@ angular.module('risevision.editorApp.services')
         for (var x = 0; x < tokens.length; x++) {
           if (tokens[x].indexOf(':') !== -1) {
             var param = tokens[x].split(':')[0];
-            var value = tokens[x].split(':')[1];
+            var value = tokens[x].substring(tokens[x].indexOf(":") + 1).trim();
 
             if (param.equalsIgnoreCase(widthParam)) {
               placeholder.width = htmlParser.getFloatValue(value);
