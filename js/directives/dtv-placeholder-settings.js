@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('risevision.editorApp.directives')
-  .directive('sidebar', ['placeholderFactory',
+  .directive('placeholderPlaylist', ['placeholderFactory',
     function (placeholderFactory) {
       return {
         restrict: 'E',
         scope: true,
-        templateUrl: 'partials/sidebar.html',
+        templateUrl: 'partials/placeholder-playlist.html',
         link: function ($scope) {
-            $scope.factory = placeholderFactory;
-          } //link()
+          $scope.factory = placeholderFactory;
+
+        }
       };
     }
   ]);

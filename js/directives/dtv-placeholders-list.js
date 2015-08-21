@@ -2,8 +2,9 @@
 
 angular.module('risevision.editorApp.directives')
   .directive('placeholdersList', ['$modal', '$templateCache',
-    'placeholdersFactory',
-    function ($modal, $templateCache, placeholdersFactory) {
+    'placeholdersFactory', 'placeholderFactory',
+    function ($modal, $templateCache, placeholdersFactory,
+      placeholderFactory) {
       return {
         restrict: 'E',
         scope: true,
@@ -12,7 +13,7 @@ angular.module('risevision.editorApp.directives')
             $scope.factory = placeholdersFactory;
 
             $scope.manage = function (placeholder) {
-
+              placeholderFactory.setPlaceholder(placeholder);
             };
 
             $scope.remove = function (placeholder) {
