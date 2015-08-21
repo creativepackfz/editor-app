@@ -86,6 +86,7 @@ describe("In order to manage presentations " +
 
     it('should open sign up model when clicking on the sign up link',function(){
       homepage.getSignUpLink().click();
+      helper.wait(commonHeaderPage.getModalDialog(),'Sign Up Modal');
       expect(commonHeaderPage.getModalDialog().isDisplayed()).to.eventually.be.true;
     });
   });

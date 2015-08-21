@@ -2,12 +2,17 @@
 
 angular.module('risevision.editorApp.controllers')
   .controller('PresentationPropertiesModalController', ['$scope',
-    '$modalInstance', 'editorFactory',
-    function ($scope, $modalInstance, editorFactory) {
-      $scope.factory = editorFactory;
+    '$modalInstance', 'presentationPropertiesFactory', 'placeholdersFactory',
+    'userState',
+    function ($scope, $modalInstance, presentationPropertiesFactory,
+      placeholdersFactory, userState) {
+
+      $scope.presentationProperties = presentationPropertiesFactory.getPresentationProperties();
+      $scope.companyId = userState.getSelectedCompanyId();
+      $scope.placeholders = placeholdersFactory.getPlaceholders();
 
       $scope.apply = function () {
-        //TODO Save presentation properties
+        presentationPropertiesFactory.setPresentationProperties($scope.presentationProperties);
         $scope.dismiss();
       };
 

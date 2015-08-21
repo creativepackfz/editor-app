@@ -4,13 +4,15 @@
     margin-bottom: 0;
   }
 </style>
+<div id="workspace">
 
-<sidebar></sidebar>
+  <sidebar></sidebar>
 
-<toolbar></toolbar>
+  <toolbar></toolbar>
 
-<div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard && !factory.editing}">
-  <div id="editingModeView" ui-view></div>
-</div><!--editor-bg-->
+  <div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard && !factory.editing}">
+    <div id="editingModeView" ui-view></div>
+  </div><!--editor-bg-->
 
-<footer></footer>
+  <footer></footer>
+</div>
