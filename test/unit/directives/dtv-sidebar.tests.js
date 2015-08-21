@@ -7,6 +7,11 @@ describe('directive: sidebar', function() {
   beforeEach(module('risevision.editorApp.services'));
   beforeEach(module('risevision.editorApp.directives'));
 
+  beforeEach(module(function ($provide) {
+    $provide.service('placeholderFactory', function() {
+      return {};
+    });
+  }));
 
   beforeEach(inject(function(_$compile_, _$rootScope_, $templateCache){
     $templateCache.put('partials/sidebar.html', '<p>mock</p>');

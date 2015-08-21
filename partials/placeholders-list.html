@@ -8,7 +8,7 @@
             <button class="btn btn-sm btn-default" id="duplicateButton" ng-click="factory.duplicatePlaceholder(placeholder)"><i class="fa fa-copy"></i></button>
             <button class="btn btn-sm btn-default" id="removeButton" ng-click="remove(placeholder)"><i class="fa fa-trash-o"></i></button>
           </div>
-          <div ng-click="factory.editing = !factory.editing" style="line-height:30px;">{{placeholder.id}}</div>
+          <div ng-click="manage(placeholder)" style="line-height:30px;">{{placeholder.id}}</div>
         </td>
       </tr>
 

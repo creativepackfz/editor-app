@@ -219,7 +219,7 @@ angular.module('risevision.editorApp.services')
           });
 
         return deferred.promise;
-      };     
+      };
 
       factory.getPreviewUrl = function () {
         if (_presentationId) {
