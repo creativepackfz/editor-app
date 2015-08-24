@@ -1,6 +1,7 @@
 'use strict';
-var PresentationAddPage = function() {
-  var presentationsAppContainer = element(by.css('.presentations-app'));
+var WorkspacePage = function() {
+  var workspaceContainer = element(by.id('workspace'));
+  var presentationPropertiesButton = element(by.id('presentationPropertiesButton'));
 
   var addPlaceholderButton = element(by.id('addPlaceholderButton'));
   var previewButton = element(by.id('previewButton'));
@@ -16,8 +17,12 @@ var PresentationAddPage = function() {
 
   var presentationLoader = element(by.xpath('//div[@spinner-key="presentation-loader"]'));
 
-  this.getPresentationsAppContainer = function() {
-    return presentationsAppContainer;
+  this.getWorkspaceContainer = function() {
+    return workspaceContainer;
+  };
+
+  this.getPresentationPropertiesButton = function() {
+    return presentationPropertiesButton;
   };
 
   this.getPreviewButton = function() {
@@ -60,6 +65,7 @@ var PresentationAddPage = function() {
     return presentationLoader;
   };
 
+
 };
 
-module.exports = PresentationAddPage;
+module.exports = WorkspacePage;

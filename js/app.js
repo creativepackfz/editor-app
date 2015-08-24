@@ -22,7 +22,8 @@ angular.module('risevision.editorApp', [
     'risevision.editorApp.filters',
     'risevision.editorApp.directives',
     'risevision.common.loading',
-    'risevision.common.i18n'
+    'risevision.common.i18n',
+    'risevision.widget.common.background-image-setting'
   ])
   // Set up our mappings between URLs, templates, and controllers
   .config(['$urlRouterProvider', '$stateProvider',
@@ -77,6 +78,7 @@ angular.module('risevision.editorApp', [
                   return editorFactory.getPresentation($stateParams
                     .presentationId);
                 } else {
+                  editorFactory.openPresentationProperties();
                   return editorFactory.newPresentation();
                 }
               });

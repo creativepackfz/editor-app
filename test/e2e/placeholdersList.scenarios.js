@@ -3,25 +3,27 @@ var expect = require('rv-common-e2e').expect;
 var HomePage = require('./pages/homepage.js');
 var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var PresentationsListPage = require('./pages/presentationListPage.js');
-var PresentationAddPage = require('./pages/presentationAddPage.js');
+var WorkspacePage = require('./pages/workspacePage.js');
 var PlaceholdersListPage = require('./pages/placeholdersListPage.js');
+var PresentationPropertiesModalPage = require('./pages/presentationPropertiesModalPage.js');
 var helper = require('rv-common-e2e').helper;
 
 browser.driver.manage().window().setSize(1920, 1080);
 describe('Add placeholder to presentation: ', function() {
-  this.timeout(2000);// to allow for protactor to load the seperate page
   var homepage;
   var commonHeaderPage;
   var presentationsListPage;
-  var presentationAddPage;
+  var workspacePage;
   var placeholdersListPage;
+  var presentationPropertiesModalPage;
 
   before(function (){
     homepage = new HomePage();
     presentationsListPage = new PresentationsListPage();
-    presentationAddPage = new PresentationAddPage();
+    workspacePage = new WorkspacePage();
     placeholdersListPage = new PlaceholdersListPage();
     commonHeaderPage = new CommonHeaderPage();
+    presentationPropertiesModalPage = new PresentationPropertiesModalPage();
 
     homepage.get();
     //wait for spinner to go away.
@@ -34,15 +36,18 @@ describe('Add placeholder to presentation: ', function() {
     before(function () {
       presentationsListPage.getPresentationAddButton().click();
       presentationsListPage.getNewPresentationButton().click();
+      helper.wait(presentationPropertiesModalPage.getPresentationPropertiesModal(), 'Presentation Properties Modal');
+      presentationPropertiesModalPage.getCancelButton().click();
 
-      presentationAddPage.getAddPlaceholderButton().click();
-      presentationAddPage.getAddPlaceholderButton().click();
+      workspacePage.getAddPlaceholderButton().click();
+      workspacePage.getAddPlaceholderButton().click();
+
     });
 
     describe('Should manage placeholders', function () {
       it('should have 2 items the list', function () {
         expect(placeholdersListPage.getPlaceholders().count()).to.eventually.equal(2);
-        
+
         expect(placeholdersListPage.getPlaceholders().get(0).getText()).to.eventually.contain('ph0');
         expect(placeholdersListPage.getPlaceholders().get(1).getText()).to.eventually.contain('ph1');
       });

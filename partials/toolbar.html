@@ -1,14 +1,14 @@
-<div class="presentation-toolbar" ng-class="{'full' : fullArtboard && !factory.editing}">
+<div id="presentationToolbar" class="presentation-toolbar" ng-class="{'full' : fullArtboard && !factory.editing}">
   <div class="row">
     <div class="col-sm-4">
-      <button class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = false" ng-show="fullArtboard && !factory.editing"><i class="fa fa-compress"></i></button>
-      <button class="btn btn-default" ng-show="!fullArtboard || factory.editing" ng-class="{'active' : fullArtboard && !factory.editing}" ng-click="fullArtboard = true; factory.editing = false"><i class="fa fa-expand"></i></button>
-      <button class="btn btn-default" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
+      <button id="compressArtboardButton" class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = false" ng-show="fullArtboard && !factory.editing"><i class="fa fa-compress"></i></button>
+      <button id="expandArtboardButton" class="btn btn-default" ng-show="!fullArtboard || factory.editing" ng-class="{'active' : fullArtboard && !factory.editing}" ng-click="fullArtboard = true; factory.editing = false"><i class="fa fa-expand"></i></button>
+      <button id="presentationPropertiesButton" class="btn btn-default" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
     </div><!--col-sm-4-->
     <div class="col-sm-4">
       <div ng-init="designMode = true" class="btn-group btn-group-justified filters filters-inverted">
-        <a ui-sref="editor.workspace.artboard" class="btn btn-default" ng-class="{'active' : designMode}" ng-click="designMode = true" >Design</a>
-        <a ui-sref="editor.workspace.htmleditor" class="btn btn-default" ng-class="{'active' : !designMode}" ng-click="designMode = false"><i class="fa fa-code icon-white icon-left"></i>HTML</a>
+        <a id="designButton" ui-sref="editor.workspace.artboard" class="btn btn-default" ng-class="{'active' : designMode}" ng-click="designMode = true" >Design</a>
+        <a id="htmlButton" ui-sref="editor.workspace.htmleditor" class="btn btn-default" ng-class="{'active' : !designMode}" ng-click="designMode = false"><i class="fa fa-code icon-white icon-left"></i>HTML</a>
       </div><!--btn-group-->
     </div><!--col-sm-4-->
     <div class="col-sm-4 text-right">

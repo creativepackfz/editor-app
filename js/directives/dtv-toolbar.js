@@ -14,10 +14,7 @@ angular.module('risevision.editorApp.directives')
             };
 
             $scope.openProperties = function () {
-              $modal.open({
-                templateUrl: 'partials/presentation-properties-modal.html',
-                controller: 'PresentationPropertiesModalController'
-              });
+              editorFactory.openPresentationProperties();
             };
           } //link()
       };

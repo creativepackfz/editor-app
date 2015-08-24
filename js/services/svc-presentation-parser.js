@@ -95,7 +95,7 @@ angular.module('risevision.editorApp.services')
         for (var x = 0; x < tokens.length; x++) {
           if (tokens[x].indexOf(':') !== -1) {
             var param = tokens[x].split(':')[0];
-            var value = tokens[x].substring(tokens[x].indexOf(":") + 1).trim();
+            var value = tokens[x].substring(tokens[x].indexOf(':') + 1).trim();
 
             if (param.equalsIgnoreCase(widthParam)) {
               presentation.width = htmlParser.getIntValue(value);
@@ -122,7 +122,7 @@ angular.module('risevision.editorApp.services')
             htmlParser.getBooleanValue(placeholders[i].timeDefined);
           placeholders[i].visibility =
             htmlParser.getBooleanValue(placeholders[i].visibility);
-            
+
           if (placeholders[i].items) {
             items = placeholders[i].items;
             for (j = 0; j < items.length; j++) {
@@ -179,13 +179,13 @@ angular.module('risevision.editorApp.services')
               return;
             }
 
-            presentation.hidePointer = 
+            presentation.hidePointer =
               htmlParser.getBooleanValue(dataObject.hidePointer);
             presentation.donePlaceholder = dataObject.donePlaceholder;
 
             _cleanPlaceholderData(dataObject.placeholders);
 
-            presentation.placeholders = dataObject.placeholders;            
+            presentation.placeholders = dataObject.placeholders;
           }
         }
       };
@@ -195,7 +195,7 @@ angular.module('risevision.editorApp.services')
         for (var x = 0; x < tokens.length; x++) {
           if (tokens[x].indexOf(':') !== -1) {
             var param = tokens[x].split(':')[0];
-            var value = tokens[x].substring(tokens[x].indexOf(":") + 1).trim();
+            var value = tokens[x].substring(tokens[x].indexOf(':') + 1).trim();
 
             if (param.equalsIgnoreCase(widthParam)) {
               placeholder.width = htmlParser.getFloatValue(value);

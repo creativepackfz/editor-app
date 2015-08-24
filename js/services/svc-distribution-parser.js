@@ -28,7 +28,7 @@ angular.module('risevision.editorApp.services')
                     placeholder.distributeToAll = false;
                   } else {
                     var itemNumber = htmlParser.getIntValue(tokens[1]);
-                    if (itemNumber !== -1 && 
+                    if (itemNumber !== -1 &&
                       itemNumber < placeholder.items.length) {
                       placeholder.items[itemNumber].distribution =
                         displaysList;
