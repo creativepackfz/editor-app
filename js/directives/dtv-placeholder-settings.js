@@ -10,6 +10,9 @@ angular.module('risevision.editorApp.directives')
         link: function ($scope) {
           $scope.factory = placeholderFactory;
 
+          $scope.$watch('factory.placeholder', function (newPlaceholder) {
+            $scope.placeholder = newPlaceholder;
+          });
         }
       };
     }

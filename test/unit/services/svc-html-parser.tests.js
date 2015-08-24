@@ -24,7 +24,10 @@ describe('service: HtmlParser ', function() {
     expect(htmlParser.stripGarbage).to.be.a('function');
     expect(htmlParser.getUnits).to.be.a('function');
     expect(htmlParser.getFloatValue).to.be.a('function');
+    expect(htmlParser.getIntValue).to.be.a('function');
+    expect(htmlParser.parseIntProperty).to.be.a('function');
     expect(htmlParser.getBooleanValue).to.be.a('function');
+    expect(htmlParser.parseBooleanProperty).to.be.a('function');
     expect(htmlParser.stripOuterGarbage).to.be.a('function');
     expect(htmlParser.updateInnerString).to.be.a('function');
   });
@@ -141,6 +144,25 @@ describe('service: HtmlParser ', function() {
     expect(htmlParser.getIntValue('" 0"')).to.equal(0);
   });
   
+  describe('parseIntProperty: ', function() {
+    it('should parse if defined', function() {
+      var obj = {id:'ph1',duration:'10'};
+      
+      htmlParser.parseIntProperty(obj, 'duration');
+      
+      expect(obj).to.deep.equal({id:'ph1',duration:10});
+    });
+    
+    it('should not parse if un-defined', function() {
+      var obj = {id:'ph1',duration:'10'};
+      
+      htmlParser.parseIntProperty(obj, 'someOtherProperty');
+      
+      expect(obj).to.deep.equal({id:'ph1',duration:'10'});
+    });
+    
+  });
+  
   it('getBooleanValue', function() {
     expect(htmlParser.getBooleanValue('true')).to.be.true;
     expect(htmlParser.getBooleanValue('false')).to.be.false;
@@ -148,6 +170,25 @@ describe('service: HtmlParser ', function() {
     expect(htmlParser.getBooleanValue(false)).to.be.false;
     
     expect(htmlParser.getBooleanValue('absolute')).to.be.false;
+    
+  });
+  
+  describe('parseBooleanProperty: ', function() {
+    it('should parse if defined', function() {
+      var obj = {id:'ph1',timeDefined:'true'};
+      
+      htmlParser.parseBooleanProperty(obj, 'timeDefined');
+      
+      expect(obj).to.deep.equal({id:'ph1',timeDefined:true});
+    });
+    
+    it('should not parse if un-defined', function() {
+      var obj = {id:'ph1',timeDefined:'true'};
+      
+      htmlParser.parseBooleanProperty(obj, 'someOtherProperty');
+      
+      expect(obj).to.deep.equal({id:'ph1',timeDefined:'true'});
+    });
     
   });
 
