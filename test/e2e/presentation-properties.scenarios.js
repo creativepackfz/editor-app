@@ -101,8 +101,10 @@ describe("In order to manage presentations " +
       });
 
       it('should save properties', function () {
+        presentationPropertiesModalPage.getNameInput().clear();
         presentationPropertiesModalPage.getNameInput().sendKeys("E2E Test Presentation");
-        presentationPropertiesModalPage.getApplyButton().click();
+        helper.clickWhenClickable(presentationPropertiesModalPage.getApplyButton(), 'Apply Button');
+
         expect(presentationPropertiesModalPage.getPresentationPropertiesModal().isPresent()).to.eventually.be.false;
       });
 

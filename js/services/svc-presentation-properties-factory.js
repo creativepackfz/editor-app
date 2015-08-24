@@ -2,7 +2,8 @@
 
 angular.module('risevision.editorApp.services')
   .factory('presentationPropertiesFactory', ['editorFactory',
-    function (editorFactory) {
+    'presentationParser',
+    function (editorFactory, presentationParser) {
       var factory = {};
       var BACKGROUND_TOKENS = {
         RGB: 'rgb',
@@ -66,6 +67,8 @@ angular.module('risevision.editorApp.services')
           editorFactory.presentation.hidePointer = presentationProperties.hidePointer;
           editorFactory.presentation.donePlaceholder =
             presentationProperties.donePlaceholder;
+
+          presentationParser.updatePresentation(editorFactory.presentation);
         }
       };
 
