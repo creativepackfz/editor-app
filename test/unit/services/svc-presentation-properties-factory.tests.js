@@ -2,7 +2,7 @@
   
 describe('service: presentationPropertiesFactory:', function() {
   beforeEach(module('risevision.editorApp.services'));
-  var presentationPropertiesFactory, newPresentationProperties, existentPresentationProperties, presentation, editorFactory, id, name, width, height, widthUnits, heightUnits, backgroundStyle, backgroundScaleToFit, hidePointer, donePlaceholder;
+  var presentationPropertiesFactory, newPresentationProperties, existentPresentationProperties, presentation, editorFactory, presentationParser, id, name, width, height, widthUnits, heightUnits, backgroundStyle, backgroundScaleToFit, hidePointer, donePlaceholder;
   beforeEach(module(function ($provide) {
 
     newPresentationProperties = {
@@ -48,6 +48,16 @@ describe('service: presentationPropertiesFactory:', function() {
     
     $provide.service('editorFactory',function () {
       return editorFactory;
+    });
+
+    presentationParser = {
+      updatePresentation: function () {
+        return;
+      }
+    }
+
+    $provide.service('presentationParser',function () {
+      return presentationParser;
     });
 
   }));

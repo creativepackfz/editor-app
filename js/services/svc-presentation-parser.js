@@ -594,19 +594,13 @@ angular.module('risevision.editorApp.services')
 
       factory.updatePresentation = function (presentation) {
         var start, end;
+
+        // process presentation header first
+        factory.updatePresentationHeader(presentation);
+
         var htmlString = presentation.layout;
 
-        if (!htmlString) {
-          return;
-        }
-
-        start = htmlString.toLowerCase().indexOf(htmlTag);
-        end = htmlString.toLowerCase().indexOf(htmlEndTag, start);
-        if (start === -1 || end === -1) {
-          return;
-        }
-
-        // process body first
+        // process body
         start = htmlString.toLowerCase().indexOf(bodyTag, start);
         end = htmlString.toLowerCase().indexOf(bodyEndTag, start);
         if (start === -1 || end === -1) {
@@ -656,7 +650,7 @@ angular.module('risevision.editorApp.services')
           styleString = htmlParser.updateStyle(backgroundSizeParam,
             backgroundScaleValue, styleString);
         } else {
-          styleString = htmlParser.emoveStyle(backgroundSizeParam,
+          styleString = htmlParser.removeStyle(backgroundSizeParam,
             styleString);
         }
 
