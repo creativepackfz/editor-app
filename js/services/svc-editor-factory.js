@@ -18,11 +18,12 @@ angular.module('risevision.editorApp.services')
 </html>\n'
   )
   .factory('editorFactory', ['$q', '$state', 'userState', 'presentation',
-    'presentationParser', 'presentationTracker', 'VIEWER_URL',
-    'REVISION_STATUS_REVISED', 'REVISION_STATUS_PUBLISHED', 'DEFAULT_LAYOUT',
+    'presentationParser', 'distributionParser', 'presentationTracker', 
+    'VIEWER_URL', 'REVISION_STATUS_REVISED', 'REVISION_STATUS_PUBLISHED', 
+    'DEFAULT_LAYOUT',
     function ($q, $state, userState, presentation, presentationParser,
-      presentationTracker, VIEWER_URL, REVISION_STATUS_REVISED,
-      REVISION_STATUS_PUBLISHED, DEFAULT_LAYOUT) {
+      distributionParser, presentationTracker, VIEWER_URL, 
+      REVISION_STATUS_REVISED, REVISION_STATUS_PUBLISHED, DEFAULT_LAYOUT) {
       var factory = {};
       var _presentationId;
 
@@ -47,6 +48,13 @@ angular.module('risevision.editorApp.services')
       };
 
       factory.newPresentation();
+      
+      var _updatePresentation = function(presentation) {
+        factory.presentation = presentation;
+
+        presentationParser.parsePresentation(factory.presentation);
+        distributionParser.parseDistribution(factory.presentation);
+      };
 
       factory.getPresentation = function (presentationId) {
         var deferred = $q.defer();
@@ -60,9 +68,7 @@ angular.module('risevision.editorApp.services')
 
         presentation.get(_presentationId)
           .then(function (result) {
-            factory.presentation = result.item;
-
-            presentationParser.parsePresentation(factory.presentation);
+            _updatePresentation(result.item);
 
             deferred.resolve();
           })
@@ -84,6 +90,8 @@ angular.module('risevision.editorApp.services')
         //show loading spinner
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
+        
+        distributionParser.updateDistribution(factory.presentation);
 
         presentation.add(factory.presentation)
           .then(function (resp) {
@@ -113,6 +121,8 @@ angular.module('risevision.editorApp.services')
         //show loading spinner
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
+        
+        distributionParser.updateDistribution(factory.presentation);
 
         presentation.update(_presentationId, factory.presentation)
           .then(function (presentationId) {
@@ -207,10 +217,9 @@ angular.module('risevision.editorApp.services')
           .then(function (result) {
             presentationTracker('Presentation Restored', _presentationId,
               factory.presentation.name);
-            factory.presentation = result.item;
-
-            presentationParser.parsePresentation(factory.presentation);
-
+            
+            _updatePresentation(result.item);
+            
             deferred.resolve();
           })
           .then(null, function (e) {

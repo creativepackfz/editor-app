@@ -77,6 +77,16 @@ describe('service: editorFactory:', function() {
         }
       };
     });
+    $provide.service('distributionParser', function() {
+      return {
+        parseDistribution: function(presentation) {
+          presentation.distributionParsed = true;
+        },
+        updateDistribution: function(presentation) {
+          presentation.distributionUpdated = true;
+        }
+      };
+    });
     $provide.service('presentationTracker', function() { 
       return function(name) {
         trackerCalled = name;
@@ -146,6 +156,7 @@ describe('service: editorFactory:', function() {
         expect(editorFactory.presentation).to.be.truely;
         expect(editorFactory.presentation.name).to.equal("some presentation");
         expect(editorFactory.presentation.parsed).to.be.true;
+        expect(editorFactory.presentation.distributionParsed).to.be.true;
 
         setTimeout(function() {
           expect(editorFactory.loadingPresentation).to.be.false;
@@ -188,6 +199,7 @@ describe('service: editorFactory:', function() {
 
       editorFactory.addPresentation();
       
+      expect(editorFactory.presentation.distributionUpdated).to.be.true;
       expect(editorFactory.savingPresentation).to.be.true;
       expect(editorFactory.loadingPresentation).to.be.true;
 
@@ -230,6 +242,7 @@ describe('service: editorFactory:', function() {
 
       editorFactory.updatePresentation();
       
+      expect(editorFactory.presentation.distributionUpdated).to.be.true;
       expect(editorFactory.savingPresentation).to.be.true;
       expect(editorFactory.loadingPresentation).to.be.true;
 
@@ -395,6 +408,8 @@ describe('restorePresentation: ',function(){
         expect(editorFactory.loadingPresentation).to.be.false;
         expect(editorFactory.presentation).to.be.truely;
         expect(editorFactory.presentation.name).to.equal("restored presentation");
+        expect(editorFactory.presentation.parsed).to.be.true;
+        expect(editorFactory.presentation.distributionParsed).to.be.true;
         expect(editorFactory.errorMessage).to.not.be.ok;
         expect(editorFactory.apiError).to.not.be.ok;
         done();
