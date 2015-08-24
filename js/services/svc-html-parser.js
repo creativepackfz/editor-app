@@ -176,6 +176,14 @@ angular.module('risevision.editorApp.services')
         return !result || isNaN(result) ? 0 : result;
       };
 
+      factory.getBooleanValue = function (value) {
+        if (typeof value === 'boolean') {
+          return value;
+        } else {
+          return value === 'true';
+        }
+      };
+
       factory.stripOuterGarbage = function (s) {
         s = s.trim();
         if (s.startsWith('\'')) {

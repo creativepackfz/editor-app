@@ -155,7 +155,7 @@ describe('service: PresentationParser ', function() {
     });
   });
 
-  it('parsePresentationData', function() {
+  it('parsePresentationData & cleanPlaceholderData', function() {
     var presentationObj = {
       layout: presentationHtml
     };
@@ -164,9 +164,10 @@ describe('service: PresentationParser ', function() {
     
     expect(presentationObj).to.be.ok;
     expect(presentationObj.donePlaceholder).to.equal('image_Logo');
-    expect(presentationObj.hidePointer).to.equal('true');
+    expect(presentationObj.hidePointer).to.be.true;
     expect(presentationObj.placeholders).to.be.a('array');
     expect(presentationObj.placeholders[0].id).to.equal('image_Logo');
+    expect(presentationObj.placeholders[0].visibility).to.be.true;
   });
   
   describe('parseStyle: ', function() {
@@ -272,10 +273,10 @@ describe('service: PresentationParser ', function() {
     
     expect(presentation).to.be.ok;
     delete presentation.layout;
-    expect(presentation).to.deep.equal({"helpURL":"","width":1920,"widthUnits":"px","height":1080,"heightUnits":"px","hidePointer":"true","donePlaceholder":"image_Logo",
+    expect(presentation).to.deep.equal({"helpURL":"","width":1920,"widthUnits":"px","height":1080,"heightUnits":"px","hidePointer":true,"donePlaceholder":"image_Logo",
       "placeholders":[
-        {"id":"image_Logo","type":"playlist","timeDefined":"false","visibility":"true","transition":"none","width":842,"widthUnits":"px","height":134,"heightUnits":"px","left":34,"leftUnits":"px","top":60,"topUnits":"px","zIndex":0,backgroundStyle:undefined,backgroundScaleToFit:undefined,
-          "items":[{"name":"Image Widget","duration":"10","type":"widget","objectReference":"5233a598-35ce-41a4-805c-fd2147f144a3","index":"0","playUntilDone":"false","objectData":"http://s3.amazonaws.com/widget-image/0.1.1/dist/widget.html"}]
+        {"id":"image_Logo","type":"playlist","timeDefined":false,"visibility":true,"transition":"none","width":842,"widthUnits":"px","height":134,"heightUnits":"px","left":34,"leftUnits":"px","top":60,"topUnits":"px","zIndex":0,"recurrenceAbsolute":false,backgroundStyle:undefined,backgroundScaleToFit:undefined,
+          "items":[{"name":"Image Widget","duration":"10","type":"widget","objectReference":"5233a598-35ce-41a4-805c-fd2147f144a3","index":"0","playUntilDone":false,"objectData":"http://s3.amazonaws.com/widget-image/0.1.1/dist/widget.html","recurrenceAbsolute":false,"timeDefined":false}]
         }
       ]
     });
@@ -439,7 +440,7 @@ describe('service: PresentationParser ', function() {
       presentationParser.parsePresentation(presentation);
       
       expect(presentationParser.updatePresentationData(presentation, presentation.layout))
-        .to.equal('<script language="javascript">\n\t<!--\n\tvar presentationData = {\n\t"hidePointer": "true",\n\t"donePlaceholder": "image_Logo",\n\t"placeholders": [\n\t\t{\n\t\t\t"id": "image_Logo",\n\t\t\t"type": "playlist",\n\t\t\t"timeDefined": "false",\n\t\t\t"visibility": "true",\n\t\t\t"transition": "none",\n\t\t\t"items": [\n\t\t\t\t{\n\t\t\t\t\t"name": "Image Widget",\n\t\t\t\t\t"duration": "10",\n\t\t\t\t\t"type": "widget",\n\t\t\t\t\t"objectReference": "5233a598-35ce-41a4-805c-fd2147f144a3",\n\t\t\t\t\t"index": "0",\n\t\t\t\t\t"playUntilDone": "false",\n\t\t\t\t\t"objectData": "http://s3.amazonaws.com/widget-image/0.1.1/dist/widget.html"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n};\n\t//-->\n\t</script>');
+        .to.equal('<script language="javascript">\n\t<!--\n\tvar presentationData = {\n\t"hidePointer": true,\n\t"donePlaceholder": "image_Logo",\n\t"placeholders": [\n\t\t{\n\t\t\t"id": "image_Logo",\n\t\t\t"type": "playlist",\n\t\t\t"timeDefined": false,\n\t\t\t"recurrenceAbsolute": false,\n\t\t\t"visibility": true,\n\t\t\t"transition": "none",\n\t\t\t"items": [\n\t\t\t\t{\n\t\t\t\t\t"name": "Image Widget",\n\t\t\t\t\t"duration": "10",\n\t\t\t\t\t"type": "widget",\n\t\t\t\t\t"objectReference": "5233a598-35ce-41a4-805c-fd2147f144a3",\n\t\t\t\t\t"index": "0",\n\t\t\t\t\t"playUntilDone": false,\n\t\t\t\t\t"objectData": "http://s3.amazonaws.com/widget-image/0.1.1/dist/widget.html",\n\t\t\t\t\t"recurrenceAbsolute": false,\n\t\t\t\t\t"timeDefined": false\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n};\n\t//-->\n\t</script>');
     });  
   });
   

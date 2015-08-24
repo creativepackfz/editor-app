@@ -24,6 +24,7 @@ describe('service: HtmlParser ', function() {
     expect(htmlParser.stripGarbage).to.be.a('function');
     expect(htmlParser.getUnits).to.be.a('function');
     expect(htmlParser.getFloatValue).to.be.a('function');
+    expect(htmlParser.getBooleanValue).to.be.a('function');
     expect(htmlParser.stripOuterGarbage).to.be.a('function');
     expect(htmlParser.updateInnerString).to.be.a('function');
   });
@@ -138,6 +139,16 @@ describe('service: HtmlParser ', function() {
     expect(htmlParser.getIntValue('" absolute"')).to.equal(0);
     
     expect(htmlParser.getIntValue('" 0"')).to.equal(0);
+  });
+  
+  it('getBooleanValue', function() {
+    expect(htmlParser.getBooleanValue('true')).to.be.true;
+    expect(htmlParser.getBooleanValue('false')).to.be.false;
+    expect(htmlParser.getBooleanValue(true)).to.be.true;
+    expect(htmlParser.getBooleanValue(false)).to.be.false;
+    
+    expect(htmlParser.getBooleanValue('absolute')).to.be.false;
+    
   });
 
   it('stripOuterGarbage', function() {

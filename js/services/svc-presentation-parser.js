@@ -113,6 +113,30 @@ angular.module('risevision.editorApp.services')
         }
       };
 
+      var _cleanPlaceholderData = function (placeholders) {
+        var items, j;
+        for (var i = 0; i < placeholders.length; i++) {
+          placeholders[i].recurrenceAbsolute =
+            htmlParser.getBooleanValue(placeholders[i].recurrenceAbsolute);
+          placeholders[i].timeDefined =
+            htmlParser.getBooleanValue(placeholders[i].timeDefined);
+          placeholders[i].visibility =
+            htmlParser.getBooleanValue(placeholders[i].visibility);
+            
+          if (placeholders[i].items) {
+            items = placeholders[i].items;
+            for (j = 0; j < items.length; j++) {
+              items[j].playUntilDone =
+                htmlParser.getBooleanValue(items[j].playUntilDone);
+              items[j].recurrenceAbsolute =
+                htmlParser.getBooleanValue(items[j].recurrenceAbsolute);
+              items[j].timeDefined =
+                htmlParser.getBooleanValue(items[j].timeDefined);
+            }
+          }
+        }
+      };
+
       factory.parsePresentationData = function (presentation) {
         var start, end;
         var htmlString = presentation.layout;
@@ -155,10 +179,13 @@ angular.module('risevision.editorApp.services')
               return;
             }
 
-            presentation.hidePointer = dataObject.hidePointer;
+            presentation.hidePointer = 
+              htmlParser.getBooleanValue(dataObject.hidePointer);
             presentation.donePlaceholder = dataObject.donePlaceholder;
 
-            presentation.placeholders = dataObject.placeholders;
+            _cleanPlaceholderData(dataObject.placeholders);
+
+            presentation.placeholders = dataObject.placeholders;            
           }
         }
       };
