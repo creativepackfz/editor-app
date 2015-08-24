@@ -17,12 +17,12 @@ angular.module('risevision.editorApp.services')
 \t</body>\n\
 </html>\n'
   )
-  .factory('editorFactory', ['$q', '$state', 'presentation',
+  .factory('editorFactory', ['$q', '$state', 'userState', 'presentation',
     'presentationParser', 'presentationTracker', 'VIEWER_URL',
-    'REVISION_STATUS_REVISED', 'DEFAULT_LAYOUT',
-    function ($q, $state, presentation, presentationParser,
+    'REVISION_STATUS_REVISED', 'REVISION_STATUS_PUBLISHED', 'DEFAULT_LAYOUT',
+    function ($q, $state, userState, presentation, presentationParser,
       presentationTracker, VIEWER_URL, REVISION_STATUS_REVISED,
-      DEFAULT_LAYOUT) {
+      REVISION_STATUS_PUBLISHED, DEFAULT_LAYOUT) {
       var factory = {};
       var _presentationId;
 
@@ -175,6 +175,10 @@ angular.module('risevision.editorApp.services')
           .then(function (presentationId) {
             presentationTracker('Presentation Published', _presentationId,
               factory.presentation.name);
+
+            factory.presentation.revisionStatus = REVISION_STATUS_PUBLISHED;
+            factory.presentation.changeDate = new Date();
+            factory.presentation.changedBy = userState.getUsername();
 
             deferred.resolve();
           })

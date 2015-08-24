@@ -92,6 +92,14 @@ describe('service: editorFactory:', function() {
         }
       }
     });
+    $provide.service('userState', function() { 
+      return {        
+        getUsername : function() {
+          return 'testusername';
+        },
+        _restoreState : function() {}
+      };
+    });
     $provide.value('VIEWER_URL', 'http://rvaviewer-test.appspot.com');
 
   }));
@@ -335,6 +343,8 @@ describe('service: editorFactory:', function() {
     it('should publish the presentation',function(done){
       updatePresentation = true;
 
+      var timeBeforePublish = new Date();
+
       editorFactory.publishPresentation();
       
       expect(editorFactory.savingPresentation).to.be.true;
@@ -342,6 +352,9 @@ describe('service: editorFactory:', function() {
 
       setTimeout(function(){
         expect(trackerCalled).to.equal('Presentation Published');
+        expect(editorFactory.presentation.revisionStatus).to.equal(0);
+        expect(editorFactory.presentation.changeDate).to.be.gte(timeBeforePublish);
+        expect(editorFactory.presentation.changedBy).to.equal("testusername");
         expect(editorFactory.savingPresentation).to.be.false;
         expect(editorFactory.loadingPresentation).to.be.false;
         expect(editorFactory.errorMessage).to.not.be.ok;
