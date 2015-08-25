@@ -1,37 +1,21 @@
 <button class="btn btn-primary btn-block" ng-click="open('lg','content.html')">Add Playlist Content <i class="fa fa-plus icon-right"></i></button>
 <div class="content-box half-top">
-  <table class="table-2 table-hover ng-hide" ng-show="StatusID == 2">
+  <table class="table-2 table-hover">
     <tbody>
-
-
-    <tr class="clickable-row">
+    <tr class="clickable-row" ng-repeat="item in factory.getItems()">
       <td>
         <div class="pull-right">
           <button class="btn btn-sm btn-default" ng-click="open('lg','widget.html')"><i class="fa fa-cog"></i></button>
-          <button class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></button>
+          <button class="btn btn-sm btn-default" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
         </div>
         <div ng-click="open('lg','plSettings.html')">
-          <p style="line-height:30px" class="remove-bottom">Google Spreadsheet</p>
+          <p style="line-height:30px" class="remove-bottom">{{item.name}}</p>
         </div>
       </td>
     </tr>
-
-    <tr class="clickable-row">
-      <td>
-        <div class="pull-right">
-          <button class="btn btn-sm btn-default" ng-click="open('lg','widget.html')"><i class="fa fa-cog"></i></button>
-          <button class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></button>
-        </div>
-        <div ng-click="open('lg','plSettings.html')">
-          <p style="line-height:30px" class="remove-bottom">Video Folder Widget</p>
-        </div>
-      </td>
-    </tr>
-
-
     </tbody>
   </table>
-  <div class="content-box-body" ng-hide="StatusID == 2">
+  <div class="content-box-body" ng-hide="factory.getItems().length">
     <p class="text-center text-muted">No Playlist Items</p>
   </div>
 </div>
