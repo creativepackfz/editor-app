@@ -25,6 +25,7 @@
     </div><!--form-group-->
 
     <div class="form-group">
+      <label id="backgroundLabel">Background</label>
       <background-image-setting id="backgroundImageSettings" background="presentationProperties.background" company-id="{{companyId}}"></background-image-setting>
     </div>
 
@@ -35,7 +36,7 @@
 
     <div class="form-group">
       <label id="hideMousePointerCheckboxLabel" class="control-label">
-        <input id="hideMousePointerCheckbox" type="checkbox" ng-model="presentationProperties.hidePointer" ng-true-value="'true'" ng-false-value="'false'"> Hide Mouse Pointer
+        <input id="hideMousePointerCheckbox" type="checkbox" ng-model="presentationProperties.hidePointer"> Hide Mouse Pointer
       </label>
     </div>
 

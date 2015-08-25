@@ -26,7 +26,7 @@ angular.module('risevision.editorApp.services')
           widthUnits: 'px',
           heightUnits: 'px',
           background: {},
-          hidePointer: 'true',
+          hidePointer: true,
           donePlaceholder: ''
         };
       };
