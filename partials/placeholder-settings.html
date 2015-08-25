@@ -57,20 +57,9 @@
   </div><!--form-group-->
 
   <div class="form-group">
-    <label class="control-label">Background</label>
-    <div class="input-group">
-      <input class="form-control" type="text" placeholder="rgba(0,0,0,0.4)">
-      <span class="input-group-addon"><img style="height:16px" src="img/color-wheel.png"></span>
-    </div><!--input-group-->
-
-    <label class="control-label half-top">
-      <input type="checkbox" ng-model="useImage" class="ng-pristine ng-valid"> Use Image
-    </label>
-
-    <!-- ngIf: useImage --><!--ng-if-->
-    <hr>
-  </div><!--form-group-->
-
+    <label>Background</label>
+    <background-image-setting id="placeholderBackgroundSettings" background="background" company-id="{{companyId}}"></background-image-setting>
+  </div>
 
   <div class="form-group">
     <label class="control-label add-right" translate>schedules-app.fields.timeline</label>
