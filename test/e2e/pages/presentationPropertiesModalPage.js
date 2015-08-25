@@ -15,6 +15,7 @@ var PresentationPropertiesModalPage = function() {
   var resolutionSelect = element(by.id('resolutionSelect'));
   var customResolution = element(by.id('customResolution'));
 
+  var backgroundLabel = element(by.id('backgroundLabel'));
   var backgroundImageSettings = element(by.id('backgroundImageSettings'));
 
   var playUntilDonePlaceholderLabel = element(by.id('playUntilDonePlaceholderLabel'));
@@ -61,6 +62,10 @@ var PresentationPropertiesModalPage = function() {
 
   this.getResolutionSelect = function() {
     return resolutionSelect;
+  };
+
+  this.getBackgroundLabel = function() {
+    return backgroundLabel;
   };
 
   this.getBackgroundImageSettings = function() {

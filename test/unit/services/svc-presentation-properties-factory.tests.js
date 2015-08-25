@@ -13,7 +13,7 @@ describe('service: presentationPropertiesFactory:', function() {
       widthUnits: 'px',
       heightUnits: 'px',
       background: {},
-      hidePointer: 'true',
+      hidePointer: true,
       donePlaceholder: ''
     };
 
@@ -25,7 +25,7 @@ describe('service: presentationPropertiesFactory:', function() {
       widthUnits: 'px',
       heightUnits: 'px',
       background: {'color':'rgba(255,255,255,0)'},
-      hidePointer: 'true',
+      hidePointer: true,
       donePlaceholder: 'done placeholder'
     };
 
@@ -38,7 +38,7 @@ describe('service: presentationPropertiesFactory:', function() {
       heightUnits: 'px',
       backgroundStyle: 'rgba(255,255,255,0)',
       backgroundScaleToFit: false,
-      hidePointer: 'true',
+      hidePointer: true,
       donePlaceholder: 'done placeholder'
     };
 

@@ -75,6 +75,11 @@ describe("In order to manage presentations " +
         expect(presentationPropertiesModalPage.getResolutionSelect().isDisplayed()).to.eventually.be.true;
       });
 
+      it('should show background label ', function () {
+        expect(presentationPropertiesModalPage.getBackgroundLabel().isDisplayed()).to.eventually.be.true;
+        expect(presentationPropertiesModalPage.getBackgroundLabel().getText()).to.eventually.equal("Background");
+      });
+
       it('should show background settings ', function () {
         expect(presentationPropertiesModalPage.getBackgroundImageSettings().isDisplayed()).to.eventually.be.true;
 
