@@ -116,22 +116,38 @@ angular.module('risevision.editorApp.services')
       var _cleanPlaceholderData = function (placeholders) {
         var items, j;
         for (var i = 0; i < placeholders.length; i++) {
-          placeholders[i].recurrenceAbsolute =
-            htmlParser.getBooleanValue(placeholders[i].recurrenceAbsolute);
-          placeholders[i].timeDefined =
-            htmlParser.getBooleanValue(placeholders[i].timeDefined);
-          placeholders[i].visibility =
-            htmlParser.getBooleanValue(placeholders[i].visibility);
+          htmlParser.parseBooleanProperty(placeholders[i],
+            'recurrenceAbsolute');
+          htmlParser.parseBooleanProperty(placeholders[i], 'timeDefined');
+          htmlParser.parseBooleanProperty(placeholders[i], 'visibility');
+
+          htmlParser.parseIntProperty(placeholders[i],
+            'recurrenceDayOfMonth');
+          htmlParser.parseIntProperty(placeholders[i],
+            'recurrenceDayOfWeek');
+          htmlParser.parseIntProperty(placeholders[i],
+            'recurrenceFrequency');
+          htmlParser.parseIntProperty(placeholders[i],
+            'recurrenceMonthOfYear');
+          htmlParser.parseIntProperty(placeholders[i],
+            'recurrenceWeekOfMonth');
 
           if (placeholders[i].items) {
             items = placeholders[i].items;
             for (j = 0; j < items.length; j++) {
-              items[j].playUntilDone =
-                htmlParser.getBooleanValue(items[j].playUntilDone);
-              items[j].recurrenceAbsolute =
-                htmlParser.getBooleanValue(items[j].recurrenceAbsolute);
-              items[j].timeDefined =
-                htmlParser.getBooleanValue(items[j].timeDefined);
+              htmlParser.parseBooleanProperty(items[j], 'playUntilDone');
+              htmlParser.parseBooleanProperty(items[j],
+                'recurrenceAbsolute');
+              htmlParser.parseBooleanProperty(items[j], 'timeDefined');
+
+              htmlParser.parseIntProperty(items[j], 'duration');
+              htmlParser.parseIntProperty(items[j], 'index');
+
+              htmlParser.parseIntProperty(items[j], 'recurrenceDayOfMonth');
+              htmlParser.parseIntProperty(items[j], 'recurrenceDayOfWeek');
+              htmlParser.parseIntProperty(items[j], 'recurrenceFrequency');
+              htmlParser.parseIntProperty(items[j], 'recurrenceMonthOfYear');
+              htmlParser.parseIntProperty(items[j], 'recurrenceWeekOfMonth');
             }
           }
         }

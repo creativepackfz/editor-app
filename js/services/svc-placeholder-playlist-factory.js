@@ -8,7 +8,7 @@ angular.module('risevision.editorApp.services')
       factory.getItems = function () {
         if (!placeholderFactory.placeholder) {
           return undefined;
-        } 
+        }
         return placeholderFactory.placeholder.items ?
           placeholderFactory.placeholder.items :
           placeholderFactory.placeholder.items = [];

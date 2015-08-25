@@ -3,10 +3,10 @@
   <div class="form-group">
     <label class="control-label">Name</label>
     <div class="input-group checkbox-addon">
-      <input type="text" class="form-control" placeholder="Placeholder Name" ng-model="factory.placeholder.id">
+      <input type="text" class="form-control" placeholder="Placeholder Name" ng-model="placeholder.id">
       <span class="input-group-addon">
         <label class="control-label">
-          <input type="checkbox" ng-model="factory.placeholder.visibility"> Visible
+          <input type="checkbox" ng-model="placeholder.visibility"> Visible
         </label>
       </span>
     </div>
@@ -17,26 +17,26 @@
     <div class="row sm-gutter">
       <div class="col-sm-6">	<div class="input-group">
         <label class="control-label input-group-addon">Width</label>
-        <input class="form-control" type="text" ng-model="factory.placeholder.width">
-        <span class="input-group-addon">{{factory.placeholder.widthUnits}}</span>
+        <input class="form-control" type="text" ng-model="placeholder.width">
+        <span class="input-group-addon">{{placeholder.widthUnits}}</span>
       </div></div>
       <div class="col-sm-6"><div class="input-group">
         <label class="control-label input-group-addon">Top(X)</label>
-        <input class="form-control" type="text" ng-model="factory.placeholder.top">
-        <span class="input-group-addon">{{factory.placeholder.topUnits}}</span>
+        <input class="form-control" type="text" ng-model="placeholder.top">
+        <span class="input-group-addon">{{placeholder.topUnits}}</span>
       </div></div>
     </div>
 
     <div class="row sm-gutter half-top">
       <div class="col-sm-6">	<div class="input-group">
         <label class="control-label input-group-addon">Height</label>
-        <input class="form-control" type="text" ng-model="factory.placeholder.height">
-        <span class="input-group-addon">{{factory.placeholder.heightUnits}}</span>
+        <input class="form-control" type="text" ng-model="placeholder.height">
+        <span class="input-group-addon">{{placeholder.heightUnits}}</span>
       </div></div>
       <div class="col-sm-6"><div class="input-group">
         <label class="control-label input-group-addon">Left(Y)</label>
-        <input class="form-control" type="text" ng-model="factory.placeholder.left">
-        <span class="input-group-addon">{{factory.placeholder.leftUnits}}</span>
+        <input class="form-control" type="text" ng-model="placeholder.left">
+        <span class="input-group-addon">{{placeholder.leftUnits}}</span>
       </div></div>
     </div>
 
@@ -47,7 +47,7 @@
     <label class="control-label add-right">Z Order</label>
     <div class="row sm-gutter">
       <div class="col-sm-6">
-        <input type="text" class="form-control" ng-model="factory.placeholder.zIndex">
+        <input type="text" class="form-control" ng-model="placeholder.zIndex">
       </div><!--col-->
 
       <div class="col-sm-3">
@@ -73,13 +73,25 @@
 
 
   <div class="form-group">
-    <label class="control-label add-right">Timeline</label>
-    <label class="control-label control-label-secondary"><input ng-init="always = true" ng-model="always" ng-checked="always" type="checkbox" class="ng-pristine ng-valid" checked="checked"> Always</label>
-    <!-- ngIf: !always -->
-  </div>
-  <div class="form-group">
-    <label class="control-label add-right">Distribution</label>
-    <label class="control-label control-label-secondary"><input type="checkbox" ng-init="allDisplays = true" ng-model="allDisplays" ng-checked="allDisplays" class="ng-pristine ng-valid" checked="checked"> All Displays</label>
-    <!-- ngIf: !allDisplays -->
-  </div>
+    <label class="control-label add-right" translate>schedules-app.fields.timeline</label>
+    <timeline-textbox
+    use-localdate = "true"
+    time-defined = "placeholder.timeDefined"
+    start-date = "placeholder.startDate"
+    end-date = "placeholder.endDate"
+    start-time = "placeholder.startTime"
+    end-time = "placeholder.endTime"
+    recurrence-type = "placeholder.recurrenceType"
+    recurrence-frequency = "placeholder.recurrenceFrequency"
+    recurrence-absolute = "placeholder.recurrenceAbsolute"
+    recurrence-day-of-week = "placeholder.recurrenceDayOfWeek"
+    recurrence-day-of-month = "placeholder.recurrenceDayOfMonth"
+    recurrence-week-of-month = "placeholder.recurrenceWeekOfMonth"
+    recurrence-month-of-year = "placeholder.recurrenceMonthOfYear"
+    recurrence-days-of-week = "placeholder.recurrenceDaysOfWeek"
+    ></timeline-textbox>
+  </div><!--form-group-->
+
+  <distribution-selector distribution="placeholder.distribution" distribute-to-all="placeholder.distributeToAll"></distribution-selector>
+
 </form>

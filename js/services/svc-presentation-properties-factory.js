@@ -74,13 +74,14 @@ angular.module('risevision.editorApp.services')
 
       var _getBackground = function (backgroundStyle, backgroundScaleToFit) {
         var background = {};
+        var closingParenthesesPosition;
 
         if (backgroundStyle) {
 
           var rgbTokenPosition = backgroundStyle.indexOf(BACKGROUND_TOKENS.RGB);
           if (rgbTokenPosition !== -1) {
 
-            var closingParenthesesPosition = backgroundStyle.indexOf(')',
+            closingParenthesesPosition = backgroundStyle.indexOf(')',
               rgbTokenPosition);
             background.color = backgroundStyle.substring(rgbTokenPosition,
               closingParenthesesPosition + 1);
@@ -96,7 +97,7 @@ angular.module('risevision.editorApp.services')
 
               var openingParenthesesPosition = backgroundStyle.indexOf(
                 '(\'', urlTokenPosition);
-              var closingParenthesesPosition = backgroundStyle.indexOf(
+              closingParenthesesPosition = backgroundStyle.indexOf(
                 '\')', urlTokenPosition);
               background.image.url = backgroundStyle.substring(
                 openingParenthesesPosition + 2,
