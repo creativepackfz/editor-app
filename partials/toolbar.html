@@ -13,7 +13,7 @@
     </div><!--col-sm-4-->
     <div class="col-sm-4 text-right">
       <button id="addPlaceholderButton" class="btn btn-primary" ng-click="addNewPlaceholder()">Add Placeholder <i class="fa fa-plus icon-right"></i></button>
-      <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-show="previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
+      <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-disabled="!previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
     </div><!--col-sm-4-->
   </div>
 </div><!--presentation-toolbar-->

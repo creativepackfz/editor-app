@@ -35,8 +35,8 @@ describe("In order to manage presentations " +
     expect(workspacePage.getAddPlaceholderButton().isPresent()).to.eventually.be.true;
   });
 
-  it('should not show Preview Button',function(){
-    expect(workspacePage.getPreviewButton().isDisplayed()).to.eventually.be.false;
+  it('should disable Preview Button',function(){
+    expect(workspacePage.getPreviewButton().getAttribute('disabled')).to.eventually.equal('true');
   });
 
   it('should not show Publish/Restore/Delete Buttons',function(){
@@ -58,7 +58,7 @@ describe("In order to manage presentations " +
     workspacePage.getSaveButton().click();
     helper.wait(workspacePage.getDeleteButton(), 'Delete Button');
     expect(workspacePage.getDeleteButton().isDisplayed()).to.eventually.be.true;
-    expect(workspacePage.getPreviewButton().isDisplayed()).to.eventually.be.true;
+    expect(workspacePage.getPreviewButton().isEnabled()).to.eventually.be.true;
   });
 
   // after(function() {
