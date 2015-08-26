@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="dismiss()">
+    <i class="fa fa-times"></i>
+  </button>
+  <h3 class="modal-title">Edit Playlist Item</h3>
+</div>
+<div class="modal-body">          
+
+  <div class="form-group">
+    <label class="control-label">Name</label>
+    <input type="text" class="form-control" ng-model="item.name">
+  </div>
+
+  <!-- <p><strong>Content:</strong> 
+    <a class="add-left" href="">
+      {{item.type}} <i class="fa fa-cog icon-right"></i>
+    </a>
+  </p> -->
+  <hr>
+
+  <div class="form-group half-top">
+
+    <label class="control-label add-right" translate="">Duration</label>
+    <label class="control-label control-label-secondary add-left">
+      <input type="checkbox" ng-model="item.playUntilDone" /> 
+      <span>Play Until Done</span>
+    </label>
+    <div class="row" ng-if="!item.playUntilDone">
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input type="number" class="form-control" id="itemDuration" ng-model="item.duration" />
+          <span class="input-group-addon">seconds</span>
+        </div>       
+      </div>
+    </div><!--row-->
+  </div>
+
+  <div class="form-group">
+    <label class="control-label add-right" translate>schedules-app.fields.timeline</label>
+    <timeline-textbox
+    use-localdate = "true"
+    time-defined = "item.timeDefined"
+    start-date = "item.startDate"
+    end-date = "item.endDate"
+    start-time = "item.startTime"
+    end-time = "item.endTime"
+    recurrence-type = "item.recurrenceType"
+    recurrence-frequency = "item.recurrenceFrequency"
+    recurrence-absolute = "item.recurrenceAbsolute"
+    recurrence-day-of-week = "item.recurrenceDayOfWeek"
+    recurrence-day-of-month = "item.recurrenceDayOfMonth"
+    recurrence-week-of-month = "item.recurrenceWeekOfMonth"
+    recurrence-month-of-year = "item.recurrenceMonthOfYear"
+    recurrence-days-of-week = "item.recurrenceDaysOfWeek">
+  </timeline-textbox>
+</div><!--form-group-->
+
+<distribution-selector distribution="item.distribution" distribute-to-all="item.distributeToAll"></distribution-selector>
+
+</div><!--modal-body-->
+<div class="modal-footer">
+
+  <button class="btn btn-primary" ng-click="apply()">Apply <i class="fa fa-check icon-right"></i></button>
+  <button class="btn btn-default" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button>
+</div>  
