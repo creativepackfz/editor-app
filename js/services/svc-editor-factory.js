@@ -100,6 +100,7 @@ angular.module('risevision.editorApp.services')
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
 
+        presentationParser.updatePresentation(factory.presentation);
         distributionParser.updateDistribution(factory.presentation);
 
         presentation.add(factory.presentation)
@@ -108,7 +109,7 @@ angular.module('risevision.editorApp.services')
               presentationTracker('Presentation Created', resp.item.id,
                 resp.item.name);
 
-              $state.go('presentation.details', {
+              $state.go('editor.workspace.artboard', {
                 presentationId: resp.item.id
               });
             }
@@ -131,12 +132,15 @@ angular.module('risevision.editorApp.services')
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
 
+        presentationParser.updatePresentation(factory.presentation);
         distributionParser.updateDistribution(factory.presentation);
 
         presentation.update(_presentationId, factory.presentation)
-          .then(function (presentationId) {
-            presentationTracker('Presentation Updated', _presentationId,
-              factory.presentation.name);
+          .then(function (resp) {
+            presentationTracker('Presentation Updated', resp.item.id,
+              resp.item.name);
+
+            _updatePresentation(resp.item);
 
             deferred.resolve();
           })
@@ -242,6 +246,16 @@ angular.module('risevision.editorApp.services')
           });
 
         return deferred.promise;
+      };
+
+      factory.save = function () {
+        console.log("Presentation save");
+         if(factory.presentation.id){
+           console.log("Presentation Update");
+          factory.updatePresentation();
+         } else {
+          factory.addPresentation();
+         }
       };
 
       factory.getPreviewUrl = function () {

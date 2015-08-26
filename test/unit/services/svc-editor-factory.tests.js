@@ -74,6 +74,10 @@ describe('service: editorFactory:', function() {
       return {
         parsePresentation: function(presentation) {
           presentation.parsed = true;
+        },
+
+        updatePresentation: function(presentation) {
+          presentation.updated = true;
         }
       };
     });
@@ -198,13 +202,14 @@ describe('service: editorFactory:', function() {
       updatePresentation = true;
 
       editorFactory.addPresentation();
-      
+
+      expect(editorFactory.presentation.updated).to.be.true;
       expect(editorFactory.presentation.distributionUpdated).to.be.true;
       expect(editorFactory.savingPresentation).to.be.true;
       expect(editorFactory.loadingPresentation).to.be.true;
 
       setTimeout(function(){
-        expect(currentState).to.equal('presentation.details');
+        expect(currentState).to.equal('editor.workspace.artboard');
         expect(trackerCalled).to.equal('Presentation Created');
         expect(editorFactory.savingPresentation).to.be.false;
         expect(editorFactory.loadingPresentation).to.be.false;
@@ -241,7 +246,8 @@ describe('service: editorFactory:', function() {
       updatePresentation = true;
 
       editorFactory.updatePresentation();
-      
+
+      expect(editorFactory.presentation.updated).to.be.true;
       expect(editorFactory.presentation.distributionUpdated).to.be.true;
       expect(editorFactory.savingPresentation).to.be.true;
       expect(editorFactory.loadingPresentation).to.be.true;
