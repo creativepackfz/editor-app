@@ -44,6 +44,8 @@
     <!-- build:css css/ea.min.css -->
     <link href="bower_components/rv-common-style/dist/css/rise.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="bower_components/rv-angular-bootstrap-colorpicker/css/colorpicker.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/codemirror/theme/twilight.css"/>
     <!-- endbuild -->
   </head>
 
@@ -85,6 +87,16 @@
     <script src="bower_components/widget-settings-ui-components/dist/js/angular/position-setting.js"></script>
     <script src="bower_components/widget-settings-ui-components/dist/js/angular/background-image-setting.js"></script>
 
+    <!-- Codemirror HTML Editor component -->
+    <script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="bower_components/codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="bower_components/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="bower_components/codemirror/mode/css/css.js"></script>
+    <script type="text/javascript" src="bower_components/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    
+    <script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+
+
     <script src="js/config/config.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/ctr-app.js"></script>
@@ -106,6 +118,7 @@
     <script src="js/services/svc-presentation-tracker.js"></script>
     <script src="js/controllers/ctr-workspace.js"></script>
     <script src="js/controllers/ctr-artboard.js"></script>
+    <script src="js/controllers/ctr-html-editor.js"></script>
     <script src="js/controllers/ctr-presentation-properties-modal.js"></script>
     <script src="js/services/svc-presentation-properties-factory.js"></script>
     <script src="js/controllers/ctr-playlist-item-modal.js"></script>

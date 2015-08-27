@@ -93,6 +93,16 @@ angular.module('risevision.editorApp.services')
         return deferred.promise;
       };
 
+      var _parseOrUpdatePresentation = function () {
+        if ($state.is('editor.workspace.htmleditor')) {
+          presentationParser.parsePresentation(factory.presentation);
+          distributionParser.parseDistribution(factory.presentation);
+        } else {
+          presentationParser.updatePresentation(factory.presentation);
+          distributionParser.updateDistribution(factory.presentation);
+        }
+      };
+
       factory.addPresentation = function () {
         _clearMessages();
 
@@ -100,8 +110,7 @@ angular.module('risevision.editorApp.services')
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
 
-        presentationParser.updatePresentation(factory.presentation);
-        distributionParser.updateDistribution(factory.presentation);
+        _parseOrUpdatePresentation();
 
         presentation.add(factory.presentation)
           .then(function (resp) {
@@ -132,8 +141,7 @@ angular.module('risevision.editorApp.services')
         factory.loadingPresentation = true;
         factory.savingPresentation = true;
 
-        presentationParser.updatePresentation(factory.presentation);
-        distributionParser.updateDistribution(factory.presentation);
+        _parseOrUpdatePresentation();
 
         presentation.update(_presentationId, factory.presentation)
           .then(function (resp) {
