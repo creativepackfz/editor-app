@@ -599,6 +599,10 @@ angular.module('risevision.editorApp.services')
             i]].concat(PLACEHOLDER_JSON_FIELDS)));
         }
 
+        data = {
+          presentationData: data
+        };
+
         var presentationDataString = JSON.stringify(data, null, '\t');
 
         var modifiedDataVariableString = dataVariableString.replace(

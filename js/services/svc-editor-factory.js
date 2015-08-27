@@ -249,13 +249,13 @@ angular.module('risevision.editorApp.services')
       };
 
       factory.save = function () {
-        console.log("Presentation save");
-         if(factory.presentation.id){
-           console.log("Presentation Update");
+        console.log('Presentation save');
+        if (factory.presentation.id) {
+          console.log('Presentation Update');
           factory.updatePresentation();
-         } else {
+        } else {
           factory.addPresentation();
-         }
+        }
       };
 
       factory.getPreviewUrl = function () {

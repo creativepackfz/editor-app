@@ -13,8 +13,8 @@
   'use strict';
 
   angular.module('risevision.common.i18n.config', [])
-    .constant('LOCALES_PREFIX', 
-    'bower_components/rv-common-i18n/dist/locales/translation_')
+    .constant('LOCALES_PREFIX',
+      'bower_components/rv-common-i18n/dist/locales/translation_')
     .constant('LOCALES_SUFIX', '.json');
 
   angular.module('risevision.editorApp.config', [])
@@ -22,7 +22,7 @@
       'https://storage-dot-rvacore-test.appspot.com/_ah/api')
     .value('CORE_URL', 'https://rvacore-test.appspot.com/_ah/api') // override default core value
     .value('VIEWER_URL', 'http://rvaviewer-test.appspot.com')
-    .value("SEGMENT_API_KEY", null);
+    .value('SEGMENT_API_KEY', null);
 
   angular.module('risevision.widget.common.storage-selector.config')
     .value('STORAGE_MODAL',

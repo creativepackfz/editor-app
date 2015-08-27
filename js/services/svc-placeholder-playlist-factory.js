@@ -26,12 +26,12 @@ angular.module('risevision.editorApp.services')
         }
       };
 
-      factory.getCurrentItemProperties = function() {
+      factory.getCurrentItemProperties = function () {
         return angular.copy(factory.item);
-      };      
+      };
 
-      factory.setCurrentItemProperties = function(newProperties) {
-        angular.copy(newProperties,factory.item);
+      factory.setCurrentItemProperties = function (newProperties) {
+        angular.copy(newProperties, factory.item);
       };
 
       return factory;
