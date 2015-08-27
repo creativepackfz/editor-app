@@ -8,7 +8,6 @@ var helper = require('rv-common-e2e').helper;
 var PresentationPropertiesModalPage = require('./pages/presentationPropertiesModalPage.js');
 
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage presentations " +
   "As a user signed in " +
   "I would like to add presentations", function() {
@@ -56,7 +55,7 @@ describe("In order to manage presentations " +
     expect(workspacePage.getCancelButton().isPresent()).to.eventually.be.true;
   });
 
-  xit('should add presentation',function(){
+  it('should add presentation',function(){
     var presentationName = 'TEST_E2E_PRESENTATION';
 
     presentationPropertiesModalPage.getNameInput().clear();
@@ -69,10 +68,10 @@ describe("In order to manage presentations " +
     expect(workspacePage.getPreviewButton().isEnabled()).to.eventually.be.true;
   });
 
-//  after(function() {
-//     helper.clickWhenClickable(workspacePage.getDeleteButton(), "Presentation Delete Button").then(function () {
-//       helper.clickWhenClickable(workspacePage.getDeleteForeverButton(), "Presentation Delete Forever Button").then(function () {
-//       });
-//     });
-//  });
+  after(function() {
+    helper.clickWhenClickable(workspacePage.getDeleteButton(), "Presentation Delete Button").then(function () {
+      helper.clickWhenClickable(workspacePage.getDeleteForeverButton(), "Presentation Delete Forever Button").then(function () {
+      });
+    });
+  });
 });
