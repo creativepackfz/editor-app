@@ -5,22 +5,25 @@ var CommonHeaderPage = require('rv-common-e2e').commonHeaderPage;
 var PresentationListPage = require('./pages/presentationListPage.js');
 var WorkspacePage = require('./pages/workspacePage.js');
 var helper = require('rv-common-e2e').helper;
+var PresentationPropertiesModalPage = require('./pages/presentationPropertiesModalPage.js');
+
 
 browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage presentations " +
   "As a user signed in " +
   "I would like to add presentations", function() {
-  this.timeout(2000);// to allow for protactor to load the seperate page
   var homepage;
   var commonHeaderPage;
   var presentationsListPage;
   var workspacePage;
+  var presentationPropertiesModalPage;
 
   before(function (){
     homepage = new HomePage();
     presentationsListPage = new PresentationListPage();
     workspacePage = new WorkspacePage();
     commonHeaderPage = new CommonHeaderPage();
+    presentationPropertiesModalPage = new PresentationPropertiesModalPage();
 
     homepage.get();
     //wait for spinner to go away.
@@ -55,16 +58,21 @@ describe("In order to manage presentations " +
 
   xit('should add presentation',function(){
     var presentationName = 'TEST_E2E_PRESENTATION';
+
+    presentationPropertiesModalPage.getNameInput().clear();
+    presentationPropertiesModalPage.getNameInput().sendKeys(presentationName);
+    helper.clickWhenClickable(presentationPropertiesModalPage.getApplyButton(), 'Apply Button');
+
     workspacePage.getSaveButton().click();
     helper.wait(workspacePage.getDeleteButton(), 'Delete Button');
     expect(workspacePage.getDeleteButton().isDisplayed()).to.eventually.be.true;
     expect(workspacePage.getPreviewButton().isEnabled()).to.eventually.be.true;
   });
 
-  // after(function() {
-  //   helper.clickWhenClickable(workspacePage.getDeleteButton(), "Presentation Delete Button").then(function () {
-  //     helper.clickWhenClickable(workspacePage.getDeleteForeverButton(), "Presentation Delete Forever Button").then(function () {
-  //     });
-  //   });
-  // });
+//  after(function() {
+//     helper.clickWhenClickable(workspacePage.getDeleteButton(), "Presentation Delete Button").then(function () {
+//       helper.clickWhenClickable(workspacePage.getDeleteForeverButton(), "Presentation Delete Forever Button").then(function () {
+//       });
+//     });
+//  });
 });

@@ -31,7 +31,9 @@ angular.module('risevision.editorApp.directives')
               }
             });
 
-            $scope.modalInstance.result.then(editorFactory.deleteSchedule);
+            $scope.modalInstance.result.then(function () {
+              editorFactory.deletePresentation();
+            });
           };
         }
       };
