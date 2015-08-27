@@ -1,7 +1,6 @@
 'use strict';
 describe('directive: placeholder-playlist', function() {
-  var $compile,
-      $rootScope;
+  var $compile, $rootScope, setCurrentItemPropertiesSpy;
   var testitem = {name: 'testitem'};
   var items = [testitem,{name:'item2'}];
 
@@ -16,6 +15,9 @@ describe('directive: placeholder-playlist', function() {
             expect(item).to.be.ok;
             expect(item).to.deep.equal(testitem);
             items.splice(items.indexOf(item),1);
+        },
+        setCurrentItemProperties: function(properties) {
+          return;
         }
       };
     });
@@ -27,7 +29,7 @@ describe('directive: placeholder-playlist', function() {
             result:{
               then:function(func){
                   expect(func).to.be.a('function');
-                  func();
+                  func(testitem);
               }
             }
           };
@@ -36,10 +38,11 @@ describe('directive: placeholder-playlist', function() {
     });
   }));
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, $templateCache){
+  beforeEach(inject(function(_$compile_, _$rootScope_, $templateCache, placeholderPlaylistFactory){
     $templateCache.put('partials/placeholder-playlist.html', '<p>mock</p>');
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+    setCurrentItemPropertiesSpy = sinon.spy(placeholderPlaylistFactory, 'setCurrentItemProperties');
   }));
 
   it('should replace the element with the appropriate content', function() {
@@ -60,6 +63,22 @@ describe('directive: placeholder-playlist', function() {
       $rootScope.$digest();
       element.scope().remove(testitem);
       expect(items).to.not.include(testitem);
+    });
+  });
+
+  describe('edit:', function(){
+    it('should have edit function in scope', function() {
+      var element = $compile("<placeholder-playlist></placeholder-playlist>")($rootScope);
+      $rootScope.$digest();
+      expect(element.scope().edit).to.be.a('function');
+    });
+
+    it('should open modal and return item on apply', function() {
+      var element = $compile("<placeholder-playlist></placeholder-playlist>")($rootScope);
+      $rootScope.$digest();
+      element.scope().edit(testitem);
+
+      setCurrentItemPropertiesSpy.should.have.been.calledWith(testitem);
     });
   });
   
