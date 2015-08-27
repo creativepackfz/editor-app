@@ -6,7 +6,6 @@ var PresentationListPage = require('./pages/presentationListPage.js');
 var helper = require('rv-common-e2e').helper;
 
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage presentations " +
          "As a user " +
          "I would like to be able to sign in to the Editor app", function() {

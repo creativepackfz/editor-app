@@ -8,7 +8,6 @@ var PresentationListPage = require('./pages/presentationListPage.js');
 var PresentationPropertiesModalPage = require('./pages/presentationPropertiesModalPage.js');
 
 
-browser.driver.manage().window().setSize(1920, 1080);
 describe("In order to manage presentations " +
          "As a user " +
          "I would like to set or edit presentation properties", function() {
