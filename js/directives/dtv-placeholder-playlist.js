@@ -11,7 +11,7 @@ angular.module('risevision.editorApp.directives')
         link: function ($scope) {
           $scope.factory = placeholderPlaylistFactory;
 
-          $scope.edit = function(item) {
+          $scope.edit = function (item) {
             placeholderPlaylistFactory.item = item;
             var modalInstance = $modal.open({
               templateUrl: 'partials/playlist-item-modal.html',
@@ -25,8 +25,9 @@ angular.module('risevision.editorApp.directives')
             });
 
             modalInstance.result.then(function (newItemProperties) {
-              placeholderPlaylistFactory.setCurrentItemProperties(newItemProperties);
-            });           
+              placeholderPlaylistFactory.setCurrentItemProperties(
+                newItemProperties);
+            });
           };
 
           $scope.remove = function (item) {
