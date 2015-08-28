@@ -1,19 +1,26 @@
 <div id="presentationToolbar" class="presentation-toolbar" ng-class="{'full' : fullArtboard && !factory.editing}">
   <div class="row">
-    <div class="col-sm-4">
-      <button id="compressArtboardButton" class="btn btn-default animated pulse ng-hide" ng-click="fullArtboard = false" ng-show="fullArtboard && !factory.editing"><i class="fa fa-compress"></i></button>
-      <button id="expandArtboardButton" class="btn btn-default" ng-show="!fullArtboard || factory.editing" ng-class="{'active' : fullArtboard && !factory.editing}" ng-click="fullArtboard = true; factory.editing = false"><i class="fa fa-expand"></i></button>
-      <button id="presentationPropertiesButton" class="btn btn-default" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
-    </div><!--col-sm-4-->
-    <div class="col-sm-4">
-      <div ng-init="designMode = true" class="btn-group btn-group-justified filters filters-inverted">
-        <a id="designButton" ui-sref="editor.workspace.artboard" class="btn btn-default" ng-class="{'active' : designMode}" ng-click="designMode = true" >Design</a>
-        <a id="htmlButton" ui-sref="editor.workspace.htmleditor" class="btn btn-default" ng-class="{'active' : !designMode}" ng-click="designMode = false"><i class="fa fa-code icon-white icon-left"></i>HTML</a>
+    <div class="col-sm-12 col-md-7">
+      <div ng-init="designMode = true" class="btn-group btn-inverse pull-right">
+        <a id="designButton" ui-sref="editor.workspace.artboard" class="btn btn-inverse" ng-class="{'active' : designMode}" ng-click="designMode = true" >Design</a>
+        <a id="htmlButton" ui-sref="editor.workspace.htmleditor" class="btn btn-inverse" ng-class="{'active' : !designMode}" ng-click="designMode = false">HTML</a>
       </div><!--btn-group-->
+
+      <button id="compressArtboardButton" class="btn btn-inverse animated pulse ng-hide" ng-click="fullArtboard = false" ng-show="fullArtboard && !factory.editing"><i class="fa fa-compress"></i></button>
+      <button id="expandArtboardButton" class="btn btn-inverse" ng-show="!fullArtboard || factory.editing" ng-class="{'active' : fullArtboard && !factory.editing}" ng-click="fullArtboard = true; factory.editing = false"><i class="fa fa-expand"></i></button>
+      <button id="presentationPropertiesButton" class="btn btn-default add-right" ng-click="openProperties()"><i class="fa fa-cog"></i></button>
+      <h2>Copy of Web Page Widget Test (Fixed)</h2>
     </div><!--col-sm-4-->
-    <div class="col-sm-4 text-right">
-      <button id="addPlaceholderButton" class="btn btn-primary" ng-click="addNewPlaceholder()">Add Placeholder <i class="fa fa-plus icon-right"></i></button>
-      <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-disabled="!previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
+    
+    <div class="col-sm-12 col-md-5 text-right">
+      
+
+      <div class="global-actions">
+        <button id="addPlaceholderButton" class="btn btn-primary" ng-click="addNewPlaceholder()">Add Placeholder <i class="fa fa-plus icon-right"></i></button>
+        <a class="btn btn-default" id="previewButton" target="_blank" ng-href="{{previewUrl}}" ng-disabled="!previewUrl">{{'schedules-app.actions.preview' | translate}} <i class="fa fa-play icon-right"></i></a>
+      </div>
     </div><!--col-sm-4-->
   </div>
 </div><!--presentation-toolbar-->
+
+      

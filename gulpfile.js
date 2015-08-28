@@ -184,7 +184,7 @@ gulp.task("test:ci",  function (cb) {
 
 //------------------------- Watch --------------------------------
 gulp.task('watch', function () {
-  gulp.watch(['./partials/**/*.html', './js/**/*.js', './index.html'], ['browser-sync-reload']);
+  gulp.watch(['./partials/**/*.html', './js/**/*.js', './bower_components/rv-common-style/**/*', './index.html'], ['browser-sync-reload']);
   gulp.watch( unitTestFiles,['test:unit']);
 });
 
