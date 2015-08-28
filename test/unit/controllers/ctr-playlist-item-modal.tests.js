@@ -15,6 +15,10 @@ describe('controller: playlist item modal', function() {
         }
       }
     });
+    
+    $provide.service('widgetModalFactory',function(){
+      return {}
+    });
 
   }));
   var $scope, $modalInstance, $modalInstanceDismissSpy, $modalInstanceCloseSpy, itemProperties;

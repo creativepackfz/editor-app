@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('risevision.editorApp.directives')
-  .directive('placeholderPlaylist', ['placeholderPlaylistFactory', '$modal',
-    '$templateCache',
-    function (placeholderPlaylistFactory, $modal, $templateCache) {
+  .directive('placeholderPlaylist', ['placeholderPlaylistFactory',
+    'widgetModalFactory', '$modal', '$templateCache',
+    function (placeholderPlaylistFactory, widgetModalFactory, $modal,
+      $templateCache) {
       return {
         restrict: 'E',
         scope: true,
         templateUrl: 'partials/placeholder-playlist.html',
         link: function ($scope) {
           $scope.factory = placeholderPlaylistFactory;
+          $scope.widgetModalFactory = widgetModalFactory;
 
           $scope.edit = function (item) {
             placeholderPlaylistFactory.item = item;

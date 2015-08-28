@@ -21,6 +21,9 @@ describe('directive: placeholder-playlist', function() {
         }
       };
     });
+    $provide.service('widgetModalFactory', function() {
+      
+    });
     $provide.service('$modal', function() {
       return {
         open: function(item) {

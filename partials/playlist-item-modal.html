@@ -11,11 +11,11 @@
     <input type="text" class="form-control" ng-model="item.name">
   </div>
 
-  <!-- <p><strong>Content:</strong> 
-    <a class="add-left" href="">
+  <p ng-show="item.type === 'widget'"><strong>Content:</strong> 
+    <a class="link add-left" href="" ng-click="widgetModalFactory.showWidgetModal(item)">
       {{item.type}} <i class="fa fa-cog icon-right"></i>
     </a>
-  </p> -->
+  </p>
   <hr>
 
   <div class="form-group half-top">

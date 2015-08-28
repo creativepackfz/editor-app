@@ -23,7 +23,8 @@ angular.module('risevision.editorApp', [
     'risevision.editorApp.directives',
     'risevision.common.loading',
     'risevision.common.i18n',
-    'risevision.widget.common.background-image-setting'
+    'risevision.widget.common.background-image-setting',
+    'risevision.widget.common'
   ])
   // Set up our mappings between URLs, templates, and controllers
   .config(['$urlRouterProvider', '$stateProvider',
