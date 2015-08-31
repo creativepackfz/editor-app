@@ -1,10 +1,12 @@
-<div id="workspace">
+<style type="text/css">
+	.navbar .container {width: 100%;}
+</style>
 
+<div id="workspace" class="workspace" ng-class="{'hide-sidebar' : !factory.editing && fullArtboard}">
   <sidebar></sidebar>
-
   <toolbar></toolbar>
 
-  <div class="editor-bg active" ng-class="{'active' : editing, 'active' : default, 'full' : fullArtboard && !factory.editing}">
+  <div class="workspace-board">
     <div id="editingModeView" ui-view></div>
   </div><!--editor-bg-->
 
