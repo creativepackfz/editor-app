@@ -23,7 +23,7 @@ deployment:
       # To deploy to one of these environments a tag must be added to the commit message. For instance, [stage-0] for editor-stage-0.risevision.com.
       # The build will fail if the tag is not added.
       # If tag is missing, the [stage-0] is used.
-      - NODE_ENV=dev npm run build
+      - NODE_ENV=stage npm run build
       - ssh editor@webserver-stage.risevision.com 'mkdir -p /rise-front-end/editor';
       - >
         STAGE_ENV="$(git log -1 --pretty=%B | grep '\[.*\]' |sed -e 's/.*\[\(.*\)\].*/\1/g')";
