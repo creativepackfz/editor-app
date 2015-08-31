@@ -2,10 +2,10 @@
 <div class="content-box half-top">
   <table class="table-2 table-hover">
     <tbody>
-    <tr class="clickable-row" ng-repeat="item in factory.getItems()">
+    <tr class="clickable-row" ng-repeat="item in factory.getItems() track by $index">
       <td>
         <div class="pull-right">
-          <button class="btn btn-sm btn-default" ng-click="open('lg','widget.html')"><i class="fa fa-cog"></i></button>
+          <button class="btn btn-sm btn-default" ng-show="item.type === 'widget'" ng-click="widgetModalFactory.showWidgetModal(item)"><i class="fa fa-cog"></i></button>
           <button class="btn btn-sm btn-default" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
         </div>
         <div ng-click="edit(item)">
