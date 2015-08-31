@@ -1,14 +1,13 @@
 <div class="content-box">
   <table class="table-2 table-hover">
     <tbody>
-
       <tr class="placeholderFromSideBar" class="clickable-row animated fadeIn" ng-repeat="placeholder in factory.getPlaceholders() track by $index">
         <td>
           <div class="pull-right">
             <button class="btn btn-sm btn-default" id="duplicateButton" ng-click="factory.duplicatePlaceholder(placeholder)"><i class="fa fa-copy"></i></button>
             <button class="btn btn-sm btn-default" id="removeButton" ng-click="remove(placeholder)"><i class="fa fa-trash-o"></i></button>
           </div>
-          <div ng-click="manage(placeholder)" style="line-height:30px;">{{placeholder.id}}</div>
+          <div class="clickable" ng-click="manage(placeholder)" style="line-height:30px;">{{placeholder.id}}</div>
         </td>
       </tr>
 

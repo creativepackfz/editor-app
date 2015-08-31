@@ -1,23 +1,16 @@
-<div class="artboard-sidebar active" ng-class="{'active': !factory.placeholder, 'move': factory.placeholder}">
+<div class="workspace-sidebar">
+  <div class="workspace-sidebar-content">
+    <div ng-show="!factory.placeholder">
+      <h4>Placeholders</h4>
+      <placeholders-list></placeholders-list>
+    </div>
 
-  <div class="artboard-sidebar-body">
-    
-    <h4>Placeholders</h4>
-    <placeholders-list></placeholders-list>
-    
-  </div><!--content-box-body-->
-</div><!--artboard-sidebar-->
-
-
-<div class="artboard-sidebar" ng-class="{'active': factory.placeholder}">
-  <div class="artboard-sidebar-body">
-
+    <div ng-show="factory.placeholder">
     <a href="" class="btn btn-default pull-left add-right" ng-click="factory.clearPlaceholder()">
       <i class="fa fa-angle-left icon-left"></i>
       Back
     </a>
     <h4>Edit Placeholder</h4>
-
     <div class="btn-group filters btn-group-justified add-bottom" role="group" aria-label="...">
       <a href="" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
       <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
@@ -29,7 +22,11 @@
 
     <div class="ph-settings" ng-hide="showPlaylist">
       <placeholder-settings></placeholder-settings>
-    </div><!--ph-settings-->
+    </div>
+    <!--ph-settings-->
+    </div>
 
   </div><!--content-box-body-->
-</div><!--artboard-sidebar-->
+</div><!--workspaceSidebar-->
+
+
