@@ -1,0 +1,208 @@
+#StoreContentOverlay {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+
+	background-color:rgba(0,0,0,0.8);
+	color: white;
+
+	top: 0;
+	left: 0;
+	z-index: 0;
+	opacity: 0;
+	margin-top: 54px;
+
+}
+
+
+#CloseOverlayButton {
+ position: absolute;
+    right: 22px;
+    top: 7px;
+    color: #FFF;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#ContentSideBar {
+	width: 200px;
+	height: 100%;
+	background-color: #CCC;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 15px;
+}
+
+
+
+/* Products Grid
+   ========================================================================== */
+.product-container {
+  padding-top: 20px; }
+
+.product {
+  
+  color: black;
+
+  /* Positioning */
+  position: relative;
+  /* Display & Box Model */
+ /* min-height: 360px;*/
+  padding: 5px;
+  border: 1px solid #ddd;
+  /* Visual */
+  border-radius: 5px;
+  background-color: #fff; }
+
+ 
+
+
+
+.product-thumb {
+  /* Positioning */
+  position: relative;
+  /* Display & Box Model */
+  display: block; }
+  .product-thumb .info {
+    /* Positioning */
+    position: absolute;
+    float: left;
+    /* Display & Box Model */
+    width: 100%;
+    height: 100%;
+    /* Visual */
+    visibility: hidden;
+    background: rgba(255, 255, 255, 0.7) url('../img/info-icon.png') center no-repeat; }
+
+.product-thumb:hover .info {
+  visibility: visible; }
+
+.products-grid .product-description {
+  max-height: 75px; }
+
+.product-details {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	background-color: white;
+	height: 100%;
+	 opacity:0;
+     -webkit-transition: opacity .25s ease;
+	 -moz-transition: opacity .25s ease;
+
+  padding: 0 15px 15px;
+  overflow: hidden; }
+
+  		 .product:hover .product-details {
+               opacity:1;
+           }
+
+
+
+  .product-details h3.experimental, .product-details h3.inactive {
+    color: red;
+    text-transform: uppercase;
+    background: none;
+    text-align: center; }
+
+.product-pricing {
+  /* Positioning */
+  position: absolute;
+  bottom: 0;
+  /* Display & Box Model */
+  padding-left: 15px;
+  padding-right: 15px; }
+  .product-pricing .price {
+    color: #2d60ad; }
+
+/* Media queries
+   ========================================================================== */
+/* Two-column layout */
+@media (min-width: 768px) {
+  .products-grid {
+    margin-left: -15px;
+    margin-right: -15px; }
+  .product-container {
+    /* Positioning */
+    float: left;
+    /* Display & Box Model */
+    width: 50%;
+    padding-left: 15px;
+    padding-right: 15px; }
+  .product-container:nth-child(odd) {
+    clear: left; } }
+
+/* Four-column layout */
+@media (min-width: 992px) {
+  /* Be more specific so this style will win out over the previous
+	media query. */
+  .product-container {
+    width: 25%; }
+  .product-container:nth-child(odd) {
+    clear: none; }
+  .product-container:nth-child(4n+1) {
+    clear: left; } }
+
+/* ==========================================================================
+   Product Details, Order
+   ========================================================================== */
+.product-info, .order-info, .subscription-info {
+  /* Display & Box Model */
+  padding: 20px;
+  border: solid 1px #ddd;
+  /* Visual */
+  background: #fff;
+  border-radius: 5px;
+  min-height: 400px;
+  position: relative; }
+  .product-info .info-row, .order-info .info-row, .subscription-info .info-row {
+    margin-top: 20px; }
+  .product-info h3.experimental, .product-info h3.inactive, .order-info h3.experimental, .order-info h3.inactive, .subscription-info h3.experimental, .subscription-info h3.inactive {
+    color: red;
+    margin-bottom: 0px;
+    text-transform: uppercase; }
+  .product-info .qty-message, .order-info .qty-message, .subscription-info .qty-message {
+    font-style: italic; }
+  .product-info .text-red, .order-info .text-red, .subscription-info .text-red {
+    color: red; }
+
+.product-header {
+  margin-bottom: 10px; }
+
+.product-vendor {
+  font-weight: bold; }
+
+.product-trial {
+  color: #45b864; }
+
+.product-expired {
+  color: red; }
+
+.price-disabled {
+  color: #ccc; }
+
+
+
+.hr-dashed {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-top: 2px dashed #cbcbcb; }
+
+/* Media queries
+   ========================================================================== */
+@media (min-width: 768px) {
+  .product-info {
+    padding: 40px; }
+  .cart-buttons li {
+    /* Positioning */
+    float: left;
+    /* Display & Box Model */
+    margin-left: 3%; }
+  .cart-buttons li:first-child {
+    margin-left: 0; } }
+
+
+
+

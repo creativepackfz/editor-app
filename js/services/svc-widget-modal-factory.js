@@ -4,9 +4,9 @@ angular.module('risevision.editorApp.services')
   .value('WIDGET_PARAMS',
     '?up_id=iframeId&parent=parentUrl&up_rsW=width&up_rsH=height&up_companyId=cid'
   )
-  .factory('widgetModalFactory', ['$rootScope', 'placeholderFactory', 
+  .factory('widgetModalFactory', ['$rootScope', 'placeholderFactory',
     'userState', '$modal', '$location', '$sce', '$log', 'WIDGET_PARAMS',
-    function ($rootScope, placeholderFactory, userState, $modal, $location, 
+    function ($rootScope, placeholderFactory, userState, $modal, $location,
       $sce, $log, WIDGET_PARAMS) {
       var factory = {};
 
