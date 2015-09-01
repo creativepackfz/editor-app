@@ -58,7 +58,9 @@
   border-radius: 5px;
   background-color: #fff; }
 
- 
+ .product h3 {
+ 	text-align: center;
+ }
 
 
 
@@ -102,7 +104,9 @@
                opacity:1;
            }
 
-
+ .product-details h3 {
+ 	text-align: left;
+ }
 
   .product-details h3.experimental, .product-details h3.inactive {
     color: red;
