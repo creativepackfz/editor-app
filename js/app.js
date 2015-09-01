@@ -24,7 +24,8 @@ angular.module('risevision.editorApp', [
     'risevision.common.loading',
     'risevision.common.i18n',
     'risevision.widget.common.background-image-setting',
-    'risevision.widget.common'
+    'risevision.widget.common',
+    'ui.codemirror'
   ])
   // Set up our mappings between URLs, templates, and controllers
   .config(['$urlRouterProvider', '$stateProvider',
@@ -104,6 +105,7 @@ angular.module('risevision.editorApp', [
       .state('editor.workspace.htmleditor', {
         url: '',
         templateUrl: 'partials/html-editor.html',
+        controller: 'HtmlEditorController',
         resolve: {
           canAccess: ['canAccessEditor',
             function (canAccessEditor) {

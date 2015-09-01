@@ -11,7 +11,11 @@ var WorkspacePage = function() {
   var deleteButton = element(by.id('deleteButton'));
   var restoreButton = element(by.id('restoreButton'));
   var publishButton = element(by.id('publishButton'));
+  var designButton = element(by.id('designButton'));
+  var htmlButton = element(by.id('htmlButton'));
   var deleteForeverButton = element(by.buttonText('Delete Forever'));
+  var codemirrorHtmlEditor = element(by.id('codemirrorHtmlEditor'));
+
 
   var errorBox = element(by.id('errorBox'));
 
@@ -49,12 +53,24 @@ var WorkspacePage = function() {
     return publishButton;
   };
 
+  this.getDesignButton = function() {
+    return designButton;
+  };
+
+  this.getHtmlButton = function() {
+    return htmlButton;
+  };
+
   this.getDeleteForeverButton = function() {
     return deleteForeverButton;
   };
 
   this.getAddPlaceholderButton = function() {
     return addPlaceholderButton;
+  };
+
+  this.getCodemirrorHtmlEditor = function() {
+    return codemirrorHtmlEditor;
   };
 
   this.getErrorBox = function () {

@@ -103,6 +103,9 @@ describe('service: editorFactory:', function() {
             currentState = state;
           }
           return currentState;
+        },
+        is: function(state) {
+          return currentState;
         }
       }
     });
@@ -220,6 +223,30 @@ describe('service: editorFactory:', function() {
       },10);
     });
 
+    it('should parse and add the presentation when $state is html-editor',function(done){
+      updatePresentation = true;
+      currentState = 'editor.workspace.htmleditor';
+
+      editorFactory.addPresentation();
+
+      expect(editorFactory.presentation.parsed).to.be.true;
+      expect(editorFactory.presentation.distributionParsed).to.be.true;
+
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(currentState).to.equal('editor.workspace.artboard');
+        expect(trackerCalled).to.equal('Presentation Created');
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        
+        done();
+      },10);
+    });
+
     it('should show an error if fails to create presentation',function(done){
       updatePresentation = false;
 
@@ -249,6 +276,28 @@ describe('service: editorFactory:', function() {
 
       expect(editorFactory.presentation.updated).to.be.true;
       expect(editorFactory.presentation.distributionUpdated).to.be.true;
+      expect(editorFactory.savingPresentation).to.be.true;
+      expect(editorFactory.loadingPresentation).to.be.true;
+
+      setTimeout(function(){
+        expect(trackerCalled).to.equal('Presentation Updated');
+        expect(editorFactory.savingPresentation).to.be.false;
+        expect(editorFactory.loadingPresentation).to.be.false;
+        expect(editorFactory.errorMessage).to.not.be.ok;
+        expect(editorFactory.apiError).to.not.be.ok;
+        done();
+      },10);
+    });
+
+    it('should parse and update the presentation when $state is html-editor',function(done){
+      updatePresentation = true;
+      currentState = 'editor.workspace.htmleditor';
+
+      editorFactory.updatePresentation();
+
+      expect(editorFactory.presentation.parsed).to.be.true;
+      expect(editorFactory.presentation.distributionParsed).to.be.true;
+
       expect(editorFactory.savingPresentation).to.be.true;
       expect(editorFactory.loadingPresentation).to.be.true;
 
