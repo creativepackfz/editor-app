@@ -2,7 +2,7 @@
   <div class="footer-content">
     <div class="pull-left">
       <!-- Indicates delete or destructive action -->
-      <button id="deleteButton" type="button" class="btn btn-danger btn-fixed-width" ng-show="factory.presentation.id" ng-click="confirmDelete()">
+      <button id="deleteButton" require-role="cp" type="button" class="btn btn-danger btn-fixed-width" ng-show="factory.presentation.id" ng-click="confirmDelete()">
         {{'common.delete' | translate}} <i class="fa fa-white fa-trash-o icon-right"></i>
       </button>
     </div>
@@ -11,16 +11,16 @@
       <last-revised revision-status="factory.presentation.revisionStatus" change-date="factory.presentation.changeDate" changed-by="factory.presentation.changedBy"></last-revised>
     </span>
 
-    <button id="restoreButton" class="btn btn-default" ng-show="factory.isRevised()" ng-click="factory.restorePresentation()">Restore</button>
+    <button id="restoreButton" require-role="cp" class="btn btn-default" ng-show="factory.isRevised()" ng-click="factory.restorePresentation()">Restore</button>
 
     <!-- Indicates a successful or positive action -->
-    <button id="saveButton" type="submit" class="btn btn-primary btn-fixed-width" ng-click="factory.save()">
+    <button id="saveButton" require-role="ce cp" type="submit" class="btn btn-primary btn-fixed-width" ng-click="factory.save()">
       {{ factory.savingSchedule ? ('common.saving' | translate) : ('common.save' | translate)}} 
       <i class="fa fa-check icon-right"></i>
     </button>
     <span class="add-left"></span>
 
-    <button id="publishButton" class="btn btn-primary" ng-show="factory.isRevised()" ng-click="factory.publishPresentation()">Publish</button>
+    <button id="publishButton" require-role="cp" class="btn btn-primary" ng-show="factory.isRevised()" ng-click="factory.publishPresentation()">Publish</button>
 
     <span class="add-left"></span>
     <!-- Indicates cancel or non-destructive action -->
