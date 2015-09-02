@@ -1,4 +1,4 @@
-#StoreContentOverlay {
+/*#StoreContentOverlay {
 	position: fixed;
 	height: 87%;
 	width: 100%;
@@ -36,7 +36,16 @@
 	top: 0;
 	padding: 15px;
 }
+*/
 
+
+/* New Modal for Common Style
+   ========================================================================== */
+
+.modal-xl {
+  width: auto;
+  max-width: 1200px;
+}
 
 
 /* Products Grid

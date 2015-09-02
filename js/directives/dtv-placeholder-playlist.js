@@ -58,6 +58,22 @@ angular.module('risevision.editorApp.directives')
             });
           };
 
+          //Prototype Directive
+          $scope.addContent = function (size) {
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/content-modal.html',
+              size: 'xl',
+              controller: 'PlaylistItemModalController',
+              resolve: {
+                item: function () {
+                  return placeholderPlaylistFactory.getCurrentItemProperties();
+                }
+              }
+            });
+          };
+
+
+
         }
       };
     }
