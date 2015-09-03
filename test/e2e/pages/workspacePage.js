@@ -1,11 +1,11 @@
 'use strict';
 var WorkspacePage = function() {
   var workspaceContainer = element(by.id('workspace'));
-  var presentationPropertiesButton = element(by.id('presentationPropertiesButton'));
+  var artboardContainer = element(by.id('artboard'));
 
+  var presentationPropertiesButton = element(by.id('presentationPropertiesButton'));
   var addPlaceholderButton = element(by.id('addPlaceholderButton'));
   var previewButton = element(by.id('previewButton'));
-
   var saveButton = element(by.id('saveButton'));
   var cancelButton = element(by.id('cancelButton'));
   var deleteButton = element(by.id('deleteButton'));
@@ -23,6 +23,10 @@ var WorkspacePage = function() {
 
   this.getWorkspaceContainer = function() {
     return workspaceContainer;
+  };
+
+  this.getArtboardContainer = function() {
+    return artboardContainer;
   };
 
   this.getPresentationPropertiesButton = function() {
