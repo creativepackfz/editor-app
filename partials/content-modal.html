@@ -123,17 +123,23 @@
                             <p>{{product.priceLine}}</p>
 
                            <div class="button-set">
+                           <a>
                             <button class="btn btn-primary btn-block" ng-if="product.addButton" ng-click="dismiss()">
                                 <strong>{{product.addButton}}</strong>
                                 <i class="fa fa-plus icon-right"> </i>
                             </button>
-                             <button class="btn btn-primary btn-block" ng-if="product.buyButton" ng-href="https://store.risevision.com/shopping-cart" target="_blank">
+                            </a>
+                             <a ng-href="https://store.risevision.com/shopping-cart" target="_blank">
+                             <button class="btn btn-primary btn-block" ng-if="product.buyButton">
                                 <strong>{{product.buyButton}}</strong>
                                 <i class="fa fa-plus fa-shopping-cart"> </i>
                             </button>
-                            <button class="btn btn-default btn-block" ng-if="product.infoButton" href="https://store.risevision.com/product/2042/video-folder-widget">
+                            </a>
+                            <a href="https://store.risevision.com/product/2042/video-folder-widget" target="_blank">
+                            <button class="btn btn-default btn-block" ng-if="product.infoButton">
                                 <strong>{{product.infoButton}}</strong>
                             </button>
+                            </a>
                            </div>
 
                             <!-- Hover Card -->
