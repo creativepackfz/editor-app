@@ -105,50 +105,29 @@
                 <div class="product-container ng-scope" ng-repeat="product in products">
                     <div class="product">
                         
-
                             <a href="" class="product-thumb" itemprop="url">
                                 <span class="info"></span>
                                 <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/{{product.imageLink}}" width="310" height="240">
                             </a>
+
                             <h3 itemprop="title">{{product.title}}</h3>
                             <p>{{product.priceLine}}</p>
 
                            <div class="button-set">
-                           <a>
-                            <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                                <strong>Add</strong>
-                                <i class="fa fa-plus icon-right"> </i>
-                            </button>
-                            </a>
-                             <!-- <a ng-href="https://store.risevision.com/shopping-cart" target="_blank">
-                             <button class="btn btn-primary btn-block" ng-if="product.buyButton">
-                                <strong>{{product.buyButton}}</strong>
-                                <i class="fa fa-plus fa-shopping-cart"> </i>
-                            </button>
-                            </a> -->
-                            <a href="https://store.risevision.com/product/2042/video-folder-widget" target="_blank">
-                            <button class="btn btn-default btn-block" ng-if="product.infoButton">
-                                <strong>{{product.infoButton}}</strong>
-                            </button>
-                            </a>
+	                           <a>
+	                            <button class="btn btn-primary btn-block" ng-click="dismiss()">
+	                                <strong>Add</strong>
+	                                <i class="fa fa-plus icon-right"> </i>
+	                            </button>
+	                            </a>
+	                            
+	                            <a href="https://store.risevision.com/product/2042/video-folder-widget" target="_blank">
+	                            <button class="btn btn-default btn-block" ng-if="product.infoButton">
+	                                <strong>{{product.infoButton}}</strong>
+	                            </button>
+	                            </a>
+
                            </div>
-
-                            <!-- Hover Card -->
-                          <!--   <div class="product-details">
-                                <h3 itemprop="title">{{product.title}}</h3>
-                                <p class="product-description" ellipsis="">{{product.description}}</p>
-                                <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                                    <strong>Add</strong>
-                                    <i class="fa fa-plus icon-right"> </i>
-                                </button>
-                                <button class="btn btn-default btn-block" ng-click="dismiss()">
-                                    <strong>More Info</strong>
-                                </button> -->
-                                <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                           <!--  </div> -->
-
-
-                       
                     </div>
                 </div>
             </div>
@@ -161,14 +140,10 @@
 
 
 <div class="modal-footer">
-<div style="text-align: center; margin-bottom: 0; background-color: #C8E9D1; padding: 5px;border-radius: 4px;">
-            <b style="margin-right: 10px">Check out all we have to offer! </b>
-            <button type="button" class="btn btn-white" style="color: green;
-    background-color: white; border:1px solid #00EC77;" ng-click="$state.go('root.common.products')">Browse All Products
-            <i class="fa fa-chevron-right" style="margin-left:5px;"></i>
-        </button>
-        
- </div>
- <!--  <button class="btn btn-primary" ng-click="apply()">Apply <i class="fa fa-check icon-right"></i></button>
-  <button class="btn btn-default" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button> -->
+	<div class="store-banner gradient-green-vertical">
+	            <b>Check out all we have to offer! </b>
+	        <button type="button" class="btn btn-white btn-emphasis" ng-click="$state.go('root.common.products')">Browse All Products
+	            <i class="fa fa-chevron-right" style="margin-left:5px;"></i>
+	        </button>    
+	</div>
 </div>  
