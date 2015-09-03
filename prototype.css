@@ -39,7 +39,7 @@
 */
 
 
-/* New Modal for Common Style
+/* Common Style Updates?
    ========================================================================== */
 .img-responsive {
   width: 100%;
@@ -48,6 +48,10 @@
 .modal-xl {
   width: auto;
   max-width: 1200px;
+}
+
+.scrollable-list {
+  cursor: auto;
 }
 
 /*TARGET ADD CONTENT MODAL ONLY */
@@ -80,7 +84,7 @@
 }
 
 
-/* Products Grid
+/* Store Products Grid - May need updates for Modal
    ========================================================================== */
 .product-container {
   padding-top: 20px; }
@@ -100,7 +104,9 @@
   background-color: #fff; }
 
  .product h3, .product p {
- 	text-align: center;
+ 	text-align: left;
+  margin-left: 15px;
+
  }
 
 
