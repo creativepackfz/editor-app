@@ -41,10 +41,39 @@
 
 /* New Modal for Common Style
    ========================================================================== */
+.img-responsive {
+  width: 100%;
+}
 
 .modal-xl {
   width: auto;
   max-width: 1200px;
+}
+
+/*TARGET ADD CONTENT MODAL ONLY */
+@media only screen and (min-width: 768px)  {
+    .product-thumb img.img-responsive {
+        height: 184px;
+    }
+}
+@media only screen and (min-width: 992px)  {
+    .product-thumb img.img-responsive {
+        height: 160px;
+    }
+}
+
+
+ .button-set {
+    position: absolute;
+    width: 96%;
+    bottom: 20px;
+}
+@media only screen and (max-width: 767px)  {
+   .button-set {
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
 }
 
 
@@ -60,14 +89,14 @@
   /* Positioning */
   position: relative;
   /* Display & Box Model */
- /* min-height: 360px;*/
+  min-height: 360px;
   padding: 5px;
   border: 1px solid #ddd;
   /* Visual */
   border-radius: 5px;
   background-color: #fff; }
 
- .product h3 {
+ .product h3, .product p {
  	text-align: center;
  }
 
@@ -103,15 +132,15 @@
 	background-color: white;
 	height: 100%;
 	 opacity:0;
-     -webkit-transition: opacity .25s ease;
+   -webkit-transition: opacity .25s ease;
 	 -moz-transition: opacity .25s ease;
 
   padding: 0 15px 15px;
   overflow: hidden; }
 
-  		 .product:hover .product-details {
+  		/* .product:hover .product-details {
                opacity:1;
-           }
+           }*/
 
  .product-details h3 {
  	text-align: left;

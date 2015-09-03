@@ -1,653 +1,177 @@
+<div ng-init="products = [
+		  {
+	      title:'Video Folder Widget',
+	      description: 'Show videos in a folder from Rise Storage.',
+	      imageLink: 'Rise-Vision/widget_video_folder_image_new.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Weather Maps',
+	      description:'Regional weather maps for the contiguous United States.',
+	      imageLink: 'Digichief/widget_4000_image_edit2.jpg',
+	      priceLine: 'Starting at $13 per Display per Month',
+	      buyButton: 'Buy',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Flight Board Widget - Arrivals',
+	      description:'Show arrivals for a single airport.',
+	      imageLink: 'FlightTime-TV/widget_arrivals_image_edit1.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Flight Board Widget - Departures',
+	      description:'Show departures for a single airport.',
+	      imageLink: 'FlightTime-TV/widget_departures_image_edit1.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'SmartPlay DS Simple Theme',
+	      description: 'A multi-purpose theme built to work with the Rise Vision Platform.',
+	      imageLink: 'SMARTplayDS/SIMPLE.jpg',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'PhotoFeed Widget',
+	      description:'Easily stream photos from Instagram or Google Photos in your Presentations.',
+	      imageLink: 'Computer-Aid/widget_ciaphotofeed_image.png',
+	      priceLine: 'Starting at $3 per Display per Month',
+	      buyButton: 'Buy',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Vimeo HTML5 Widget',
+	      description:'The Vimeo HTML5 Widget is your go to Widget for Vimeo video streaming.',
+	      imageLink: 'Scotts-Digital-Signage/vimeo.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'ComputerAid Countdown Widget',
+	      description:'A customizable countdown timer for upcoming events.',
+	      imageLink: 'Computer-Aid/widget_caicountdown_image.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Video Folder Widget',
+	      description: 'Show videos in a folder from Rise Storage.',
+	      imageLink: 'Rise-Vision/widget_video_folder_image_new.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Weather Maps',
+	      description:'Regional weather maps for the contiguous United States.',
+	      imageLink: 'Digichief/widget_4000_image_edit2.jpg',
+	      priceLine: 'Starting at $13 per Display per Month',
+	      buyButton: 'Buy',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Flight Board Widget - Arrivals',
+	      description:'Show arrivals for a single airport.',
+	      imageLink: 'FlightTime-TV/widget_arrivals_image_edit1.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      },
+	      {
+	      title:'Flight Board Widget - Departures',
+	      description:'Show departures for a single airport.',
+	      imageLink: 'FlightTime-TV/widget_departures_image_edit1.png',
+	      priceLine: 'Available for Free!',
+	      addButton: 'Add',
+	      infoButton: 'More Info'
+	      }
+      ]">
+</div>
+
 <div class="modal-header">
   <button type="button" class="close" ng-click="dismiss()">
     <i class="fa fa-times"></i>
   </button>
-  <h3 class="modal-title">Add Content</h3>
+  <h3 class="modal-title">Add Playlist Content</h3>
 </div>
 
 
-<div class="modal-body">          
+<div class="modal-body" style="padding-bottom:0">
+    <search-filter filter-config="filterConfig" search="search" do-search="doSearch"></search-filter>
+    <div class="content-box half-top">
+        <div class="scrollable-list" scrolling-list="load()" rv-spinner rv-spinner-key="presentation-list-loader" rv-spinner-start-active="0" style="overflow-x:hidden">
+            <div id="products-grid" class="products-grid clearfix">
+                <div class="product-container ng-scope" ng-repeat="product in products">
+                    <div class="product">
+                        
+
+                            <a href="" class="product-thumb" itemprop="url">
+                                <span class="info"></span>
+                                <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/{{product.imageLink}}" width="310" height="240">
+                            </a>
+                            <h3 itemprop="title">{{product.title}}</h3>
+                            <p>{{product.priceLine}}</p>
+
+                           <div class="button-set">
+                            <button class="btn btn-primary btn-block" ng-if="product.addButton" ng-click="dismiss()">
+                                <strong>{{product.addButton}}</strong>
+                                <i class="fa fa-plus icon-right"> </i>
+                            </button>
+                             <button class="btn btn-primary btn-block" ng-if="product.buyButton" ng-href="https://store.risevision.com/shopping-cart" target="_blank">
+                                <strong>{{product.buyButton}}</strong>
+                                <i class="fa fa-plus fa-shopping-cart"> </i>
+                            </button>
+                            <button class="btn btn-default btn-block" ng-if="product.infoButton" href="https://store.risevision.com/product/2042/video-folder-widget">
+                                <strong>{{product.infoButton}}</strong>
+                            </button>
+                           </div>
+
+                            <!-- Hover Card -->
+                          <!--   <div class="product-details">
+                                <h3 itemprop="title">{{product.title}}</h3>
+                                <p class="product-description" ellipsis="">{{product.description}}</p>
+                                <button class="btn btn-primary btn-block" ng-click="dismiss()">
+                                    <strong>Add</strong>
+                                    <i class="fa fa-plus icon-right"> </i>
+                                </button>
+                                <button class="btn btn-default btn-block" ng-click="dismiss()">
+                                    <strong>More Info</strong>
+                                </button> -->
+                                <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
+                           <!--  </div> -->
 
 
- <search-filter filter-config="filterConfig" search="search" do-search="doSearch"></search-filter>
-  <div class="content-box half-top">
-    <div class="scrollable-list" scrolling-list="load()" rv-spinner rv-spinner-key="presentation-list-loader" rv-spinner-start-active="0" style="overflow-x:hidden">
-
-
-
-    <div id="products-grid" class="products-grid clearfix">
-	 <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
+                       
                     </div>
-                   
                 </div>
             </div>
+            <!-- END PRODUCTS GRID -->
         </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
+    </div>
+</div>
+<!--modal-body-->
 
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-         <div class="product-container">
-            <div class="product">
-                <div itemscope="">
-                    <a href="" class="product-thumb" itemprop="url">
-                        <span class="info"></span>
-                        <img class="img-responsive" ng-src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png" width="310" height="240" src="https://s3.amazonaws.com/Store-Products/Rise-Vision/widget_video_folder_image_new.png">
-                    </a>
-                     <h3 itemprop="title">Video Folder Widget</h3>
-
-                    <div class="product-details">
-                        <h3 itemprop="title">Video Folder Widget</h3>
-
-                        <p class="product-description" ellipsis="">Show videos in a folder from Rise Storage.</p>
-                        <button class="btn btn-primary btn-block" ng-click="dismiss()">
-                            <strong>Add</strong>
-                            <i class="fa fa-plus icon-right"> </i>
-                         </button>
-                         <button class="btn btn-default btn-block" ng-click="dismiss()">
-                            <strong>More Info</strong>
-                         </button>
-
-
-                        <!--  <p class="product-pricing">Starting at <span class="price pointer">$0</span>&nbsp;Free</p> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-        
-
-
-	</div>
-
-
-<!-- END PRODUCTS GRID
- -->
-
- </div>
- </div>
-</div><!--modal-body-->
 
 
 <div class="modal-footer">
-
+<div style="text-align: center; margin-bottom: 0; background-color: #C8E9D1; padding: 5px;border-radius: 4px;">
+            <b style="margin-right: 10px">Check out all we have to offer! </b>
+            <button type="button" class="btn btn-white" style="color: green;
+    background-color: white; border:1px solid #00EC77;" ng-click="$state.go('root.common.products')">Browse All Products
+            <i class="fa fa-chevron-right" style="margin-left:5px;"></i>
+        </button>
+        
+ </div>
  <!--  <button class="btn btn-primary" ng-click="apply()">Apply <i class="fa fa-check icon-right"></i></button>
   <button class="btn btn-default" ng-click="dismiss()">Cancel <i class="fa fa-times icon-right"></i></button> -->
 </div>  
