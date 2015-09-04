@@ -1,18 +1,28 @@
 <button class="btn btn-primary btn-block" ng-click="open('lg','content.html')">Add Playlist Content <i class="fa fa-plus icon-right"></i></button>
 <div class="content-box half-top">
-  <table class="table-2 table-hover">
+  <table class="table-2 table-hover table-playlist-items">
     <tbody>
     <tr class="clickable-row" ng-repeat="item in factory.getItems() track by $index">
       <td>
         <div class="pull-right">
-          <button class="btn btn-sm btn-default" ng-show="item.type === 'widget'" ng-click="widgetModalFactory.showWidgetModal(item)"><i class="fa fa-cog"></i></button>
-          <button class="btn btn-sm btn-default" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
+
+          <span class="btn-group">
+            <button class="btn btn-xs btn-default"><i class="fa fa-arrow-up"></i></button>
+            <button class="btn btn-xs btn-default"><i class="fa fa-arrow-down"></i></button>
+          </span>
+
+          <button class="btn btn-xs btn-default" ng-show="item.type === 'widget'" ng-click="widgetModalFactory.showWidgetModal(item)"><i class="fa fa-cog"></i></button>
+          <button class="btn btn-xs btn-default" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
         </div>
+
         <div ng-click="edit(item)">
-          <p style="line-height:30px" class="remove-bottom">{{item.name}}</p>
+          <p class="remove-bottom playlist-item-name">{{item.name}}</p>
+          <p class="text-small text-muted remove-bottom">Status</p>
         </div>
+
       </td>
     </tr>
+
     </tbody>
   </table>
   <div class="content-box-body" ng-hide="factory.getItems().length">
