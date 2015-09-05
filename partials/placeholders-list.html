@@ -1,7 +1,7 @@
 <div class="content-box">
   <table class="table-2 table-hover">
     <tbody>
-      <tr class="clickable-row placeholderFromSideBar" class="animated fadeIn" ng-repeat="placeholder in factory.getPlaceholders() track by $index">
+      <tr class="clickable-row placeholderFromSideBar" ng-repeat="placeholder in factory.getPlaceholders() track by $index">
         <td>
           <div class="pull-right">
             <button class="btn btn-xs btn-default" id="duplicateButton" ng-click="factory.duplicatePlaceholder(placeholder)"><i class="fa fa-copy"></i></button>

@@ -1,29 +1,31 @@
-<div class="workspace-sidebar">
+<div class="workspace-sidebar" ng-class="{'show-ph-properties' : factory.placeholder}">
   <div class="workspace-sidebar-content">
-    <div ng-show="!factory.placeholder">
+    
+
+    <div class="ph-properties">
+      <a href="" class="btn btn-default pull-left add-right" ng-click="factory.clearPlaceholder()">
+        <i class="fa fa-angle-left icon-left"></i>
+        Back
+      </a>
+      <h4>Edit Placeholder</h4>
+      <div class="btn-group btn-group-justified half-bottom" role="group" aria-label="...">
+        <a href="" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
+        <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
+      </div>
+
+      <div class="ph-playlist animated fadeIn ng-hide" ng-show="showPlaylist">
+        <placeholder-playlist></placeholder-playlist>
+      </div>
+
+      <div class="ph-settings animated fadeIn" ng-hide="showPlaylist">
+        <placeholder-settings></placeholder-settings>
+      </div>
+      <!--ph-settings-->
+    </div>
+
+    <div class="ph-list">
       <h4>Placeholders</h4>
       <placeholders-list></placeholders-list>
-    </div>
-
-    <div ng-show="factory.placeholder">
-    <a href="" class="btn btn-default pull-left add-right" ng-click="factory.clearPlaceholder()">
-      <i class="fa fa-angle-left icon-left"></i>
-      Back
-    </a>
-    <h4>Edit Placeholder</h4>
-    <div class="btn-group btn-group-justified half-bottom" role="group" aria-label="...">
-      <a href="" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
-      <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
-    </div>
-
-    <div class="ph-playlist animated fadeIn ng-hide" ng-show="showPlaylist">
-      <placeholder-playlist></placeholder-playlist>
-    </div>
-
-    <div class="ph-settings" ng-hide="showPlaylist">
-      <placeholder-settings></placeholder-settings>
-    </div>
-    <!--ph-settings-->
     </div>
 
   </div><!--content-box-body-->
