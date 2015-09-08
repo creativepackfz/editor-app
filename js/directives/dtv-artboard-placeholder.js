@@ -17,6 +17,7 @@ angular.module('risevision.editorApp.directives')
             element.css('left',$scope.placeholder.left + $scope.placeholder.leftUnits);
             element.css('width',$scope.placeholder.width + $scope.placeholder.widthUnits);
             element.css('height',$scope.placeholder.height + $scope.placeholder.heightUnits);
+            element.css('background',$scope.placeholder.backgroundStyle);
             element.css('z-index',$scope.placeholder.zIndex);
           }, true);
 
