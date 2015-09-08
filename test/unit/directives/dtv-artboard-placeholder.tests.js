@@ -15,7 +15,8 @@ describe('directive: artboard-placeholder', function() {
       "leftUnits": "px",
       "top": 530,
       "topUnits": "px",
-      "zIndex": 1
+      "zIndex": 1,
+      "backgroundStyle": "rgb(222, 33, 90)"
   };
 
   beforeEach(module('risevision.editorApp.services'));
@@ -57,6 +58,7 @@ describe('directive: artboard-placeholder', function() {
       expect(element.css('left')).to.equal(placeholder.left+placeholder.leftUnits);
       expect(element.css('width')).to.equal(placeholder.width+placeholder.widthUnits);
       expect(element.css('height')).to.equal(placeholder.height+placeholder.heightUnits);
+      expect(element.css('background')).to.equal(placeholder.backgroundStyle);
       expect(parseInt(element.css('z-index'))).to.equal(placeholder.zIndex);    
     });
 
@@ -68,11 +70,13 @@ describe('directive: artboard-placeholder', function() {
       placeholder.top = 220;
       placeholder.left = 120;
       placeholder.zIndex = 40;
+      placeholder.backgroundStyle = "rgb(11, 43, 60)"
       $scope.$apply();
       expect(element.css('top')).to.equal(placeholder.top+placeholder.topUnits);
       expect(element.css('left')).to.equal(placeholder.left+placeholder.leftUnits);
       expect(element.css('width')).to.equal(placeholder.width+placeholder.widthUnits);
       expect(element.css('height')).to.equal(placeholder.height+placeholder.heightUnits);
+      expect(element.css('background')).to.equal(placeholder.backgroundStyle);
       expect(parseInt(element.css('z-index'))).to.equal(placeholder.zIndex);        
     });
 
