@@ -17,6 +17,7 @@ var PresentationPropertiesModalPage = function() {
 
   var backgroundLabel = element(by.id('backgroundLabel'));
   var backgroundImageSettings = element(by.id('backgroundImageSettings'));
+  var backgroundColorInput = element(by.css('#backgroundImageSettings input'));
 
   var playUntilDonePlaceholderLabel = element(by.id('playUntilDonePlaceholderLabel'));
   var playUntilDonePlaceholderSelect = element(by.id('playUntilDonePlaceholderSelect'));
@@ -66,6 +67,10 @@ var PresentationPropertiesModalPage = function() {
 
   this.getBackgroundLabel = function() {
     return backgroundLabel;
+  };
+
+  this.getBackgroundColorInput = function() {
+    return backgroundColorInput;
   };
 
   this.getBackgroundImageSettings = function() {
