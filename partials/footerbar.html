@@ -8,7 +8,7 @@
     </div>
     
     <span class="save-status add-right" ng-show="factory.presentation.id">
-      <last-revised revision-status="factory.presentation.revisionStatus" change-date="factory.presentation.changeDate" changed-by="factory.presentation.changedBy"></last-revised>
+      <last-revised revision-status-name="factory.presentation.revisionStatusName" change-date="factory.presentation.changeDate" changed-by="factory.presentation.changedBy"></last-revised>
     </span>
 
     <button id="restoreButton" require-role="cp" class="btn btn-default" ng-show="factory.isRevised()" ng-click="factory.restorePresentation()">Restore</button>

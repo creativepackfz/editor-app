@@ -341,13 +341,13 @@ describe('service: editorFactory:', function() {
     });
 
     it('should not be revised if published', function() {
-      editorFactory.presentation.revisionStatus = 0;
+      editorFactory.presentation.revisionStatusName = 'Published';
       
       expect(editorFactory.isRevised()).to.be.false;
     });
 
-    it('should be revised with revision status 1', function() {
-      editorFactory.presentation.revisionStatus = 1;
+    it('should be revised with revision status Revised', function() {
+      editorFactory.presentation.revisionStatusName = 'Revised';
       
       expect(editorFactory.isRevised()).to.be.true;
     });
@@ -420,7 +420,7 @@ describe('service: editorFactory:', function() {
 
       setTimeout(function(){
         expect(trackerCalled).to.equal('Presentation Published');
-        expect(editorFactory.presentation.revisionStatus).to.equal(0);
+        expect(editorFactory.presentation.revisionStatusName).to.equal('Published');
         expect(editorFactory.presentation.changeDate).to.be.gte(timeBeforePublish);
         expect(editorFactory.presentation.changedBy).to.equal("testusername");
         expect(editorFactory.savingPresentation).to.be.false;
