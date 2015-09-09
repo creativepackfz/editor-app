@@ -3,6 +3,7 @@ var WorkspacePage = function() {
   var workspaceContainer = element(by.id('workspace'));
   var artboardContainer = element(by.id('artboard'));
 
+  var expandArtboardButton = element(by.id('expandArtboardButton'));
   var presentationPropertiesButton = element(by.id('presentationPropertiesButton'));
   var addPlaceholderButton = element(by.id('addPlaceholderButton'));
   var previewButton = element(by.id('previewButton'));
@@ -27,6 +28,10 @@ var WorkspacePage = function() {
 
   this.getArtboardContainer = function() {
     return artboardContainer;
+  };
+
+  this.getExpandArtboardButton = function() {
+    return expandArtboardButton;
   };
 
   this.getPresentationPropertiesButton = function() {
