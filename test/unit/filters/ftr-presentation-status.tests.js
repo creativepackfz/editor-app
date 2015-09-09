@@ -41,7 +41,7 @@ describe('filter: status', function() {
       });
     });
     it('should return Published string if revisionStatus is 0',function(done){
-      var revisionStatus = 0;
+      var revisionStatus = 'Published';
       var expectation = "Published";
       setTimeout(function() {
         expect(presentationStatus(revisionStatus)).to.equal(expectation);
@@ -61,7 +61,7 @@ describe('filter: status', function() {
       });
     });
     it('should return Revised string if revisionStatus is 1',function(done){
-      var revisionStatus = 1;
+      var revisionStatus = 'Revised';
       var expectation = "Revised";
       setTimeout(function() {
         expect(presentationStatus(revisionStatus)).to.equal(expectation);

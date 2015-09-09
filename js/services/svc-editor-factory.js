@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('risevision.editorApp.services')
-  .value('REVISION_STATUS_PUBLISHED', 0)
-  .value('REVISION_STATUS_REVISED', 1)
+  .value('REVISION_STATUS_PUBLISHED', 'Published')
+  .value('REVISION_STATUS_REVISED', 'Revised')
   /*jshint multistr: true */
   .value('DEFAULT_LAYOUT',
     '\
@@ -189,7 +189,7 @@ angular.module('risevision.editorApp.services')
       };
 
       factory.isRevised = function () {
-        return factory.presentation.revisionStatus ===
+        return factory.presentation.revisionStatusName ===
           REVISION_STATUS_REVISED;
       };
 
@@ -207,7 +207,7 @@ angular.module('risevision.editorApp.services')
             presentationTracker('Presentation Published', _presentationId,
               factory.presentation.name);
 
-            factory.presentation.revisionStatus =
+            factory.presentation.revisionStatusName =
               REVISION_STATUS_PUBLISHED;
             factory.presentation.changeDate = new Date();
             factory.presentation.changedBy = userState.getUsername();

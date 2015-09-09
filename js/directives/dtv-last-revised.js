@@ -7,16 +7,16 @@
         return {
           restrict: 'E',
           scope: {
-            revisionStatus: '=',
+            revisionStatusName: '=',
             changeDate: '=',
             changedBy: '='
           },
           templateUrl: 'partials/last-revised.html',
           link: function ($scope) {
-              $scope.$watch('revisionStatus', function (newVal) {
-                if (newVal === 0) {
+              $scope.$watch('revisionStatusName', function (newVal) {
+                if (newVal === 'Published') {
                   $scope.status = 'Published';
-                } else if (newVal === 1) {
+                } else if (newVal === 'Revised') {
                   $scope.status = 'Revised';
                 } else {
                   $scope.status = 'Saved';

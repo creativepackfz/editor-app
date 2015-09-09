@@ -4,12 +4,12 @@
 angular.module('risevision.editorApp.filters')
   .filter('presentationStatus', ['translateFilter',
     function (translateFilter) {
-      return function (revisionStatus) {
-        if (revisionStatus === 0) {
+      return function (revisionStatusName) {
+        if (revisionStatusName === 'Published') {
           return translateFilter(
             'schedules-app.presentation-modal.presentation-list.status.published'
           );
-        } else if (revisionStatus === 1) {
+        } else if (revisionStatusName === 'Revised') {
           return translateFilter(
             'schedules-app.presentation-modal.presentation-list.status.revised'
           );

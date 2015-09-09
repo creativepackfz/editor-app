@@ -43,11 +43,11 @@
               <i ng-if="search.sortBy == 'name'" class="fa" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
               <!-- end ngIf: search.sortBy == 'name' -->
             </th>
-            <th id="tableHeaderStatus"  ng-click="sortBy('revisionStatus')">
+            <th id="tableHeaderStatus"  ng-click="sortBy('revisionStatusName')">
               Status
-              <!-- ngIf: search.sortBy == 'revisionStatus' -->
-              <i ng-if="search.sortBy == 'revisionStatus'" class="fa" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
-              <!-- end ngIf: search.sortBy == 'revisionStatus' -->
+              <!-- ngIf: search.sortBy == 'revisionStatusName' -->
+              <i ng-if="search.sortBy == 'revisionStatusName'" class="fa" ng-class="{false: 'fa-long-arrow-up', true: 'fa-long-arrow-down'}[search.reverse]"></i>
+              <!-- end ngIf: search.sortBy == 'revisionStatusName' -->
             </th>
             <th id="tableHeaderChangeDate" class="text-right hidden-xs" ng-click="sortBy('changeDate')">
               Last Modified
@@ -60,7 +60,7 @@
         <tbody>
           <tr class="clickable-row" ng-repeat="presentation in presentations.list" ui-sref="editor.workspace.artboard({presentationId: presentation.id})">
             <td class="col-sm-9"><strong>{{presentation.name}}</strong></td>
-            <td class="col-sm-9 hidden-xs"><strong ng-class="{'text-danger': presentation.revisionStatus==1}">{{presentation.revisionStatus | presentationStatus}}</strong></td>
+            <td class="col-sm-9 hidden-xs"><strong ng-class="{'text-danger': presentation.revisionStatusName==='Revised'}">{{presentation.revisionStatusName | presentationStatus}}</strong></td>
             <td class="col-sm-2 hidden-xs text-right nowrap" >{{presentation.changeDate | date:'d-MMM-yyyy h:mm a'}}</td>
           </tr>
           <!-- If no presentation available -->

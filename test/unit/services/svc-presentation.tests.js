@@ -230,7 +230,7 @@ describe('service: presentation:', function() {
     it('should output a proper search string',function(done){
       presentation.list({query: 'str'})
         .then(function(result){
-          expect(searchString).to.equal('name:~\'str\' OR id:~\'str\' OR revisionStatus:~\'str\'');
+          expect(searchString).to.equal('name:~\'str\' OR id:~\'str\' OR revisionStatusName:~\'str\'');
 
           done();
         })

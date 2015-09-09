@@ -11,7 +11,7 @@ describe('directive: last revised', function() {
   }));
 
   function compileDirective() {
-    var tpl = '<last-revised revision-status="presentation.revisionStatus" change-date="presentation.changeDate" changed-by="presentation.changedBy"></last-revised>';
+    var tpl = '<last-revised revision-status-name="presentation.revisionStatusName" change-date="presentation.changeDate" changed-by="presentation.changedBy"></last-revised>';
 
     inject(function($compile) {
       elm = $compile(tpl)($scope);
@@ -29,7 +29,7 @@ describe('directive: last revised', function() {
   describe('revisionStatus: ', function() {
     it('should show Revised', function() {
       $scope.presentation = {
-        revisionStatus: 1
+        revisionStatusName: 'Revised'
       };
 
       compileDirective();
@@ -39,7 +39,7 @@ describe('directive: last revised', function() {
 
     it('should show Published', function() {
       $scope.presentation = {
-        revisionStatus: 0
+        revisionStatusName: 'Published'
       };
       
       compileDirective();
