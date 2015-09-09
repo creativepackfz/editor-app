@@ -45,7 +45,7 @@ describe('Select placeholders in artboard: ', function() {
     });
 
     describe('Should manage placeholders', function () {
-      it('should show the palceholder', function () {
+      it('should show the placeholder', function () {
         expect(artboardPage.getPlaceholderContainer().isDisplayed()).to.eventually.be.true;
       });
             
@@ -56,7 +56,17 @@ describe('Select placeholders in artboard: ', function() {
           done();
         });           
       });
-     
+    });
+
+    describe('sidebar:',function(){
+      it('should reveal hidden sidebar when selecting placeholder', function (done) {
+        workspacePage.getExpandArtboardButton().click();
+        artboardPage.getPlaceholderContainer().getSize().then(function (size) {
+          browser.actions().mouseMove(artboardPage.getPlaceholderContainer(), {x: size.width-10, y: size.height-10}).click().perform();
+          expect(workspacePage.getWorkspaceContainer().getAttribute('class')).to.eventually.contain('hide-sidebar');
+          done();
+        });
+      });
     });
   });
 });
