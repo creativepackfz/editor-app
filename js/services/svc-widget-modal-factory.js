@@ -4,21 +4,30 @@ angular.module('risevision.editorApp.services')
   .value('WIDGET_PARAMS',
     '?up_id=iframeId&parent=parentUrl&up_rsW=width&up_rsH=height&up_companyId=cid'
   )
-  .factory('widgetModalFactory', ['$rootScope', 'placeholderFactory', 
-    'userState', '$modal', '$location', '$sce', '$log', 'WIDGET_PARAMS',
-    function ($rootScope, placeholderFactory, userState, $modal, $location, 
-      $sce, $log, WIDGET_PARAMS) {
+  .factory('widgetModalFactory', ['$rootScope', 'placeholderFactory',
+    'gadgetFactory', 'userState', '$q', '$modal', '$location', '$sce',
+    '$log', 'WIDGET_PARAMS',
+    function ($rootScope, placeholderFactory, gadgetFactory, userState, $q,
+      $modal, $location, $sce, $log, WIDGET_PARAMS) {
       var factory = {};
 
-      // TODO: Get settings URL from Gadget Object
-      factory.showWidgetModal = function (item) {
-        var url = item.objectData.replace('widget.html', 'settings.html') +
-          WIDGET_PARAMS
+      var _getSettingsUrl = function (url) {
+        url = url
+          .replace('http://', '//')
+          .replace('https://', '//') + WIDGET_PARAMS
           .replace('cid', userState.getSelectedCompanyId())
           .replace('width', placeholderFactory.placeholder.width)
           .replace('height', placeholderFactory.placeholder.height)
           .replace('iframeId', 'widget-modal-frame')
           .replace('parentUrl', encodeURIComponent($location.$$absUrl));
+
+        return $sce.trustAsResourceUrl(url);
+      };
+
+      factory.showWidgetModal = function (item) {
+        if (!item.objectReference) {
+          return;
+        }
 
         var modalInstance = $modal.open({
           templateUrl: 'partials/widget-modal.html',
@@ -27,10 +36,17 @@ angular.module('risevision.editorApp.services')
           backdrop: true,
           resolve: {
             widget: function () {
-              return {
-                url: $sce.trustAsResourceUrl(url),
-                additionalParams: item.additionalParams
-              };
+              var deferred = $q.defer();
+
+              gadgetFactory.getGadget(item.objectReference)
+                .then(function (gadget) {
+                  deferred.resolve({
+                    url: _getSettingsUrl(gadget.uiUrl),
+                    additionalParams: item.additionalParams
+                  });
+                });
+
+              return deferred.promise;
             }
           }
         });
