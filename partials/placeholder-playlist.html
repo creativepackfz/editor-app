@@ -7,8 +7,8 @@
         <div class="pull-right">
 
           <span class="btn-group">
-            <button class="btn btn-xs btn-default"><i class="fa fa-arrow-up"></i></button>
-            <button class="btn btn-xs btn-default"><i class="fa fa-arrow-down"></i></button>
+            <button class="btn btn-xs btn-default" id="moveUpButton" ng-click="factory.movePlaylistItemUp(item)" ng-disabled="!factory.canPlaylistItemMoveUp(item)"><i class="fa fa-arrow-up"></i></button>
+            <button class="btn btn-xs btn-default" id="moveDownButton" ng-click="factory.movePlaylistItemDown(item)" ng-disabled="!factory.canPlaylistItemMoveDown(item)"><i class="fa fa-arrow-down"></i></button>
           </span>
 
           <button class="btn btn-xs btn-default" ng-show="item.type === 'widget'" ng-click="widgetModalFactory.showWidgetModal(item)"><i class="fa fa-cog"></i></button>

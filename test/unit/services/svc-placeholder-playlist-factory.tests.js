@@ -61,6 +61,10 @@ describe('service: placeholderPlaylistFactory:', function() {
 
     expect(placeholderPlaylistFactory.getItems).to.be.a('function');
     expect(placeholderPlaylistFactory.removeItem).to.be.a('function');
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveDown).to.be.a('function');
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveUp).to.be.a('function');
+    expect(placeholderPlaylistFactory.movePlaylistItemDown).to.be.a('function');
+    expect(placeholderPlaylistFactory.movePlaylistItemUp).to.be.a('function');
     expect(placeholderPlaylistFactory.getCurrentItemProperties).to.be.a('function');
     expect(placeholderPlaylistFactory.setCurrentItemProperties).to.be.a('function');
   });
@@ -102,6 +106,28 @@ describe('service: placeholderPlaylistFactory:', function() {
       expect(items[1]).to.equal(item);    
     });
   });
+  
+  it('canPlaylistItemMoveUp/Down: ', function() {
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveDown(item0)).to.be.true;
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveDown(item2)).to.be.false;
+    
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveUp(item0)).to.be.false;
+    expect(placeholderPlaylistFactory.canPlaylistItemMoveUp(item2)).to.be.true;
+  }); 
+  
+  it('movePlaylistItemUp/Down: ', function() {
+    placeholderPlaylistFactory.movePlaylistItemDown(item0);
+    
+    expect(items.indexOf(item0)).to.equal(1);
+    
+    placeholderPlaylistFactory.movePlaylistItemUp(item2);
+    
+    expect(items.indexOf(item2)).to.equal(1);
+    expect(items.indexOf(item0)).to.equal(2);
+
+    placeholderPlaylistFactory.movePlaylistItemDown(item0);
+    expect(items.indexOf(item0)).to.equal(2);
+  }); 
 
   describe('getCurrentItemProperties: ',function(){
     it('should get a copy of current item properties',function(){
@@ -144,7 +170,5 @@ describe('service: placeholderPlaylistFactory:', function() {
     });  
     
   });
-
-
 
 });
