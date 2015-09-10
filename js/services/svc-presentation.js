@@ -46,6 +46,8 @@ angular.module('risevision.editorApp.services')
               return coreApi.presentation.list(obj);
             })
             .then(function (resp) {
+              $log.debug('list presentations resp', resp);
+
               deferred.resolve(resp.result);
             })
             .then(null, function (e) {

@@ -12,12 +12,24 @@ angular.module('risevision.editorApp.directives')
         link: function ($scope) {
           $scope.factory = placeholderPlaylistFactory;
           $scope.widgetModalFactory = widgetModalFactory;
+          
+          $scope.addContent = function() {
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/store-products-modal.html',
+              size: 'lg',
+              controller: 'storeProductsModal'
+            });
+
+            modalInstance.result.then(function (productDetails) {
+              $scope.playlistItem.objectReference = productDetails[0];
+            });
+          };
 
           $scope.edit = function (item) {
             placeholderPlaylistFactory.item = item;
             var modalInstance = $modal.open({
               templateUrl: 'partials/playlist-item-modal.html',
-              size: 'lg',
+              size: 'md',
               controller: 'PlaylistItemModalController',
               resolve: {
                 item: function () {

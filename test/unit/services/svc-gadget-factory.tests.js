@@ -80,7 +80,7 @@ describe('service: gadgetFactory: ', function() {
       })
       .then(null,done);
     });
-    
+
     it('should only call API once', function(done) {
       gadgetFactory.getGadget('gadgetId');
       
