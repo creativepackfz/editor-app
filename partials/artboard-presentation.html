@@ -1,10 +1,6 @@
-<div>
+<artboard-placeholder ng-repeat="placeholder in presentation.placeholders" placeholder="placeholder" 
+	ng-click="placeholderFactory.setPlaceholder(placeholder)">
+	{{placeholder.id}}
+</artboard-placeholder>
 
-  <artboard-placeholder ng-repeat="placeholder in presentation.placeholders" placeholder="placeholder" 
-	  ng-click="placeholderFactory.setPlaceholder(placeholder)">
-	  {{placeholder.id}}
-  </artboard-placeholder>
-
-  <div class="ph-overlay active" ng-if="placeholderFactory.placeholder" ng-click="placeholderFactory.clearPlaceholder()"></div>
-
-</div>
+<div class="ph-overlay active" ng-if="placeholderFactory.placeholder" ng-click="placeholderFactory.clearPlaceholder()"></div>
