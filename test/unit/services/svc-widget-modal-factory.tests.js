@@ -19,12 +19,25 @@ describe('service: widgetModalFactory:', function() {
         }
       }
     });
+    $provide.service('gadgetFactory', function() {
+      return {
+        getGadget: function() {
+          var deferred = Q.defer();
+                    
+          deferred.resolve({uiUrl: 'http://somewidget/settings.html'});
+          
+          return deferred.promise;
+        }
+      }
+    });
     $provide.service('$modal',function(){
       return {
         open : function(obj){
+          var deferred = Q.defer();
+
           expect(obj).to.be.truely;
           widgetObj = obj.resolve.widget();
-          var deferred = Q.defer();
+
           if(updateParams){
             deferred.resolve({additionalParams: 'updatedParams'});
           }else{
@@ -47,7 +60,7 @@ describe('service: widgetModalFactory:', function() {
   var widgetModalFactory, item, updateParams, widgetObj;
   beforeEach(function(){
     item = {
-      objectData: 'http://somewidget/widget.html',
+      objectReference: '123',
       additionalParams: 'params'
     };
     updateParams = true;
@@ -62,15 +75,19 @@ describe('service: widgetModalFactory:', function() {
     expect(widgetModalFactory.showWidgetModal).to.be.a('function');
   });
   
-  it('should initialize url correctly', function(done) {
+  it('should initialize url correctly and remove protocol (http)', function(done) {
     widgetModalFactory.showWidgetModal(item);
 
     setTimeout(function() {
       expect(widgetObj).to.be.ok;
-      expect(widgetObj.additionalParams).to.equal('params');
-      expect(widgetObj.url).to.equal('http://somewidget/settings.html?up_id=widget-modal-frame&parent=http%3A%2F%2Fserver%2F&up_rsW=100&up_rsH=200&up_companyId=someId');
+
+      // TODO: Should find a better way to access value
+      expect(widgetObj.$$state.value).to.be.ok;
+
+      expect(widgetObj.$$state.value.additionalParams).to.equal('params');
+      expect(widgetObj.$$state.value.url).to.equal('//somewidget/settings.html?up_id=widget-modal-frame&parent=http%3A%2F%2Fserver%2F&up_rsW=100&up_rsH=200&up_companyId=someId');
       
-      done();
+      done();        
     }, 10);  
   });
   

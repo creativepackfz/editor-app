@@ -3,7 +3,9 @@ describe('controller: playlist item modal', function() {
   beforeEach(module('risevision.editorApp.controllers'));
   beforeEach(module(function ($provide) {
     itemProperties = {
-      name: 'test'
+      name: 'test',
+      type: 'widget',
+      objectReference: '123'
     };
     $provide.service('$modalInstance',function(){
       return {
@@ -12,6 +14,18 @@ describe('controller: playlist item modal', function() {
         },
         dismiss : function(action){
           return;
+        }
+      }
+    });
+    
+    $provide.service('gadgetFactory', function() {
+      return {
+        getGadget: function() {
+          var deferred = Q.defer();
+                    
+          deferred.resolve({name: 'Widget'});
+          
+          return deferred.promise;
         }
       }
     });
@@ -48,6 +62,14 @@ describe('controller: playlist item modal', function() {
 
   it('should get the item properties',function(){
     expect($scope.item).to.equal(itemProperties);
+  });
+  
+  it('should load widget name', function(done) {
+    setTimeout(function() {
+      expect($scope.widgetName).to.equal('Widget');
+      
+      done();
+    }, 10);
   });
 
   it('should set item properties on apply',function(){

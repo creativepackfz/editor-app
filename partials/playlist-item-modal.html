@@ -11,9 +11,9 @@
     <input type="text" class="form-control" ng-model="item.name">
   </div>
 
-  <p ng-show="item.type === 'widget'"><strong>Content:</strong> 
+  <p ng-show="widgetName"><strong>Content:</strong> 
     <a class="link add-left" href="" ng-click="widgetModalFactory.showWidgetModal(item)">
-      {{item.type}} <i class="fa fa-cog icon-right"></i>
+      {{widgetName}} <i class="fa fa-cog icon-right"></i>
     </a>
   </p>
   <hr>

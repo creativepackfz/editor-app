@@ -8,20 +8,19 @@ angular.module('risevision.editorApp.directives')
         priority: 100000,
         scope: false,
 
-        compile:  function(element, attr, linker){
+        compile: function (element, attr, linker) {
           var accessDenied = true;
           var requiredRoles = attr.requireRole.split(' ');
-          for(var i in requiredRoles){
-              if(userState.hasRole(requiredRoles[i])){
-                  accessDenied = false;
-              }
+          for (var i in requiredRoles) {
+            if (userState.hasRole(requiredRoles[i])) {
+              accessDenied = false;
+            }
           }
-          if(accessDenied){
-            angular.forEach(element.children(), function(elm){
-              try{
+          if (accessDenied) {
+            angular.forEach(element.children(), function (elm) {
+              try {
                 elm.remove();
-              }
-              catch(ignore){}
+              } catch (ignore) {}
             });
             element.remove();
           }
