@@ -25,7 +25,8 @@ angular.module('risevision.editorApp', [
     'risevision.common.i18n',
     'risevision.widget.common.background-image-setting',
     'risevision.widget.common',
-    'ui.codemirror'
+    'ui.codemirror',
+    'angular.vertilize'
   ])
   // Set up our mappings between URLs, templates, and controllers
   .config(['$urlRouterProvider', '$stateProvider',

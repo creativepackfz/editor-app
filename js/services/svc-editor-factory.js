@@ -31,7 +31,7 @@ angular.module('risevision.editorApp.services')
       factory.openPresentationProperties = function () {
         $modal.open({
           templateUrl: 'partials/presentation-properties-modal.html',
-          size: 'lg',
+          size: 'md',
           controller: 'PresentationPropertiesModalController'
         });
       };
