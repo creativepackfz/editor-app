@@ -29,22 +29,30 @@ describe('controller: playlist item modal', function() {
         }
       }
     });
+
+    $provide.service('placeholderPlaylistFactory',function(){
+      return {
+        updateItem: function(item) {
+          itemUpdated = item;
+        }
+      }
+    });
     
     $provide.service('widgetModalFactory',function(){
       return {}
     });
 
   }));
-  var $scope, $modalInstance, $modalInstanceDismissSpy, $modalInstanceCloseSpy, itemProperties;
+  var $scope, $modalInstance, $modalInstanceDismissSpy, itemProperties, itemUpdated;
 
   beforeEach(function(){
 
     inject(function($injector,$rootScope, $controller){
+      itemUpdated = null;
       $scope = $rootScope.$new();
       $modalInstance = $injector.get('$modalInstance');
 
       $modalInstanceDismissSpy = sinon.spy($modalInstance, 'dismiss');
-      $modalInstanceCloseSpy = sinon.spy($modalInstance, 'close');
 
       $controller('PlaylistItemModalController', {
         $scope: $scope,
@@ -56,12 +64,13 @@ describe('controller: playlist item modal', function() {
   });
   it('should exist',function(){
     expect($scope).to.be.truely;
-    expect($scope.apply).to.be.a('function');
+    expect($scope.save).to.be.a('function');
     expect($scope.dismiss).to.be.a('function');
   });
 
-  it('should get the item properties',function(){
-    expect($scope.item).to.equal(itemProperties);
+  it('should copy the item properties',function(){
+    expect($scope.item).to.not.equal(itemProperties);
+    expect($scope.item).to.deep.equal(itemProperties);
   });
   
   it('should load widget name', function(done) {
@@ -72,13 +81,18 @@ describe('controller: playlist item modal', function() {
     }, 10);
   });
 
-  it('should set item properties on apply',function(){
-    $scope.apply();
-    $modalInstanceCloseSpy.should.have.been.calledWith($scope.item);
+  it('should update item properties on apply',function(){
+    $scope.save();
+    
+    expect(itemUpdated).to.not.equal($scope.item);
+    expect(itemUpdated).to.equal(itemProperties);
+    
+    $modalInstanceDismissSpy.should.have.been.called;
   });
 
   it('should dismiss modal when cancel',function(){
     $scope.dismiss();
+    expect(itemUpdated).to.not.be.ok;
     $modalInstanceDismissSpy.should.have.been.called;
   });
 

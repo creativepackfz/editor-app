@@ -247,6 +247,16 @@ describe('service: gadget:', function() {
         .then(null,done);
     });
     
+    it('should output a productCodes search string',function(done){
+      gadget.list({productCodes: ['product1']})
+        .then(function(result){
+          expect(searchString).to.equal('productCode:\'product1\'');
+
+          done();
+        })
+        .then(null,done);
+    });
+    
     it("should handle failure to get list correctly",function(done){
       returnList = false;
 

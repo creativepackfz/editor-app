@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-block" ng-click="addContent()">Add Playlist Content <i class="fa fa-plus icon-right"></i></button>
+<button id="addContentButton" class="btn btn-primary btn-block" ng-click="playlistItemFactory.add()">Add Playlist Content <i class="fa fa-plus icon-right"></i></button>
 <div class="content-box half-top">
   <table class="table-2 table-hover table-playlist-items">
     <tbody>
@@ -12,10 +12,10 @@
           </span>
 
           <button class="btn btn-xs btn-default" ng-show="item.type === 'widget'" ng-click="widgetModalFactory.showWidgetModal(item)"><i class="fa fa-cog"></i></button>
-          <button class="btn btn-xs btn-default" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
+          <button class="btn btn-xs btn-default" id="removeButton" ng-click="remove(item)"><i class="fa fa-trash-o"></i></button>
         </div>
 
-        <div ng-click="edit(item)">
+        <div ng-click="playlistItemFactory.edit(item)">
           <p class="remove-bottom playlist-item-name">{{item.name}}</p>
           <p class="text-small text-muted remove-bottom">Status</p>
         </div>

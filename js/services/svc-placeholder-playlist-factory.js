@@ -19,13 +19,19 @@ angular.module('risevision.editorApp.services')
           factory.getItems().indexOf(item) : -1;
       };
 
+      factory.updateItem = function (item) {
+        if (_getItemIndex(item) === -1) {
+          factory.getItems().push(item);
+        }
+      };
+
       factory.removeItem = function (item) {
         var index = _getItemIndex(item);
         if (index !== -1) {
           factory.getItems().splice(index, 1);
         }
-      };  
-      
+      };
+
       factory.canPlaylistItemMoveDown = function (item) {
         var index = _getItemIndex(item);
 
@@ -53,14 +59,6 @@ angular.module('risevision.editorApp.services')
         if (factory.canPlaylistItemMoveUp(item)) {
           _moveItem(item, _getItemIndex(item) - 1);
         }
-      };
-
-      factory.getCurrentItemProperties = function () {
-        return angular.copy(factory.item);
-      };
-
-      factory.setCurrentItemProperties = function (newProperties) {
-        angular.copy(newProperties, factory.item);
       };
 
       return factory;

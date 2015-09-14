@@ -8,33 +8,34 @@ angular.module('risevision.editorApp.services')
       var defaultCount = 200;
       var service = {
         product: {
-          list: function(search, cursor) {
+          list: function (search, cursor) {
             var deferred = $q.defer();
 
             var companyId = userState.getSelectedCompanyId();
             var category = 'Content';
 
-            var filterString = "visibleTo:ALL";
+            var filterString = 'visibleTo:ALL';
 
             if (companyId) {
-              filterString += " OR visibleTo:" + companyId;
+              filterString += ' OR visibleTo:' + companyId;
             }
 
-            filterString = "(" + filterString + ")";
-            filterString = filterString + " AND (productTag:" + category + ")";
-            
+            filterString = '(' + filterString + ')';
+            filterString = filterString + ' AND (productTag:' + category +
+              ')';
+
             if (search.query && search.query.length) {
-              filterString += " AND " + search.query;
+              filterString += ' AND ' + search.query;
             }
-            
+
             var obj = {
-                "companyId": userState.getSelectedCompanyId(),
-                "search": filterString,
-                "cursor": cursor,
-                "count": search.count,
-                "sort": "defaultOrderWeight ASC"
+              'companyId': userState.getSelectedCompanyId(),
+              'search': filterString,
+              'cursor': cursor,
+              'count': search.count,
+              'sort': 'defaultOrderWeight ASC'
             };
-            
+
             $log.debug('Store product list called with', obj);
 
             storeAPILoader().then(function (storeApi) {
@@ -49,7 +50,7 @@ angular.module('risevision.editorApp.services')
                 $log.error('Failed to get list of products.', e);
                 deferred.reject(e);
               });
-              
+
             return deferred.promise;
           }
         }

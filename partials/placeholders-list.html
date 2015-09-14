@@ -7,7 +7,7 @@
             <button class="btn btn-xs btn-default" id="duplicateButton" ng-click="factory.duplicatePlaceholder(placeholder)"><i class="fa fa-copy"></i></button>
             <button class="btn btn-xs btn-default" id="removeButton" ng-click="remove(placeholder)"><i class="fa fa-trash-o"></i></button>
           </div>
-          <div ng-click="manage(placeholder)">
+          <div id="manageLink" ng-click="manage(placeholder)">
             <p class="remove-bottom placeholder-item-name">{{placeholder.id}}</p>
           </div>
         </td>

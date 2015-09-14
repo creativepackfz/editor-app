@@ -3,7 +3,7 @@ angular.module('risevision.editorApp.controllers')
   .controller('storeProductsModal', ['$scope', '$modalInstance',
     'store', '$loading', 'BaseList', '$filter', 'STORE_URL',
     function ($scope, $modalInstance, store, $loading, BaseList, $filter,
-    STORE_URL) {
+      STORE_URL) {
       var DB_MAX_COUNT = 40; //number of records to load at a time
 
       $scope.storeUrl = STORE_URL;
