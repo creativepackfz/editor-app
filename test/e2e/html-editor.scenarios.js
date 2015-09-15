@@ -43,9 +43,13 @@ describe('Show HTML Editor: ', function() {
 
     });
 
+    it('Should disable HTML button', function() {
+      expect(workspacePage.getHtmlButton().getAttribute("disabled")).to.eventually.equal('true');
+    });
+
     describe('Should allow HTML editing', function () {
       it('should show html editor', function () {
-        expect(workspacePage.getCodemirrorHtmlEditor().isDisplayed()).to.eventually.be.truely;
+        expect(workspacePage.getCodemirrorHtmlEditor().isDisplayed()).to.eventually.be.true;
         expect(workspacePage.getCodemirrorHtmlEditor().getText()).to.eventually.contain('var presentationData =');
       });
 
