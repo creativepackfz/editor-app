@@ -8,9 +8,9 @@ angular.module('risevision.editorApp.controllers')
       $scope.presentations = new BaseList(DB_MAX_COUNT);
 
       $scope.search = {
-        sortBy: 'name',
+        sortBy: 'changeDate',
         count: DB_MAX_COUNT,
-        reverse: false
+        reverse: true
       };
 
       $scope.filterConfig = {

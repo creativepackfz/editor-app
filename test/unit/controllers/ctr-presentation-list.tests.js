@@ -153,7 +153,7 @@ describe('controller: Presentation List', function() {
 
     describe('sortBy: ',function(){
       it('should reset list and reverse sort by changeDate',function(done){
-        $scope.sortBy('name');
+        $scope.sortBy('changeDate');
         $scope.$digest();
 
         expect($scope.loadingPresentations).to.be.true;
@@ -164,8 +164,8 @@ describe('controller: Presentation List', function() {
 
           expect($scope.presentations.list).to.have.length(40);
 
-          expect($scope.search.sortBy).to.equal('name');
-          expect($scope.search.reverse).to.be.true;
+          expect($scope.search.sortBy).to.equal('changeDate');
+          expect($scope.search.reverse).to.be.false;
 
           done();
         },10);
@@ -204,8 +204,8 @@ describe('controller: Presentation List', function() {
 
         expect($scope.presentations.list).to.have.length(40);
 
-        expect($scope.search.sortBy).to.equal('name');
-        expect($scope.search.reverse).to.be.false;
+        expect($scope.search.sortBy).to.equal('changeDate');
+        expect($scope.search.reverse).to.be.true;
 
         done();
       },10);
