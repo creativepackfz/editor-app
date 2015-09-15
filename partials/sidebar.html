@@ -13,11 +13,11 @@
         <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
       </div>
 
-      <div class="ph-playlist animated fadeIn ng-hide" ng-show="showPlaylist">
+      <div class="ph-playlist animated fadeIn" ng-show="factory.placeholder && showPlaylist">
         <placeholder-playlist></placeholder-playlist>
       </div>
 
-      <div class="ph-settings animated fadeIn" ng-hide="showPlaylist">
+      <div class="ph-settings animated fadeIn" ng-show="factory.placeholder && !showPlaylist">
         <placeholder-settings></placeholder-settings>
       </div>
       <!--ph-settings-->
@@ -30,5 +30,3 @@
 
   </div><!--content-box-body-->
 </div><!--workspaceSidebar-->
-
-

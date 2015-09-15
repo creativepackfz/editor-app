@@ -8,14 +8,20 @@ angular.module('risevision.editorApp.services')
 
       var BACKGROUND_TOKENS = {
         RGB: 'rgb',
-        URL: 'url',
-        LEFT: 'left',
-        RIGHT: 'right',
-        TOP: 'top',
-        MIDDLE: 'middle',
-        BOTTOM: 'bottom',
-        CENTER: 'center'
+        URL: 'url'
       };
+
+      var POSITION_OPTIONS = [
+        ['left top', 'top-left'],
+        ['center top', 'top-center'],
+        ['right top', 'top-right'],
+        ['left center', 'middle-left'],
+        ['center center', 'middle-center'],
+        ['right center', 'middle-right'],
+        ['left bottom', 'bottom-left'],
+        ['center bottom', 'bottom-center'],
+        ['right bottom', 'bottom-right']
+      ];
 
       factory.parseBackground = function (backgroundStyle,
         backgroundScaleToFit) {
@@ -26,56 +32,36 @@ angular.module('risevision.editorApp.services')
 
           var rgbTokenPosition = backgroundStyle.indexOf(BACKGROUND_TOKENS.RGB);
           if (rgbTokenPosition !== -1) {
-
             closingParenthesesPosition = backgroundStyle.indexOf(')',
               rgbTokenPosition);
             background.color = backgroundStyle.substring(rgbTokenPosition,
               closingParenthesesPosition + 1);
-
-          } else {
-
-            var urlTokenPosition = backgroundStyle.indexOf(
-              BACKGROUND_TOKENS.URL);
-            if (urlTokenPosition !== -1) {
-
-              background.useImage = true;
-              background.image = {};
-
-              var openingParenthesesPosition = backgroundStyle.indexOf(
-                '(\'', urlTokenPosition);
-              closingParenthesesPosition = backgroundStyle.indexOf(
-                '\')', urlTokenPosition);
-              background.image.url = backgroundStyle.substring(
-                openingParenthesesPosition + 2,
-                closingParenthesesPosition);
-
-              var verticalImagePosition = '';
-              if (backgroundStyle.indexOf(BACKGROUND_TOKENS.TOP) !== -1) {
-                verticalImagePosition = BACKGROUND_TOKENS.TOP;
-              } else if (backgroundStyle.indexOf(BACKGROUND_TOKENS.MIDDLE) !==
-                -1) {
-                verticalImagePosition = BACKGROUND_TOKENS.MIDDLE;
-              } else if (backgroundStyle.indexOf(BACKGROUND_TOKENS.BOTTOM) !==
-                -1) {
-                verticalImagePosition = BACKGROUND_TOKENS.BOTTOM;
-              }
-
-              var horizontalImagePosition = '';
-              if (backgroundStyle.indexOf(BACKGROUND_TOKENS.LEFT) !== -1) {
-                horizontalImagePosition = BACKGROUND_TOKENS.LEFT;
-              } else if (backgroundStyle.indexOf(BACKGROUND_TOKENS.RIGHT) !==
-                -1) {
-                horizontalImagePosition = BACKGROUND_TOKENS.RIGHT;
-              }
-
-              if (verticalImagePosition && horizontalImagePosition) {
-                background.image.position = verticalImagePosition + '-' +
-                  horizontalImagePosition;
-              }
-
-              background.image.scale = backgroundScaleToFit;
-            }
           }
+
+          var urlTokenPosition = backgroundStyle.indexOf(
+            BACKGROUND_TOKENS.URL);
+          if (urlTokenPosition !== -1) {
+
+            background.useImage = true;
+            background.image = {};
+
+            var openingParenthesesPosition = backgroundStyle.indexOf(
+              '(\'', urlTokenPosition);
+            closingParenthesesPosition = backgroundStyle.indexOf(
+              '\')', urlTokenPosition);
+            background.image.url = backgroundStyle.substring(
+              openingParenthesesPosition + 2,
+              closingParenthesesPosition);
+
+            for (var i = 0; i < POSITION_OPTIONS.length; i++) {
+              if (backgroundStyle.indexOf(POSITION_OPTIONS[i][0]) !== -1) {
+                background.image.position = POSITION_OPTIONS[i][1];
+              }
+            }
+
+            background.image.scale = backgroundScaleToFit;
+          }
+
         }
 
         return background;
@@ -85,20 +71,23 @@ angular.module('risevision.editorApp.services')
 
         var backgroundStyle = '';
 
-        if (background.useImage) {
-
-          var positions = '';
-          if (background.image.position) {
-            positions = background.image.position.split('-')[1] + ' ' +
-              background.image.position.split('-')[0];
-          }
-
-          backgroundStyle = 'url(\'' + background.image.url +
-            '\') no-repeat ' + positions;
-
-        } else {
-
+        if (background.color) {
           backgroundStyle = background.color;
+        }
+
+        if (background.useImage) {
+          backgroundStyle += backgroundStyle ? ' ' : '';
+          backgroundStyle += 'url(\'' + background.image.url +
+            '\') no-repeat';
+
+          if (background.image.position) {
+            for (var i = 0; i < POSITION_OPTIONS.length; i++) {
+              if (background.image.position.indexOf(POSITION_OPTIONS[i][1]) !==
+                -1) {
+                backgroundStyle += ' ' + POSITION_OPTIONS[i][0];
+              }
+            }
+          }
         }
 
         return backgroundStyle;
