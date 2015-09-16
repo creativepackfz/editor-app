@@ -54,6 +54,7 @@ angular.module('risevision.editorApp.controllers')
 
         if (cat !== $scope.search.sortBy) {
           $scope.search.sortBy = cat;
+          $scope.search.reverse = false;
         } else {
           $scope.search.reverse = !$scope.search.reverse;
         }
