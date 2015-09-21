@@ -10,7 +10,7 @@
       <h4>Edit Placeholder</h4>
       <div class="btn-group btn-group-justified half-bottom" role="group" aria-label="...">
         <a href="" class="btn btn-default active" ng-class="{'active' : !showPlaylist}" ng-click="showPlaylist=false">Properties</a>
-        <a href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
+        <a id="editPlaylistButton" href="" class="btn btn-default" ng-class="{'active' : showPlaylist}" ng-click="showPlaylist=true">Playlist</a>
       </div>
 
       <div class="ph-playlist animated fadeIn" ng-show="factory.placeholder && showPlaylist">

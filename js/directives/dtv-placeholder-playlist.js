@@ -2,9 +2,9 @@
 
 angular.module('risevision.editorApp.directives')
   .directive('placeholderPlaylist', ['placeholderPlaylistFactory',
-    'widgetModalFactory', '$modal', '$templateCache',
-    function (placeholderPlaylistFactory, widgetModalFactory, $modal,
-      $templateCache) {
+    'playlistItemFactory', 'widgetModalFactory', '$modal', '$templateCache',
+    function (placeholderPlaylistFactory, playlistItemFactory,
+      widgetModalFactory, $modal, $templateCache) {
       return {
         restrict: 'E',
         scope: true,
@@ -12,37 +12,7 @@ angular.module('risevision.editorApp.directives')
         link: function ($scope) {
           $scope.factory = placeholderPlaylistFactory;
           $scope.widgetModalFactory = widgetModalFactory;
-          
-          $scope.addContent = function() {
-            var modalInstance = $modal.open({
-              templateUrl: 'partials/store-products-modal.html',
-              size: 'lg',
-              controller: 'storeProductsModal'
-            });
-
-            modalInstance.result.then(function (productDetails) {
-              $scope.playlistItem.objectReference = productDetails[0];
-            });
-          };
-
-          $scope.edit = function (item) {
-            placeholderPlaylistFactory.item = item;
-            var modalInstance = $modal.open({
-              templateUrl: 'partials/playlist-item-modal.html',
-              size: 'md',
-              controller: 'PlaylistItemModalController',
-              resolve: {
-                item: function () {
-                  return placeholderPlaylistFactory.getCurrentItemProperties();
-                }
-              }
-            });
-
-            modalInstance.result.then(function (newItemProperties) {
-              placeholderPlaylistFactory.setCurrentItemProperties(
-                newItemProperties);
-            });
-          };
+          $scope.playlistItemFactory = playlistItemFactory;
 
           $scope.remove = function (item) {
             var modalInstance = $modal.open({

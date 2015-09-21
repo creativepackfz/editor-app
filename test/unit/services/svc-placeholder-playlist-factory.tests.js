@@ -7,23 +7,7 @@ describe('service: placeholderPlaylistFactory:', function() {
       'name': 'item1',
       'duration': '10',
       'type': 'gadget',
-      'objectReference': null,
-      'index': '0',
-      'playUntilDone': 'false',
-      'objectData': 'Hello Digital',
-      'additionalParams': null,
-      'timeDefined': 'false',
-      'startDate': null,
-      'endDate': null,
-      'startTime': null,
-      'endTime': null,
-      'recurrenceType': 'Daily',
-      'recurrenceFrequency': '1',
-      'recurrenceAbsolute': 'false',
-      'recurrenceDayOfWeek': '0',
-      'recurrenceDayOfMonth': '1',
-      'recurrenceWeekOfMonth': '0',
-      'recurrenceMonthOfYear': '0'
+      'objectReference': null
     };
     item0 = {
       name: 'item0'
@@ -60,13 +44,12 @@ describe('service: placeholderPlaylistFactory:', function() {
     expect(placeholderPlaylistFactory).to.be.truely;
 
     expect(placeholderPlaylistFactory.getItems).to.be.a('function');
+    expect(placeholderPlaylistFactory.updateItem).to.be.a('function');
     expect(placeholderPlaylistFactory.removeItem).to.be.a('function');
     expect(placeholderPlaylistFactory.canPlaylistItemMoveDown).to.be.a('function');
     expect(placeholderPlaylistFactory.canPlaylistItemMoveUp).to.be.a('function');
     expect(placeholderPlaylistFactory.movePlaylistItemDown).to.be.a('function');
     expect(placeholderPlaylistFactory.movePlaylistItemUp).to.be.a('function');
-    expect(placeholderPlaylistFactory.getCurrentItemProperties).to.be.a('function');
-    expect(placeholderPlaylistFactory.setCurrentItemProperties).to.be.a('function');
   });
   
   describe('getItems: ', function() {
@@ -107,6 +90,25 @@ describe('service: placeholderPlaylistFactory:', function() {
     });
   });
   
+  describe('updateItem: ',function(){
+    it('should add the item',function(){
+      var newItem = {
+        name: 'Item 2'
+      };
+      placeholderPlaylistFactory.updateItem(newItem);
+
+      expect(items.length).to.equal(4);
+      expect(items[3]).to.equal(newItem);    
+    });
+    
+    it('should not add duplicate item',function(){
+      placeholderPlaylistFactory.updateItem(item);
+
+      expect(items.length).to.equal(3);
+      expect(items[1]).to.equal(item);    
+    });
+  });
+  
   it('canPlaylistItemMoveUp/Down: ', function() {
     expect(placeholderPlaylistFactory.canPlaylistItemMoveDown(item0)).to.be.true;
     expect(placeholderPlaylistFactory.canPlaylistItemMoveDown(item2)).to.be.false;
@@ -128,47 +130,5 @@ describe('service: placeholderPlaylistFactory:', function() {
     placeholderPlaylistFactory.movePlaylistItemDown(item0);
     expect(items.indexOf(item0)).to.equal(2);
   }); 
-
-  describe('getCurrentItemProperties: ',function(){
-    it('should get a copy of current item properties',function(){
-      var itemProperties = placeholderPlaylistFactory.getCurrentItemProperties();
-
-      expect(itemProperties).to.not.equal(item);
-      expect(itemProperties).to.deep.equal(item);
-    });  
-
-    it('should return undefined if current item is undefined',function(){
-      placeholderPlaylistFactory.item = undefined;
-
-      expect(placeholderPlaylistFactory.getCurrentItemProperties()).to.equal(undefined);
-    });
-  });  
-
-  describe('setCurrentItemProperties: ',function(){
-    it('should set new properties to current item',function(){
-      var newProperties = {
-          'name': 'New Name',
-          'duration': '11',
-          'type': 'text',
-          'playUntilDone': 'true',
-          'timeDefined': 'true',
-          'startDate': new Date(),
-          'endDate': new Date(),
-          'startTime': new Date(),
-          'endTime': new Date(),
-          'recurrenceType': 'Weekly',
-          'recurrenceFrequency': '2',
-          'recurrenceAbsolute': 'true',
-          'recurrenceDayOfWeek': '1',
-          'recurrenceDayOfMonth': '2',
-          'recurrenceWeekOfMonth': '1',
-          'recurrenceMonthOfYear': '1'
-      }
-      placeholderPlaylistFactory.setCurrentItemProperties(newProperties);
-
-      expect(item).to.deep.equal(newProperties);
-    });  
-    
-  });
 
 });

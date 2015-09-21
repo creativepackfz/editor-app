@@ -26,11 +26,11 @@ angular.module('risevision.editorApp.services')
         return query.trim();
       };
 
-      var createIdsQuery = function (ids) {
+      var createQuery = function (field, ids) {
         var query = '';
 
         for (var i in ids) {
-          query += 'OR id:\'' + ids[i] + '\' ';
+          query += 'OR ' + field + ':\'' + ids[i] + '\' ';
         }
 
         query = query.substring(3);
@@ -46,8 +46,9 @@ angular.module('risevision.editorApp.services')
             createSearchQuery(GADGET_SEARCH_FIELDS, search.query) :
             '';
 
-          query += search.ids ? createIdsQuery(search.ids) :
-            '';
+          query += search.ids ? createQuery('id', search.ids) : '';
+          query += search.productCodes ?
+            createQuery('productCode', search.productCodes) : '';
 
           var obj = {
             'companyId': userState.getSelectedCompanyId(),
@@ -61,6 +62,8 @@ angular.module('risevision.editorApp.services')
               return coreApi.gadget.list(obj);
             })
             .then(function (resp) {
+              $log.debug('list gadgets resp', resp);
+
               deferred.resolve(resp.result);
             })
             .then(null, function (e) {
